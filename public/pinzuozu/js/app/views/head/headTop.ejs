@@ -1,0 +1,27 @@
+<div class="container">
+    <div id="head-top-left" class="left-content">
+        <%== isLogin=='yes'?can.view.render('js/app/views/head/login.ejs',{}) : can.view.render('js/app/views/head/logout.ejs',{})%>
+    </div>
+    <ul class="nav nav-pills pull-right">
+        <li class="pull-right dropdown">
+            <a class="f14 cr666 right-padding" data-toggle="dropdown" href="">网站导航▼</a>
+            <ul class="dropdown-menu">
+                <li class="text-center">
+                    <a href="#">test</a>
+                </li>
+                <li class="text-center">
+                    <a href="#">test</a>
+                </li>
+                <li class="text-center">
+                    <a href="#">test</a>
+                </li>
+            </ul>
+        </li>
+        <li class="pull-right dropdown">
+            <a class="f14 cr666 right-padding right-li" href="#">如何拼座？</a>
+        </li>
+        <li class="pull-right dropdown">
+            <a class="f14 cr666 right-padding right-li" href="index.html">返回首页</a>
+        </li>
+    </ul>
+</div>

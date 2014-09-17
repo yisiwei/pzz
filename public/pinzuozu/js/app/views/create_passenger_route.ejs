@@ -1,0 +1,353 @@
+<div id="passengernewmap" class="h300 m30"></div>
+<form class="form-horizontal mauto  m50" role="form">
+  <input type="hidden" name="line_type" value="乘客需求"/>
+  <div class="form-group has-feedback">
+    <label for="originCar" class="col-xs-2 control-label"> <b class="crred f12 p2">*</b>
+      出发地：
+    </label>
+    <div class="col-xs-2">
+      <input name="line_depart_city" class="form-control border-radius-style" id="line_depart_city" placeholder="出发城市"></div>
+    <div class="col-xs-4">
+      <input name="line_depart_address" class="form-control border-radius-style" id="line_depart_address" placeholder="详细地址">
+      <span onclick="mark('start')" class="cr3b offer-position-icon fa fa-map-marker fa-lg form-control-feedback"></span>
+      <div id="searchDepartCity" class="offer-map-detail"></div>
+
+    </div>
+    <span id="depart-msg" class="col-xs-4 f12 control-label tl"></span>
+  </div>
+  <div class="form-group has-feedback">
+    <label for="destinationCar" class="col-xs-2 control-label"> <b class="crred f12 p2">*</b>
+      目的地：
+    </label>
+    <div class="col-xs-2">
+      <input name="line_dest_city" class="form-control border-radius-style" id="line_dest_city" placeholder="目的城市"></div>
+    <div class="col-xs-4">
+      <input id="line_dest_address" class="form-control border-radius-style" name="line_dest_address" placeholder="详细地址">
+      <span onclick="mark('end')" class="crfb offer-position-icon fa fa-map-marker fa-lg form-control-feedback"></span>
+      <div id="searchDestCity" class="offer-map-detail"></div>
+    </div>
+    <span id="dest-msg" class="col-xs-4 f12 crred control-label tl"></span>
+  </div>
+  <div class="form-group">
+    <label for="destinationCar" class="col-xs-2 control-label">途径：</label>
+    <div class="col-xs-6">
+      <input name="line_midway" class="form-control border-radius-style" id="line_midway" placeholder="途径地"></div>
+  </div>
+  <div class="form-group">
+    <label for="destinationCar" class="col-xs-2 control-label">里程：</label>
+    <div class="col-xs-10">
+      <span name="line_milleage" id="line_milleage" class="form-control-static offer-kilometre-span offer-kilometre-span-font">0</span>
+      <span class="form-control-static offer-kilometre-span">km</span>
+    </div>
+  </div>
+  <!--start time -->
+  <div class="form-group">
+    <label for="destinationCar" class="col-xs-2 control-label">
+      <b class="crred f12 p2">*</b>
+      出发日期：
+    </label>
+    <div class="control-group col-xs-3">
+      <div class="controls">
+        <div class="input-prepend input-group ">
+          <span class="add-on input-group-addon border-radius-style"> <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+          </span>
+          <input type="text" id='d' class="form-control border-radius-style offer-date-input" />
+        </div>
+      </div>
+    </div>
+    <div class="control-group col-xs-3">
+      <div class="controls">
+        <div class="input-prepend input-group ">
+          <span class="add-on input-group-addon border-radius-style"> <i class="glyphicon glyphicon-calendar fa fa fa-clock-o"></i>
+          </span>
+          <input type="text" id='t' class="form-control border-radius-style offer-date-input" value="08:00"  />
+        </div>
+      </div>
+    </div>
+    <span id="departTime-msg" class="col-xs-4 f12 crred control-label tl"></span>
+  </div>
+  <!--start time end -->
+  <div class="form-group">
+    <div class="col-xs-offset-2 col-xs-10">
+      <div class="checkbox">
+        <label>
+          <input id="isBack" type="checkbox">是否返程</label>
+      </div>
+    </div>
+  </div>
+  <!-- backtime -->
+  <div class="form-group" style="display:none;" id="backtime">
+    <label for="destinationCar" class="col-xs-2 control-label">
+      <b class="crred f12 p2">*</b>
+      返程日期：
+    </label>
+    <div class="control-group col-xs-3">
+      <div class="controls">
+        <div class="input-prepend input-group ">
+          <span class="add-on input-group-addon border-radius-style">
+            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+          </span>
+          <input type="text" id='db' class="form-control border-radius-style offer-date-input" data-ro  />
+        </div>
+      </div>
+    </div>
+    <div class="control-group col-xs-3">
+      <div class="controls">
+        <div class="input-prepend input-group ">
+          <span class="add-on input-group-addon border-radius-style">
+            <i class="glyphicon glyphicon-calendar fa fa fa-clock-o"></i>
+          </span>
+          <input type="text" id='tb' class="form-control border-radius-style offer-date-input"  value="08:00"  />
+        </div>
+      </div>
+    </div>
+    <span id="backtime-msg" class="col-xs-4 f12 crred control-label tl"></span>
+  </div>
+  <!-- backtime end -->
+  <!-- phone -->
+  <div class="form-group">
+    <label class="col-xs-2 control-label">联系电话：</label>
+    <div class="col-xs-10">
+      <p class="form-control-static" name="user_phone">13303360636</p>
+    </div>
+  </div>
+  <!-- phone end -->
+  <!-- give-seat   -->
+  <div class="form-group">
+    <label class="col-xs-2 control-label">
+      <b class="crred f12 p2">*</b>
+      需求座位：
+    </label>
+    <div class="col-xs-2">
+      <select class="form-control border-radius-style" name="line_participants">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+    </div>
+  </div>
+  <!-- give-seat end -->
+  <!-- price -->
+  <div class="form-group">
+    <label class="col-xs-2 control-label">期望价格：</label>
+    <div class="col-xs-2">
+      <input type="number" id="line_price" class="form-control border-radius-style offer-date-input" name="line_price" />
+    </div>
+    <span  class="col-xs-4  control-label tl">元/人</span>
+
+  </div>
+  <!-- price end -->
+  <!-- descrip -->
+  <div class="form-group">
+    <label class="col-xs-2 control-label">补充说明：</label>
+    <div class="col-xs-8">
+      <textarea name="line_remark" class="form-control border-radius-style" rows="3"></textarea>
+    </div>
+  </div>
+  <!-- descrip end -->
+  <div class="text-center m30">
+    <button id="submit" type="button" class="btn btn-primary border-radius-style">立即发布</button>
+    <button type="button" class="btn border-radius-style offer-back-btn">返回</button>
+
+  </div>
+</form>
+<script src='js/rome.js'></script>
+<script src='js/example.js'></script>
+<script type="text/javascript">
+    var map = new BMap.Map("passengernewmap");
+    map.centerAndZoom(new BMap.Point(116.404, 39.915), 12);
+    map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+    map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+    //var transit = new BMap.DrivingRoute(map, {
+    //    renderOptions: {
+    //        map: map,
+            //panel: "r-result",
+            //enableDragging : true //起终点可进行拖拽
+    //    },  
+    //});
+    var myCity = new BMap.LocalCity();
+    myCity.get(myFun);
+
+    var cityName;
+    function myFun(result){
+        cityName = result.name;
+        map.setCenter(cityName);
+    }
+    //transit.search("固安","廊坊市");
+    
+    var sIcon=new BMap.Icon("http://api0.map.bdimg.com/images/dest_markers.png",new BMap.Size(42,34),{anchor:new BMap.Size(15,32),imageOffset:new BMap.Size(0,0)});
+    var eIcon=new BMap.Icon("http://api0.map.bdimg.com/images/dest_markers.png",new BMap.Size(42,34),{anchor:new BMap.Size(15,32),imageOffset:new BMap.Size(0,-34)});
+    var s_marker;//起点标记
+    var e_marker;//终点标记
+    var myGeo = new BMap.Geocoder();
+
+    //建立一个自动完成的对象
+    var startPlace = new BMap.Autocomplete(
+      {
+        "input":"line_depart_address",
+        "location":map
+      }
+    );
+    var endPlace = new BMap.Autocomplete(
+      {
+        "input":"line_dest_address",
+        "location":map
+      }
+    );
+    //鼠标放在下拉列表上的事件
+    startPlace.addEventListener("onhighlight", function(e){
+      var str = "";
+      var _value = e.fromitem.value;
+      var value = "";
+      if(e.fromitem.index > -1){
+        value = _value.province + _value.city + _value.district + 
+        _value.street + _value.business;
+      }
+      str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+      value = "";
+      if(e.toitem.index > -1){
+        _value = e.toitem.value;
+        value = _value.province + _value.city + _value.district +
+        _value.street + _value.business;
+      }
+      str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+      $("#searchDepartCity").innerHTML = str;
+    });
+
+    endPlace.addEventListener("onhighlight", function(e){
+      var str = "";
+      var _value = e.fromitem.value;
+      var value = "";
+      if(e.fromitem.index > -1){
+        value = _value.province + _value.city + _value.district + 
+        _value.street + _value.business;
+      }
+      str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+      value = "";
+      if(e.toitem.index > -1){
+        _value = e.toitem.value;
+        value = _value.province + _value.city + _value.district +
+        _value.street + _value.business;
+      }
+      str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+      $("#searchDestCity").innerHTML = str;
+    });
+
+
+    var myStartValue;
+    var myEndValue;
+    //鼠标点击下拉列表后的事件
+    startPlace.addEventListener("onconfirm",function(e){
+      var _value = e.item.value;
+      myStartValue = _value.province + _value.city + _value.district +
+      _value.street + _value.business;
+      $("#searchDepartCity").innerHTML = "onconfirm<br />index="+e.item.index+"<br />myStartValue= " + myStartValue;
+      setStartPlace();
+    });
+    endPlace.addEventListener("onconfirm",function(e){
+      var _value = e.item.value;
+
+      myEndValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+      $("#searchDestCity").innerHTML = "onconfirm<br />index="+e.item.index+"<br />myEndValue= " + myEndValue;
+      setEndPlace();
+    });
+
+    function setStartPlace(){
+      if(s_marker!=null && s_marker!=""){
+        map.removeOverlay(s_marker);//清除单个标记
+      }
+      var sLocal = new BMap.LocalSearch(map,{
+        onSearchComplete:myStartFun
+      });
+      sLocal.search(myStartValue);
+      function myStartFun(){
+        //获取第一个智能搜索的结果
+        var sPoint = sLocal.getResults().getPoi(0).point;
+        map.centerAndZoom(sPoint,12);
+        s_marker = new BMap.Marker(sPoint,{icon:sIcon});
+        map.addOverlay(s_marker);//将标记添加到地图中
+        s_marker.enableDragging();//设置可拖动标记
+        s_marker.addEventListener('dragend', function(e){
+          myGeo.getLocation(e.point,function(rs){
+            var addComp = rs.addressComponents;
+            $("#line_depart_address").val(addComp.district + addComp.street+addComp.streetNumber);
+          });
+        });
+      }
+    }
+    function setEndPlace(){
+      if(e_marker!=null && e_marker!=""){
+        map.removeOverlay(e_marker);//清除单个标记
+      }
+      var eLocal = new BMap.LocalSearch(map,{
+        onSearchComplete:myEndFun
+      });
+      eLocal.search(myEndValue);
+      function myEndFun(){
+        //获取第一个智能搜索的结果
+        var ePoint = eLocal.getResults().getPoi(0).point;
+        map.centerAndZoom(ePoint,12);
+        e_marker = new BMap.Marker(ePoint,{icon:eIcon});
+        map.addOverlay(e_marker);//将标记添加到地图中
+        e_marker.enableDragging();//设置可拖动标记
+        e_marker.addEventListener('dragend', function(e){
+          myGeo.getLocation(e.point,function(rs){
+            var addComp = rs.addressComponents;
+            $("#line_dest_address").val(addComp.district + addComp.street+addComp.streetNumber);
+          });
+        });
+      }
+    }
+    
+
+    function mark(place){
+      if(place == 'start'){
+        //alert('start');
+        
+        myGeo.getPoint(cityName,function(point){
+          if(point){
+            
+            map.centerAndZoom(point,12);
+            //map.clearOverlays();//清除所有标记
+            map.removeOverlay(s_marker);//清除单个标记
+            s_marker = new BMap.Marker(point,{icon:sIcon});//创建标记，icon为标记图标
+            map.addOverlay(s_marker);//将标记添加到地图中
+            s_marker.enableDragging();//设置可拖动标记
+           
+            s_marker.addEventListener('dragend', function(e){
+              // $("#detail-s-place").val(e.point.lng + ", " + e.point.lat);
+              myGeo.getLocation(e.point,function(rs){
+                var addComp = rs.addressComponents;
+                //alert(addComp.street+addComp.streetNumber);
+                $("#line_depart_address").val(addComp.district +addComp.street+addComp.streetNumber);
+              });
+            });
+          }
+        });
+        // var focus_point=new BMap.Point($(this).attr("lng"),$(this).attr("lat"));
+        // s_marker = new BMap.Marker(map.getCenter(),{icon:sIcon});
+        // s_marker.setPosition(focus_point);
+        // map.centerAndZoom(focus_point,17);
+      }else{
+        myGeo.getPoint(cityName,function(point){
+          if(point){
+            map.centerAndZoom(point,12);
+            map.removeOverlay(e_marker);//清除单个标记
+            e_marker = new BMap.Marker(point,{icon:eIcon});//创建标记，icon为标记图标
+            map.addOverlay(e_marker);//将标记添加到地图中
+            e_marker.enableDragging();//设置可拖动标记
+           
+            e_marker.addEventListener('dragend', function(e){
+              // $("#detail-e-place").val(e.point.lng + ", " + e.point.lat);
+              myGeo.getLocation(e.point,function(rs){
+                var addComp = rs.addressComponents;
+                $("#line_dest_address").val(addComp.district +addComp.street+addComp.streetNumber);
+              });
+            });
+          }
+        });
+      }
+    }
+</script>

@@ -136,12 +136,12 @@ legend {
 
 /*定位*/
 
-.tl{text-align:left}
+.tl{text-align:left !important}
 .tc{text-align:center !important;}
-.tr{text-align:right}
+.tr{text-align:right !important}
 .bc{margin-left:auto;margin-right:auto;}
-.fl{float:left;display:inline}
-.fr{float:right;display:inline}
+.fl{float:left;display:inline !important}
+.fr{float:right;display:inline !important}
 .cb{clear:both}
 .cl{clear:left}
 .cr{clear:right}
@@ -186,8 +186,9 @@ legend {
 .h100{height:100px}
 .h200{height:200px}
 .h300{height:300px}
-.h500{height: 500px}
+.h500{height: 500px!important}
 .h{height:100%}
+.r10{right: 10px !important}
 
 /*边距*/
 .mauto{margin:auto auto}
@@ -294,4 +295,19 @@ color: #449d44;
 }
 .cree{
 	color: #eee;
+}
+.crred{
+	color: #ff0000;
+}
+.crfff{
+	color: #fff;
+}
+.cr5a{
+	color: #5AC92E;
+}
+.cr9e{
+color:#9ED034;
+}
+.cref{
+	color:#efefef;
 }

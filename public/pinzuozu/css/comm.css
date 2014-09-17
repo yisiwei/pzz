@@ -14,6 +14,9 @@
 .frame-bborder{
 	border-bottom: #eee 1px solid !important;
 }
+.frame-tborder{
+	border-top: #eee 1px solid !important;
+}
 .comm-line{
 	height: 1px;
 	border-bottom: dashed 1px #;
@@ -31,4 +34,7 @@
 /*background颜色*/
 .frame-bgw{
 	background: #fff;
+}
+.top-bg{
+	background: #efefef;
 }

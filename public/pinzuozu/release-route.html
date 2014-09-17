@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>发布线路</title>
+    <link href="css/comm.css" rel='stylesheet' type='text/css' />
+    <link href="css/cssreset.css" rel='stylesheet' type='text/css' />
+    <link href="css/module.css" rel='stylesheet' type='text/css' />
+    <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!-- Custom Theme files -->
+    <link href="css/style.css" rel='stylesheet' type='text/css' />
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/can.jquery.js"></script>
+    <script src="js/can.ejs.js"></script>
+    <script src="js/can.fixture.js"></script>
+
+    <script src="js/app/fixtures/user.js"></script>
+    <script src="js/app/models/user.js"></script>
+    <script src="js/app/controls/common.js"></script>
+
+    <script src="js/style.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+            new HeadTop("#head-top");
+            new HeadBottom("#head-bottom");
+            new Footer("#footer");
+
+            $("#menu-route").parent().addClass('current');
+
+            $('#select-passenger').click(function() {
+                $("#select-passenger").css({
+                    backgroundColor: '#6DC5DD',
+                    color: '#fff'
+                });
+                $("#select-passenger b").css("color","#fff");
+                window.location.href="passenger-route.html";
+            });
+                $('#select-driver').click(function() {
+                $("#select-driver").css({
+                    backgroundColor: '#6DC5DD',
+                    color: '#fff'
+                });
+                $("#select-driver b").css("color","#fff");
+                window.location.href="driver-route.html"
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <div id="head-top" class="wmw top-bg"></div>
+            <div id="head-bottom" class="container header_top" ></div>
+        </div>
+        <div id="banner" class="wmw">
+            <img class="img-responsive"  src="images/show.png">
+        </div>
+        <div class="container" id="main">
+
+            <div  class="page-list-bg p10 mt20 frame-border">
+                <div class="row release-route-select">
+                    <div class="col-xs-6 release-route-select-passenger" >
+                        <label id="select-passenger" > <strong style=""><input type="radio"  value="1">我是乘客</strong> <b>发布需求，让司机联系</b>
+                        </label>
+                    </div>
+                    <div class="col-xs-6 release-route-select-driver" >
+                        <label id="select-driver"> <strong ><input type="radio"  value="1">我是司机</strong> <b>发布线路，让乘客购买</b>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- friends-links -->
+            <div class="row">
+
+                <div class=" page-list-bg p10 mt20 frame-border  friends-links" >
+                    <dl >
+                        <dt class="cr333 mb10 f14">新手上路</dt>
+                        <dd >
+                            <a class="cr999 f12 p5" href="">新手入门</a>
+                        </dd>
+                        <dd>
+                            <a class="cr999 f12 p5" href="">新手入门</a>
+                        </dd>
+                        <dd>
+                            <a class="cr999 f12 p5" href="">新手入门</a>
+                        </dd>
+                        <dd>
+                            <a class="cr999 f12 p5" href="">新手入门</a>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt class="cr333 f14 mb10">新手上路</dt>
+                        <dd >
+                            <a class="cr999 f12 p5" href="">新手入门</a>
+                        </dd>
+                        <dd>
+                            <a class="cr999 f12 p5" href="">新手入门</a>
+                        </dd>
+                        <dd>
+                            <a class="cr999 f12 p5" href="">新手入门</a>
+                        </dd>
+                        <dd>
+                            <a class="cr999 f12 p5" href="">新手入门</a>
+                        </dd>
+                    </dl>
+                    <dl >
+                        <dt class="cr333 f14 mb10">新手上路</dt>
+                        <dd >
+                            <a class="cr999 f12 p5" href="">新手入门</a>
+                        </dd>
+                        <dd>
+                            <a class="cr999 f12 p5" href="">新手入门</a>
+                        </dd>
+                        <dd>
+                            <a class="cr999 f12 p5" href="">新手入门</a>
+                        </dd>
+                        <dd>
+                            <a class="cr999 f12 p5" href="">新手入门</a>
+                        </dd>
+                    </dl>
+                    <dl >
+                        <dt class="cr333 f14 mb10">新手上路</dt>
+                        <dd >
+                            <a class="cr999 f12 p5" href="">新手入门</a>
+                        </dd>
+                        <dd>
+                            <a class="cr999 f12 p5" href="">新手入门</a>
+                        </dd>
+                        <dd>
+                            <a class="cr999 f12 p5" href="">新手入门</a>
+                        </dd>
+                        <dd>
+                            <a class="cr999 f12 p5" href="">新手入门</a>
+                        </dd>
+                    </dl>
+                    <dl >
+                        <dt class="cr333 f14 mb10">新手上路</dt>
+                        <dd >
+                            <a class="cr999 f12 p5" href="">新手入门</a>
+                        </dd>
+                        <dd>
+                            <a class="cr999 f12 p5" href="">新手入门</a>
+                        </dd>
+                        <dd>
+                            <a class="cr999 f12 p5" href="">新手入门</a>
+                        </dd>
+                        <dd>
+                            <a class="cr999 f12 p5" href="">新手入门</a>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt class="cr333 f14 mb10">新手上路</dt>
+                        <dd >
+                            <a class="cr999 f12 p5" href="">新手入门</a>
+                        </dd>
+                        <dd>
+                            <a class="cr999 f12 p5" href="">新手入门</a>
+                        </dd>
+                        <dd>
+                            <a class="cr999 f12 p5" href="">新手入门</a>
+                        </dd>
+                        <dd>
+                            <a class="cr999 f12 p5" href="">新手入门</a>
+                        </dd>
+                    </dl>
+
+                </div>
+
+            </div>
+
+            <!-- friends-links end --> 
+        </div>
+        <!-- main end -->
+        <div id="footer" class="text-center wmw p30 mt15 footer-bg">
+            
+        </div>
+    </div>
+    <!-- wrapper -->
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<div class="mt10">
+  <dl>
+    <dt>
+        <img src="images/car.jpg"></dt>
+    <dd>
+        <a href="passenger-route-detail.html?id=<%=line.attr("id") %>">
+          <%=line.attr("line_depart_city") %>:<%=line.attr("line_depart_address") %> 
+          <i class="icon"></i>
+          <%=line.attr("line_dest_city") %>:<%=line.attr("line_dest_address") %>
+        </a>
+    </dd>
+    <dd>
+      <span>
+        出发时间：
+        <strong><%=line.attr("line_depart_datetime") %>&nbsp;</strong>
+      </span>
+      <span>
+        需要座位<strong><%=line.attr("line_participants") %></strong>个
+      </span>
+    </dd>
+  </dl>
+</div>
+<div class="page-list-price-div">
+  <span class="page-list-span">￥<%=line.attr("line_price") %>元/位</span>
+</div>

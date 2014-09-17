@@ -1,0 +1,83 @@
+<div class=" text-center m10">
+    <h3>用户注册</h3>
+</div>
+<form class="form-horizontal m50" role="form">
+
+    <div class="form-group m30">
+        <label for="inputMobile" class="col-xs-3 control-label">手机号码：</label>
+        <div class="col-xs-5">
+            <input type="text" pattern="[0-9]" name="user_phone" class="form-control frame-nradius" id="userphone" placeholder="手机号码">
+        </div>
+        <span id="phone-msg" class="col-xs-4 f14 control-label tl">亲，请输入真实手机号
+        </span>
+    </div>
+    <div class="form-group m15">
+        <div class="col-xs-offset-3  col-xs-9">
+            <label>
+                没有手机？
+                <a id="mobile-reg" href="javascript:void(0)">用邮箱注册</a>
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group m30">
+        <label for="" class="col-xs-3 control-label">短信验证码：</label>
+        <div class="col-xs-3">
+            <input type="text" class="form-control frame-nradius" id="code" placeholder="验证码" />
+        </div>
+
+        <div class="col-xs-5">
+            <button type="button" id="code-btn" class="btn btn-default frame-nradius">获取验证码</button>
+        </div>
+
+    </div>
+
+    <div class="form-group m30 ">
+        <label for="inputPassword" class="col-xs-3 control-label">密码：</label>
+        <div class="col-xs-5">
+            <input type="password" name="user_password" class="form-control frame-nradius" id="password" placeholder="密码" />
+        </div>
+        <span id="pwd-msg" class="col-xs-4 f14 control-label tl">
+        </span>
+    </div>
+    <div class="form-group m30 ">
+        <label for="inputPassword" class="col-xs-3 control-label">确认密码：</label>
+        <div class="col-xs-5">
+            <input type="password" class="form-control frame-nradius" id="confirmPwd" placeholder="确认密码">
+        </div>
+        <span id="cfPwd-msg" class="col-xs-4 f14 control-label tl">
+        </span>
+    </div>
+    
+    <div class="form-group m30">
+        <label for="inputName" class="col-xs-3 control-label">姓名/昵称：</label>
+        <div class="col-xs-5">
+            <input type="text" name="user_nickname" class="form-control frame-nradius" id="nickname" placeholder="姓名/昵称" />
+        </div>
+        <span id="nickname-msg" class="col-xs-4 f14 control-label tl">
+        </span>
+    </div>
+    <div class="form-group m30">
+        <div class="col-xs-offset-3 col-xs-7">
+            <div class="checkbox">
+                <label class="f12">
+                    <input type="checkbox" id="agreement">
+                    我接受
+                    <a class="f12" href="">《拼座族服务使用协议》</a>
+                    及
+                    <a class="f12" href="">《隐私条款》</a>
+                </label>
+                
+            </div>
+            
+        </div>
+        <span id="agreement-msg" class="mt5 col-xs-2 f14 control-label tl"></span>
+    </div>
+    <div class="form-group m30">
+        <div class="col-xs-offset-3 col-xs-5">
+            <button id="submit" type="button" class="btn btn-lg w btn-info p20 frame-nradius">
+                立即注册
+            </button>
+        </div>
+    </div>
+</form>
