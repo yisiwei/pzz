@@ -1,0 +1,37 @@
+.frame-border{
+	border: #eee 1px solid !important;
+}
+.frame-rborder{
+	border-right:#eee 1px solid !important;
+}
+.frame-lborder{
+	border-left:#eee 1px solid !important;
+}
+.frame-nlborder{
+	border: #eee 1px solid !important;
+	border-left-color:transparent !important;
+}
+.frame-bborder{
+	border-bottom: #eee 1px solid !important;
+}
+.frame-tborder{
+	border-top: #eee 1px solid !important;
+}
+.comm-line{
+	height: 1px;
+	border-bottom: dashed 1px #;
+}
+.frame-nborder{
+	border: none !important;
+}
+.frame-nradius{
+	border-radius: 0px !important;
+}
+/*转换块级元素*/
+/*.ele-a{
+	display: block !important; 
+}*/
+/*background颜色*/
+.frame-bgw{
+	background: #fff;
+}
