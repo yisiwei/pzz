@@ -19,15 +19,19 @@
 </script>
 <script>
     $(document).ready(function(){
-        // $("#mobile-psd").hide();
-        // $("#mobile-rpsd").hide();
-        // $("#mobile-verify").hide();
-        // $("#mobile-name").hide();
+        $("#mobile-psd").hide();
+        $("#mobile-rpsd").hide();
+        $("#mobile-verify").hide();
+        $("#mobile-name").hide();
 
-        // $("#mail-psd").hide();
-        // $("#mail-rpsd").hide();
-        // $("#mail-verify").hide();
-        // $("#mail-name").hide();
+        $("#mail-psd").hide();
+        $("#mail-rpsd").hide();
+        $("#mail-verify").hide();
+        $("#mail-name").hide();
+        // 跳转到激活邮箱界面
+        $("#mail-active").click(function() {
+            window.location.href="mail-active.html"
+        });
 
         $("#reg-mobile").show();
         $("#reg-mail").hide();
@@ -39,6 +43,7 @@
       $("#reg-mail").show();
       $("#reg-mobile").hide();
   });
+
 });
 </script>
 </head>
@@ -56,7 +61,7 @@
             <div class=" text-center m10">
                 <h3>用户注册</h3>
             </div>
-            <form class="form-horizontal m50" role="form">
+            <form class="form-horizontal mt50 mb50  " role="form">
 
                 <div class="form-group m30">
                     <label for="inputMobile" class="col-xs-3 control-label">手机号码：</label>
@@ -143,7 +148,7 @@
             <div class=" text-center m10">
                 <h3>用户注册</h3>
             </div>
-            <form class="form-horizontal m50" role="form">
+            <form class="form-horizontal mt50 mb50 " role="form">
 
                 <div class="form-group m30">
                     <label for="inputemail" class="col-xs-3 control-label">邮箱：</label>
@@ -218,7 +223,7 @@
                 </div>
                 <div class="form-group m30">
                     <div class="col-xs-offset-3 col-xs-5">
-                        <button type="submit" class="btn btn-lg w btn-info p20 frame-nradius">立即注册</button>
+                        <button id="mail-active" type="button" class="btn btn-lg w btn-info p20 frame-nradius">立即注册</button>
                     </div>
                 </div>
             </form>
@@ -256,7 +261,7 @@
 </p>
 <p>
 <a href="">
-Copyright Reserved 2007-2011 AA制拼车、搭乘顺风车，仅在AA拼车网（www.aapinche.cn） ICP备12001863号-3
+Copyright Reserved 2014-2015 拼座族拼车、搭乘顺风车，仅在拼座族网ICP备585858588
 </a>
 </p>
 </div>

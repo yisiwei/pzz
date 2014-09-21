@@ -35,3 +35,20 @@
 .frame-bgw{
 	background: #fff;
 }
+/* span button等转为块级元素*/
+.com-block{
+	display: block !important;
+}
+.com-initial{
+	display: initial !important; 
+}
+.com-overflow{
+	overflow: auto;
+}
+.top-bg{
+	background: #efefef;
+}
+.top-bg-usercenter{
+	 height:50px;
+	 background:#3399cc;"
+}
