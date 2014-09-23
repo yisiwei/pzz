@@ -1,0 +1,274 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1">
+    -->
+    <title>Home</title>
+    <link href="css/comm.css" rel='stylesheet' type='text/css' />
+    <link href="css/cssreset.css" rel='stylesheet' type='text/css' />
+    <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="css/module.css" rel='stylesheet' type='text/css' />
+    <!-- Custom Theme files -->
+    <link href="css/style.css" rel='stylesheet' type='text/css' />
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</script>
+<script>
+    $(document).ready(function(){
+        $("#mobile-psd").hide();
+        $("#mobile-rpsd").hide();
+        $("#mobile-verify").hide();
+        $("#mobile-name").hide();
+
+        $("#mail-psd").hide();
+        $("#mail-rpsd").hide();
+        $("#mail-verify").hide();
+        $("#mail-name").hide();
+        // 跳转到激活邮箱界面
+        $("#mail-active").click(function() {
+            window.location.href="mail-active.html"
+        });
+
+        $("#reg-mobile").show();
+        $("#reg-mail").hide();
+  $("#mail-reg").click(function(){
+    $("#reg-mobile").show();
+    $("#reg-mail").hide();
+  });
+  $("#mobile-reg").click(function() {
+      $("#reg-mail").show();
+      $("#reg-mobile").hide();
+  });
+
+});
+</script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="text-center m30">
+    <a href="index.html"><img src="images/logo.jpg"></a>
+    </div>
+<div class="container ">
+    
+    <div class="row frame-border frame-bgw">
+
+        <div id="reg-mobile" class="col-xs-8 frame-bg mt30">
+            <div class=" text-center m10">
+                <h3>用户注册</h3>
+            </div>
+            <form class="form-horizontal mt50 mb50  " role="form">
+
+                <div class="form-group m30">
+                    <label for="inputMobile" class="col-xs-3 control-label">手机号码：</label>
+                    <div class="col-xs-5">
+                        <input type="tel" class="form-control frame-nradius" id="inputMobile" placeholder="手机号码">
+                    </div>
+                    <span id="mobile-num" class="col-xs-4 f12 control-label tl">
+                        亲，请输入真实有效手机号
+                    </span>
+                </div>
+                <div class="form-group m15">
+                     <div class="col-xs-offset-3  col-xs-9">
+
+                    <label>
+                        没有手机？
+                        <a id="mobile-reg" href="javascript:void(0)">用邮箱注册</a>
+                    </label>
+
+                </div>
+                </div>
+                <div class="form-group m30">
+                    <label for="" class="col-xs-3 control-label">短信验证：</label>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control frame-nradius" id="" placeholder=""></div>
+
+                    <div class="col-xs-2 register-mobile-verify">
+                        <button type="submit" class="btn btn-default frame-nradius" style="">获取验证码</button>
+                    </div>
+                     <span id="mobile-verify" class="col-xs-4 f12 crred control-label tl">
+                        <i class="fa fa-times-circle crred fa-lg mr5"></i>输入正确验证码
+                    </span>
+
+                </div>
+               
+
+                <div class="form-group m30 ">
+                    <label for="inputPassword" class="col-xs-3 control-label">输入密码：</label>
+                    <div class="col-xs-5">
+                        <input type="password" class="form-control frame-nradius" id="inputPassword" placeholder="确认密码"></div>
+                        <span id="mobile-psd" class="col-xs-4 f12 crred control-label tl">
+                        <i class="fa fa-times-circle crred fa-lg mr5"></i>输入密码
+                    </span>
+                </div>
+                <div class="form-group m30 ">
+                    <label for="inputPassword" class="col-xs-3 control-label">确认密码：</label>
+                    <div class="col-xs-5">
+                        <input type="password" class="form-control frame-nradius" id="inputPassword" placeholder="确认密码"></div>
+                        <span id="mobile-rpsd" class="col-xs-4 crred f12 cr5a control-label tl fa-check-circle"><i class="fa fa-lg cr5a fa-check-circle"></i>
+                        
+                    </span>
+                </div>
+                
+                <div class="form-group m30">
+                    <label for="inputName" class="col-xs-3 control-label">姓名/昵称：</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control frame-nradius" id="inputName" placeholder="姓名/昵称"></div>
+                        <span id="mobile-name" class="col-xs-4 f12 crred control-label tl fa fa-times-circle">
+                        姓名或昵称不能为空
+                    </span>
+                </div>
+                <div class="form-group m30">
+                    <div class="col-xs-offset-3 col-xs-9">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox">
+                                我接受
+                                <a href="">《拼座族服务使用协议》</a>
+                                <span>及</span>
+                                <a href="">《隐私条款》</a>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group m30">
+                     <div class="col-xs-offset-3 col-xs-5">
+                        <button type="submit" class="btn btn-lg w btn-info p20 frame-nradius">立即注册</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        
+        <div id="reg-mail" class="col-xs-8 frame-bg mt30">
+            <div class=" text-center m10">
+                <h3>用户注册</h3>
+            </div>
+            <form class="form-horizontal mt50 mb50 " role="form">
+
+                <div class="form-group m30">
+                    <label for="inputemail" class="col-xs-3 control-label">邮箱：</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control frame-nradius" id="inputMobile" placeholder="邮箱"></div>
+                        <span id="mail-email" class="col-xs-4 f12  control-label tl">
+                        亲，请输入正确邮箱格式
+                    </span>
+                </div>
+                <div class="form-group m15">
+                     <div class="col-xs-offset-3  col-xs-9">
+
+                    <label>
+                        没有邮箱？
+                        <a id="mail-reg" href="javascript:void(0)">用手机注册</a>
+                    </label>
+
+                </div>
+                </div>
+               
+
+                <div class="form-group m30 ">
+                    <label for="inputPassword" class="col-xs-3 control-label">输入密码：</label>
+                    <div class="col-xs-5">
+                        <input type="password" class="form-control frame-nradius" id="inputPassword" placeholder="密码"></div>
+                        <span id="mail-psd" class="col-xs-4 f12 crred control-label tl fa fa-times-circle">
+                        输入密码
+                    </span>
+                </div>
+                <div class="form-group m30 ">
+                    <label for="inputPassword" class="col-xs-3 control-label">确认密码：</label>
+                    <div class="col-xs-5">
+                        <input type="password" class="form-control frame-nradius" id="inputPassword" placeholder="确认密码"></div>
+                        <span id="mail-rpsd" class="col-xs-4 f12 crred control-label tl fa fa-times-circle">
+                        两次密码输入不一致
+                    </span>
+                </div>
+              <!--   <div class="form-group m30">
+                    <label for="" class="col-xs-3 control-label">输入验证码：</label>
+                    <div class="col-xs-3 ">
+                        <input type="text" class="form-control frame-nradius" id="" placeholder="验证码"></div>
+
+                    <div class="col-xs-2 register-mobile-verify">
+                        <button type="submit" class="btn btn-default frame-nradius">获取验证码</button>
+                    </div>
+                    <span id="mail-verify" class="col-xs-4 f12 crred control-label tl">
+                        <i class="fa fa-times-circle crred fa-lg mr5"></i>输入正确验证码
+                    </span>
+
+                </div> -->
+
+                <div class="form-group m30">
+                    <label for="inputName" class="col-xs-3 control-label">姓名/昵称：</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control frame-nradius" id="inputName" placeholder="姓名/昵称"></div>
+                        <span id="mail-name" class="col-xs-4 f12 crred control-label tl fa fa-times-circle">
+                        姓名或昵称不能为空
+                    </span>
+                </div>
+                <div class="form-group m30">
+                    <div class="col-xs-offset-3 col-xs-9">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox">
+                                我接受
+                                <a href="">《拼座族服务使用协议》</a>
+                                <span>及</span>
+                                <a href="">《隐私条款》</a>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group m30">
+                    <div class="col-xs-offset-3 col-xs-5">
+                        <button id="mail-active" type="button" class="btn btn-lg w btn-info p20 frame-nradius">立即注册</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <div class="col-xs-4 pl20 frame-lborder mt120">
+            <p class="text-center frame-bborder pb30">
+                已经注册现在去
+                <a href="user-login.html">登录</a>
+            </p>
+            <h3 class="pager text-center">最轻松便捷的拼座</h3>
+            <div class="text-center">
+                <p class="pt10"><i class="fa fa-star cr5b pr10"></i>分担油费，乐在其中</p>
+                <p class="pt10"><i class="fa fa-star cr5b pr10"></i>分享路况，收益大家</p>
+                <p class="pt10"><i class="fa fa-star cr5b pr10"></i>以车会友，其乐无穷</p>
+                <p class="pt10"><i class="fa fa-star cr5b pr10"></i>偕同相伴，美化旅途</p>
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+<!-- footer start -->
+<div id="footer" class="text-center wmw p30 footer-bg mt15" >
+<p>
+<a href="">关于拼座族</a>
+|
+<a href="">关于拼座族</a>
+|
+<a href="">关于拼座族</a>
+|
+<a href="">关于拼座族</a>
+|
+<a href="">关于拼座族</a>
+</p>
+<p>
+<a href="">
+Copyright Reserved 2014-2015 拼座族拼车、搭乘顺风车，仅在拼座族网ICP备585858588
+</a>
+</p>
+</div>
+<!-- footer end -->
+    </div>
+    <!-- wrapper end -->
+
+</body>
+
+</html>
