@@ -1,0 +1,293 @@
+<div class="header" >
+    <div id="header-top" class="wmw top-bg">
+        
+    </div>
+    <div id="header-bottom" class="container header_top" >
+        
+    </div>
+</div>
+<div id="banner" class="banner-bg wmw home-search-banner h500">
+            
+</div>
+<div class="container" id="main">
+    <div class="row">
+        <!-- left start -->
+        <div class="col-xs-8">
+            <div id="work" class="page-list-bg p10 mt20 frame-border">
+                <div class="page-list-title">
+                    <h4 class="page-header passenger-h">
+                        上下班拼座
+                    </h4>
+                    <a href="#" class="more">
+                        更多
+                    </a>
+                </div>
+                <div class="page-list">
+                    <ul>
+                      <% local_lines.each(function(line,i){ %> 
+                      <li class="<%= i==local_lines.length-1?'last':'' %>">
+                        <%== can.view.render('js/app/views/home/pincheLocal.ejs',{line:line}) %>
+                      </li>
+                      <% }); %>
+                    </ul>
+                </div>
+            </div>
+            <!-- 上下班 end -->
+            <div id="long-distance" class="page-list-bg p10 mt20 frame-border">
+                <div class="page-list-title">
+                    <h4 class="page-header passenger-h">
+                        长途拼座
+                    </h4>
+                    <a href="#" class="more">
+                        更多
+                    </a>
+                </div>
+                <div class="page-list">
+                    <ul>
+                      <% long_lines.each(function(line,i){ %> 
+                      <li class="<%= i==long_lines.length-1?'last':'' %>">
+                        <%== can.view.render('js/app/views/home/pincheLong.ejs',{line:line}) %>
+                      </li>
+                      <% }); %>
+                    </ul>
+                </div>
+            </div>
+            <!-- 长途 end -->
+            <div id="passenger-need" class="page-list-bg p10 mt20 frame-border">
+                <div class="page-list-title">
+                    <h4 class="page-header passenger-h">
+                        乘客需求
+                    </h4>
+                    <a href="#" class="more">
+                        更多
+                    </a>
+                </div>
+                <div class="page-list">
+                    <ul>
+                      <% need_lines.each(function(line,i){ %> 
+                      <li class="<%= i==need_lines.length-1?'last':'' %>">
+                        <%== can.view.render('js/app/views/home/pincheNeed.ejs',{line:line}) %>
+                      </li>
+                      <% }); %>
+                    </ul>
+                </div>
+            </div>
+            <!-- 乘客需求 end --> </div>
+        <!-- left end -->
+        <!-- right start-->
+        <div class="col-xs-4">
+
+            <div id="diary-share" class="page-list-bg p10 mt20 frame-border">
+                <div class="page-list-title">
+                    <h4 class="page-header passenger-h">旅游日记</h4>
+                    <a href="#" class="more">更多</a>
+                </div>
+                <div id="com-travel-diary">
+                    <ul>
+                        <li>
+                            <img src="images/travel.jpg">
+                            <p>
+                                <a href="">与美女拼车_一次心灵的纠结</a>
+                            </p>
+                        </li>
+                        <li>
+                            <img src="images/travel.jpg">
+                            <p>
+                                <a href="">与美女拼车_一次心灵的纠结</a>
+                            </p>
+                        </li>
+                        <li>
+                            <img src="images/travel.jpg">
+                            <p>
+                                <a href="">与美女拼车_一次心灵的纠结</a>
+                            </p>
+                        </li>
+                        <li>
+                            <img src="images/travel.jpg">
+                            <p>
+                                <a href="">与美女拼车_一次心灵的纠结</a>
+                            </p>
+                        </li>
+                        <li class="last">
+                            <img src="images/travel.jpg">
+                            <p>
+                                <a href="">与美女拼车_一次心灵的纠结</a>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="road-share" class="page-list-bg p10 mt20 frame-border">
+                <div class="page-list-title">
+                    <h4 class="page-header passenger-h">路况信息</h4>
+                    <a href="#" class="more">更多</a>
+                </div>
+                <div id="com-msg">
+                    <ul>
+                        <li>
+                            <a href="">与美女拼车_一次心灵的纠结</a>
+                        </li>
+                        <li>
+                            <a href="">与美女拼车_一次心灵的纠结</a>
+                        </li>
+                        <li>
+                            <a href="">与美女拼车_一次心灵的纠结</a>
+                        </li>
+                        <li>
+                            <a href="">与美女拼车_一次心灵的纠结</a>
+                        </li>
+                        <li>
+                            <a href="">与美女拼车_一次心灵的纠结</a>
+                        </li>
+                        <li>
+                            <a href="">与美女拼车_一次心灵的纠结</a>
+                        </li>
+                        <li>
+                            <a href="">与美女拼车_一次心灵的纠结</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- <div id="car-share" class="page-list-bg p10 mt20 frame-border"></div>
+        -->
+    </div>
+    <!-- right end -->
+    </div>
+
+    <div class="row">
+        <div class=" page-list-bg p10 mt20 frame-border" style="overflow:auto;margin:15px 15px;">
+            <div class="page-list-title">
+                <h4 class="page-header passenger-h"> <i class="fa fa-users cr5b mr10"></i>
+                和我们一起拼座吧
+                </h4>
+            </div>
+            <div style="margin:10px 40px;">
+                <img src="images/header.jpg">
+                <img src="images/header1.png">
+                <img src="images/header1.jpg">
+                <img src="images/header2.jpg">
+                <img src="images/header1.png">
+                <img src="images/header.jpg">
+                <img src="images/header1.jpg">
+                <img src="images/header2.jpg">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class=" page-list-bg p10 mt20 frame-border" style="overflow:auto;margin:15px 15px;">
+            <dl style="float: left;margin: 10px 60px 10px 20px;">
+                <dt class="cr333 mb10 f14">新手上路</dt>
+                <dd >
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+                <dd>
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+                <dd>
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+                <dd>
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+            </dl>
+            <dl style="float: left;margin: 10px 60px 10px 10px;">
+                <dt class="cr333 f14 mb10">新手上路</dt>
+                <dd >
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+                <dd>
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+                <dd>
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+                <dd>
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+            </dl>
+            <dl style="float: left;margin: 10px 60px 10px 10px;">
+                <dt class="cr333 f14 mb10">新手上路</dt>
+                <dd >
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+                <dd>
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+                <dd>
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+                <dd>
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+            </dl>
+            <dl style="float: left;margin: 10px 60px 10px 10px;">
+                <dt class="cr333 f14 mb10">新手上路</dt>
+                <dd >
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+                <dd>
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+                <dd>
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+                <dd>
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+            </dl>
+            <dl style="float: left;margin: 10px 60px 10px 10px;">
+                <dt class="cr333 f14 mb10">新手上路</dt>
+                <dd >
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+                <dd>
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+                <dd>
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+                <dd>
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+            </dl>
+            <dl style="float: left;margin: 10px 60px 10px 10px;">
+                <dt class="cr333 f14 mb10">新手上路</dt>
+                <dd >
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+                <dd>
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+                <dd>
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+                <dd>
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+            </dl>
+            <dl style="float: left;margin: 10px 60px 10px 10px;">
+                <dt class="cr333 f14 mb10">新手上路</dt>
+                <dd >
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+                <dd>
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+                <dd>
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+                <dd>
+                    <a class="cr999 f12 p5" href="">新手入门</a>
+                </dd>
+            </dl>
+
+        </div>
+
+    </div>
+</div>
+<div id="footer" class="text-center wmw p30 mt15 footer-bg">
+        
+</div>

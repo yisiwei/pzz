@@ -1,9 +1,26 @@
 (function(namespace) {
+
 	//HeadTop
 	HeadTop = can.Control({
 		init:function(element,options){
+			// var search = window.location.search;
+			var isLogin = false;
+			var username = "admin";
+			// if(search!=null){
+			// 	var result = search.substr(1, search.length);
+			// 	var arr = result.split("&");
+			// 	for (var i = 0; i < arr.length; i++) {
+			// 		var param = arr[i].split("=");
+			// 		var name = param[0];
+			// 		if (name == "username") {
+			// 			isLogin = true;
+			// 			username = param[1];
+			// 		}
+			// 		console.log(param);
+			// 	};
+			// }
 			this.element.html(can.view(
-				"js/app/views/head/headTop.ejs",{isLogin:'yes'}
+				"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:username}
 			));
 		},
 		'#logout click':function() {

@@ -26,11 +26,11 @@ can.fixture("GET /pzz_users/{id}",function(request){
 // 	return USERS[0];
 // });
 //create
-can.fixture("POST /pzz_users",function(request){
-	var id = LINES.length + 1;
-	LINES.push($.extend({id:id},request.data));
-	return {id:id};
-});
+// can.fixture("POST /pzz_users",function(request){
+// 	var id = USERS.length + 1;
+// 	USERS.push($.extend({id:id},request.data));
+// 	return {id:id};
+// });
 //update
 can.fixture("PUT /pzz_users/{id}",function(request){
 	$.extend(USERS[(+request.data.id)-1],request.data);	

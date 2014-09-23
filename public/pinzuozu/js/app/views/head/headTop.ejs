@@ -1,6 +1,6 @@
 <div class="container">
     <div id="head-top-left" class="left-content">
-        <%== isLogin=='yes'?can.view.render('js/app/views/head/login.ejs',{}) : can.view.render('js/app/views/head/logout.ejs',{})%>
+        <%== isLogin==true?can.view.render('js/app/views/head/login.ejs',{username:username}) : can.view.render('js/app/views/head/logout.ejs',{})%>
     </div>
     <ul class="nav nav-pills pull-right">
         <li class="pull-right dropdown">

@@ -1,12 +1,37 @@
 (function(namespace) {
 	//RegisterView
-	RegisterView = can.Control({
+	Register = can.Control({
 		init:function(element,options){
-			this.element.html(can.view(
-				"js/app/views/registerViewPhone.ejs"
-			));
+			
 		},
-		'#submit click':function(el){//提交按钮
+		'register route':function(){
+			this.element.html(can.view(
+				"js/app/views/register/register.ejs"
+			));
+			$("#register").html(can.view(
+				"js/app/views/register/registerViewPhone.ejs"
+			));
+			$("#footer").html(can.view(
+				"js/app/views/footer/footer.ejs"
+			));
+			console.log("username="+this.options.secret.attr("username"));
+		},
+		'#email-submit click':function(el,event){//邮箱注册提交
+			//alert("a");
+			var user = new User();
+			var form = this.element.find("form");
+			var values = can.deparam(form.serialize());
+			user.attr(values);
+			//alert(user.email);
+			User.register(user,function(results){
+				console.log("返回："+results)
+			 	// var err = eval("(" + results + ")");
+  			// 	console.log("返回："+err.userp_hone);
+  				$("#phone-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
+				$("#phone-msg").text("手机号已被注册");	
+			});
+		},
+		'#phone-submit click':function(el){//手机注册提交
 			this.register(el);
 		},
 		register:function(){//注册
@@ -86,12 +111,12 @@
 		},
 		'#mobile-reg click':function(){//邮箱注册
 			$("#register").html(can.view(
-				"js/app/views/registerViewMail.ejs"
+				"js/app/views/register/registerViewMail.ejs"
 			));
 		},
 		'#mail-reg click':function(){//手机注册
 			$("#register").html(can.view(
-				"js/app/views/registerViewPhone.ejs"
+				"js/app/views/register/registerViewPhone.ejs"
 			));
 		},
 		'#userphone blur':function(){
@@ -105,6 +130,15 @@
 			}else{
 				$("#phone-msg").removeClass('crred fa fa-times-circle').addClass('cr5a fa fa-check-circle');
 				$("#phone-msg").text("");
+			}
+		},
+		'#email blur':function(el,event){
+			if($.trim(el.val()).length<=0){
+				$("#email-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
+				$("#email-msg").text("请输入邮箱");	
+			}else{
+				$("#email-msg").removeClass('crred fa fa-times-circle').addClass('cr5a fa fa-check-circle');
+				$("#email-msg").text("");
 			}
 		},
 		'#password blur':function(){
@@ -171,6 +205,6 @@
 	});
 
 	can.extend(namespace,{
-		RegisterView:RegisterView
+		Register:Register
 	})
 })(window);

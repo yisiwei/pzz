@@ -8,7 +8,10 @@
  * Download from: http://canjs.com
  */
 (function(undefined) {
-
+    $.ajaxPrefilter(function(options, originalOptions, jqXHR){
+        options["contentType"] = "application/json";
+        options["data"] = JSON.stringify(originalOptions["data"]);
+    });
     // ## util/can.js
     var __m4 = (function() {
 

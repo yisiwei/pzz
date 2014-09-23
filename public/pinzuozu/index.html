@@ -12,218 +12,45 @@
     <link href="css/module.css" rel='stylesheet' type='text/css' />
     <!-- Custom Theme files -->
     <link href="css/style.css" rel='stylesheet' type='text/css' />
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href='css/rome.css' rel='stylesheet' type='text/css' />
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery.min.js"></script>
+
     <script src="js/can.jquery.js"></script>
     <script src="js/can.ejs.js"></script>
     <script src="js/can.fixture.js"></script>
 
     <script src="js/app/fixtures/line.js"></script>
+
     <script src="js/app/models/line.js"></script>
+    <script src="js/app/models/user.js"></script>
+
     <script src="js/app/controls/common.js"></script>
     <script src="js/app/controls/home.js"></script>
-    <script src="js/app/home.js"></script>
+    <script src="js/app/controls/local.js"></script>
+    <script src="js/app/controls/long.js"></script>
+    <script src="js/app/controls/need.js"></script>
+    <script src="js/app/controls/route.js"></script>
+    <script src="js/app/controls/route_driver.js"></script>
+    <script src="js/app/controls/route_passenger.js"></script>
+    <script src="js/app/controls/register.js"></script>
+    <script src="js/app/controls/login.js"></script>
+    <script src="js/app/controls/userCenter.js"></script>
+
+    <script src="js/app/app.js"></script>
 
     <script src="js/bootstrap.min.js"></script>
     <script src="js/style.js"></script>
+
+    <script type="text/javascript" 
+        src="http://api.map.baidu.com/api?v=2.0&ak=xmyNRRC4grtX6rp4hv0rp7q8"></script>
 </head>
 
 <body>
-    <div class="wrapper">
-        <!--start-header-->
-        <div class="header" >
-            <!-- top start-->
-            <div id="head-top" class="wmw top-bg">
-                
-            </div>
-            <div id="head-bottom" class="container header_top" >
-                
-            </div>
-            <!-- top end -->
-        </div>
-        <!-- End-header-->
-        <!-- banner -->
-        <div id="banner" class="banner-bg wmw home-search-banner" style="height:500px;">
-            
-        </div>
-        <!-- banner end -->
-        <div class="container" id="main">
-            <div class="row">
-                <!-- left start -->
-                <div class="col-xs-8">
-                    <div id="work" class="page-list-bg p10 mt20 frame-border">
-                        
-                    </div>
-                    <!-- 上下班 end -->
-                    <div id="long-distance" class="page-list-bg p10 mt20 frame-border">
-                        
-                    </div>
-                    <!-- 长途 end -->
-                    <div id="passenger-need" class="page-list-bg p10 mt20 frame-border">
-                        
-                    </div>
-                    <!-- 乘客需求 end --> 
-                </div>
-                <!-- left end -->
-                <!-- right start-->
-                <div class="col-xs-4">
-
-                    <div id="diary-share" class="page-list-bg p10 mt20 frame-border">
-                        
-                    </div>
-                    <div id="road-share" class="page-list-bg p10 mt20 frame-border">
-                        
-                    </div>
-                    <!-- <div id="car-share" class="page-list-bg p10 mt20 frame-border">
-                        
-                    </div> -->
-                </div>
-                <!-- right end --> 
-            </div>
-
-            <div class="row">
-                <div class=" page-list-bg p10 mt20 frame-border" style="overflow:auto;margin:15px 15px;">
-                    <div class="page-list-title">
-                        <h4 class="page-header passenger-h"> <i class="fa fa-users cr5b mr10"></i>
-                            和我们一起拼座吧
-                        </h4>
-                    </div>
-                    <div style="margin:10px 40px;">
-                        <img src="images/header.jpg">
-                        <img src="images/header1.png">
-                        <img src="images/header1.jpg">
-                        <img src="images/header2.jpg">
-                        <img src="images/header1.png">
-                        <img src="images/header.jpg">
-                        <img src="images/header1.jpg">
-                        <img src="images/header2.jpg">
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="row">
-
-                <div class=" page-list-bg p10 mt20 frame-border" style="overflow:auto;margin:15px 15px;">
-                    <dl style="float: left;margin: 10px 60px 10px 20px;">
-                        <dt class="cr333 mb10 f14">新手上路</dt>
-                        <dd >
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                        <dd>
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                        <dd>
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                        <dd>
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                    </dl>
-                    <dl style="float: left;margin: 10px 60px 10px 10px;">
-                        <dt class="cr333 f14 mb10">新手上路</dt>
-                        <dd >
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                        <dd>
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                        <dd>
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                        <dd>
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                    </dl>
-                    <dl style="float: left;margin: 10px 60px 10px 10px;">
-                        <dt class="cr333 f14 mb10">新手上路</dt>
-                        <dd >
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                        <dd>
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                        <dd>
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                        <dd>
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                    </dl>
-                    <dl style="float: left;margin: 10px 60px 10px 10px;">
-                        <dt class="cr333 f14 mb10">新手上路</dt>
-                        <dd >
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                        <dd>
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                        <dd>
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                        <dd>
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                    </dl>
-                    <dl style="float: left;margin: 10px 60px 10px 10px;">
-                        <dt class="cr333 f14 mb10">新手上路</dt>
-                        <dd >
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                        <dd>
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                        <dd>
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                        <dd>
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                    </dl>
-                    <dl style="float: left;margin: 10px 60px 10px 10px;">
-                        <dt class="cr333 f14 mb10">新手上路</dt>
-                        <dd >
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                        <dd>
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                        <dd>
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                        <dd>
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                    </dl>
-                    <dl style="float: left;margin: 10px 60px 10px 10px;">
-                        <dt class="cr333 f14 mb10">新手上路</dt>
-                        <dd >
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                        <dd>
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                        <dd>
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                        <dd>
-                            <a class="cr999 f12 p5" href="">新手入门</a>
-                        </dd>
-                    </dl>
-
-                </div>
-
-            </div>
-        </div>
-        <!-- main end -->
-        <!-- footer start -->
-        <div id="footer" class="text-center wmw p30 mt15 footer-bg">
+    <div id="wrapper" class="wrapper">
         
-        </div>
-        <!-- footer end -->
     </div>
-    <!-- wrapper -->
 </body>
 
 </html>
