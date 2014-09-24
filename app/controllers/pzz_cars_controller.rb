@@ -1,7 +1,6 @@
 class PzzCarsController < ApplicationController
   before_action :set_pzz_car, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_pzz_user!
-
   # GET /pzz_cars
   # GET /pzz_cars.json
   def index
@@ -70,6 +69,6 @@ class PzzCarsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pzz_car_params
-      params.require(:pzz_car).permit(:user_id, :car_type, :car_brand, :car_seats, :car_plate_no)
+      params.require(:pzz_car).permit(:pzz_user_id, :pzz_driver_identity_id, :user_realname, :car_type, :car_brand_name, :car_seats, :car_plate_no, :car_vin, :car_engine_no, :identity_vl_no, :identity_vl_image, :identity_vl_issued, :insurance_corporate, :insurance_no, :insurance_expired, :insurance_image, :identity_status, :identity_remark)
     end
 end

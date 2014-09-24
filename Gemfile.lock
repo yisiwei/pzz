@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/chloerei/alipay.git
+  revision: 2ff702fa1472012f8e0b0721e262ddf7857f6a74
+  specs:
+    alipay (0.1.0)
+
+GIT
   remote: git://github.com/jetthoughts/yaml_db.git
   revision: fb4b6bd7e12de3cffa93e0a298a1e5253d7e92ba
   ref: fb4b6bd7e12de3cffa93e0a298a1e5253d7e92ba
@@ -160,6 +166,7 @@ GEM
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
     orm_adapter (0.5.0)
+    os (0.9.6)
     paper_trail (3.0.5)
       activerecord (>= 3.0, < 5.0)
       activesupport (>= 3.0, < 5.0)
@@ -168,6 +175,10 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    paperclip-compression (0.3.6)
+      os (~> 0.9.6)
+      paperclip (>= 3.3)
+      ruby-imagespec (~> 0.3.1)
     paperclip-meta (1.1.0)
       paperclip (>= 3.0.2, < 5.0)
     paperclip-optimizer (1.0.3)
@@ -178,6 +189,7 @@ GEM
     puma (2.9.1)
       rack (>= 1.1, < 2.0)
     rack (1.5.2)
+    rack-cors (0.2.9)
     rack-pjax (0.8.0)
       nokogiri (~> 1.5)
       rack (~> 1.1)
@@ -218,6 +230,7 @@ GEM
     remotipart (1.2.1)
     request_store (1.1.0)
     rolify (3.4.1)
+    ruby-imagespec (0.3.1)
     safe_yaml (1.0.3)
     sass (3.2.19)
     sass-rails (4.0.3)
@@ -261,6 +274,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-session_store!
+  alipay!
   apipie-rails
   cancan
   coffee-rails (~> 4.0.0)
@@ -277,9 +291,11 @@ DEPENDENCIES
   mysql2
   paper_trail (~> 3.0.5)
   paperclip (~> 4.1.1)
+  paperclip-compression
   paperclip-meta
   paperclip-optimizer
   puma
+  rack-cors
   rack-rewrite (~> 1.5.0)
   rails (= 4.1.1)
   rails-i18n (~> 4.0.0)

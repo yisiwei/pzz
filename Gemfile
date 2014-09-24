@@ -28,8 +28,13 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Use msyql
 gem 'mysql2'
 
+#gem 'simple_token_authentication' # add token authentication
 # authentication
 gem 'devise'
+# not working
+# gem 'devise-token_authenticatable' # enable token-auth for devise > 3.3.0
+# gem 'devise_invitable', '~> 1.3.4' # invite friends to join in
+
 
 # authorization based on roles
 gem 'cancan'
@@ -64,6 +69,7 @@ gem 'paperclip', '~> 4.1.1'
 gem 'paperclip-meta' # add width, height, and size to paperclip images
 gem 'image_optim'
 gem 'paperclip-optimizer'
+gem 'paperclip-compression'
 
 #image crop
 gem 'rails_admin_jcrop'
@@ -96,6 +102,12 @@ gem 'enum_help'
 
 # rest api documentation
 gem 'apipie-rails'
+
+# cors support
+gem 'rack-cors', :require => 'rack/cors'
+
+# alipay
+gem 'alipay', :github => 'chloerei/alipay'
 
 # pzz app gems end
 

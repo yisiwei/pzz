@@ -1,10 +1,14 @@
 class PzzUser < ActiveRecord::Base
   rolify
 
+  # You likely have this before callback set up for the token.
+  before_save :ensure_authentication_token
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :lockable, :timeoutable #,:confirmable
+
 
   # fields
   # Virtual attribute for authenticating by either username or email
@@ -13,14 +17,13 @@ class PzzUser < ActiveRecord::Base
   enum user_status: [:active, :disabled, :locked]
   enum user_contact_prefer: [:email, :phone, :both]
   enum user_grade: [:low, :middle, :high]
-  has_attached_file :user_avatar, :styles => { :medium => "240x240>", :thumb => "120x120>" }, :default_url => ""
-  before_post_process :skip_for_audio
-
+  has_attached_file :user_avatar, :styles => { :medium => "100x100>", :thumb => "50x50>" }, 
+  :default_url => "/images/:style/head.jpg"
 
   # validates 
   validates_attachment :user_avatar,
-  :content_type => { :content_type => "image/jpeg" },
-  :size => { :in => 0..10.kilobytes}
+  :content_type => { :content_type => /\Aimage\/.*\Z/ },
+  :size => { :in => 0..500.kilobytes}
 
   validates :user_phone, 
       :uniqueness => {
@@ -35,6 +38,7 @@ class PzzUser < ActiveRecord::Base
   has_many :passenger_orders, foreign_key: "passenger_id", class_name: "PzzOrder", dependent: :nullify
   has_one  :pzz_car, dependent: :destroy
   has_one  :pzz_identity, dependent: :destroy
+  has_one  :pzz_driver__identity, dependent: :destroy
   has_many :pzz_sms_histories, dependent: :nullify
   has_many :pzz_traffics, dependent: :nullify
   has_many :sent_messages, foreign_key: "from_user_id", class_name: "PzzMessage"
@@ -54,12 +58,19 @@ class PzzUser < ActiveRecord::Base
     end
   end
 
-  
-
-  def skip_for_audio
-    ! %w(audio/ogg application/ogg).include?(user_avatar_content_type)
+  # omit email when using user_phone
+  protected
+    def email_required?
+    false
   end
 
+
+  def self.current
+    Thread.current[:pzz_user]
+  end
+  def self.current=(user)
+    Thread.current[:pzz_user] = user
+  end
 
 
   # identity
@@ -68,6 +79,36 @@ class PzzUser < ActiveRecord::Base
 
   # sms
 
+ 
+  # tokens
+  def ensure_authentication_token
+    if authentication_token.blank?
+      self.authentication_token = generate_authentication_token
+    end
+  end
+ 
+  private
+  
+  def generate_authentication_token
+    loop do
+      token = Devise.friendly_token
+      break token unless PzzUser.where(authentication_token: token).first
+    end
+  end
 
+
+  public
+  def make_image(name)
+    file = File.join("#{name}")
+    io = File.new(file)
+    self.user_avatar = io
+  end
+
+  def crop_avatar(user, x, y, w, h)
+    tmp_image = "#{Rails.root}/tmp/" + "#{Time.now.to_i}#{Time.now.to_i}.png"
+    avatar = "#{Rails.root}/public" + "#{user.user_avatar.url}".split("?")[0]
+    system "convert \"#{avatar}\" -crop #{w}x#{h}+#{x}+#{y} \"#{tmp_image}\""
+    make_image(tmp_image)
+  end
 
 end

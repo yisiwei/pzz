@@ -18,7 +18,7 @@ class PzzIdentitiesControllerTest < ActionController::TestCase
 
   test "should create pzz_identity" do
     assert_difference('PzzIdentity.count') do
-      post :create, pzz_identity: { identity_card_image: @pzz_identity.identity_card_image, identity_card_no: @pzz_identity.identity_card_no, identity_dl_image: @pzz_identity.identity_dl_image, identity_dl_no: @pzz_identity.identity_dl_no, identity_dl_starttime: @pzz_identity.identity_dl_starttime, identity_dl_status: @pzz_identity.identity_dl_status, identity_dl_type: @pzz_identity.identity_dl_type, identity_gender: @pzz_identity.identity_gender, identity_realname: @pzz_identity.identity_realname, identity_status: @pzz_identity.identity_status, user_id: @pzz_identity.user_id }
+      post :create, pzz_identity: { identity_card_no: @pzz_identity.identity_card_no, identity_image: @pzz_identity.identity_image, identity_remark: @pzz_identity.identity_remark, identity_status: @pzz_identity.identity_status, pzz_user_id: @pzz_identity.pzz_user_id, user_gender: @pzz_identity.user_gender, user_realname: @pzz_identity.user_realname }
     end
 
     assert_redirected_to pzz_identity_path(assigns(:pzz_identity))
@@ -35,7 +35,7 @@ class PzzIdentitiesControllerTest < ActionController::TestCase
   end
 
   test "should update pzz_identity" do
-    patch :update, id: @pzz_identity, pzz_identity: { identity_card_image: @pzz_identity.identity_card_image, identity_card_no: @pzz_identity.identity_card_no, identity_dl_image: @pzz_identity.identity_dl_image, identity_dl_no: @pzz_identity.identity_dl_no, identity_dl_starttime: @pzz_identity.identity_dl_starttime, identity_dl_status: @pzz_identity.identity_dl_status, identity_dl_type: @pzz_identity.identity_dl_type, identity_gender: @pzz_identity.identity_gender, identity_realname: @pzz_identity.identity_realname, identity_status: @pzz_identity.identity_status, user_id: @pzz_identity.user_id }
+    patch :update, id: @pzz_identity, pzz_identity: { identity_card_no: @pzz_identity.identity_card_no, identity_image: @pzz_identity.identity_image, identity_remark: @pzz_identity.identity_remark, identity_status: @pzz_identity.identity_status, pzz_user_id: @pzz_identity.pzz_user_id, user_gender: @pzz_identity.user_gender, user_realname: @pzz_identity.user_realname }
     assert_redirected_to pzz_identity_path(assigns(:pzz_identity))
   end
 
