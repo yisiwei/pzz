@@ -1,5 +1,7 @@
 class PzzUsers::RegistrationsController < Devise::RegistrationsController
 
+	before_filter :authenticate_user_from_token!
+
 	# make for public api and native website
 	wrap_parameters :pzz_user, 
 		include: [:email, :password, :password_confirmation, 
@@ -25,26 +27,53 @@ class PzzUsers::RegistrationsController < Devise::RegistrationsController
  	end
 
 	def update
-		@user = PzzUser.find(current_pzz_user.id)
+		@resource = PzzUser.find(current_pzz_user.id)
 
-		successfully_updated = if needs_password?(@user, params)
-			@user.update_with_password(devise_parameter_sanitizer.sanitize(:account_update))
+		successfully_updated = if needs_password?(@resource, params)
+			@resource.update_with_password(devise_parameter_sanitizer.sanitize(:account_update))
 		else
 			# remove the virtual current_password attribute
 			# update_without_password doesn't know how to ignore it
 			params[:pzz_user].delete(:current_password)
-			@user.update_without_password(devise_parameter_sanitizer.sanitize(:account_update))
+			@resource.update_without_password(devise_parameter_sanitizer.sanitize(:account_update))
 		end
 
 		if successfully_updated
 			set_flash_message :notice, :updated
 			# Sign in the user bypassing validation in case their password changed
-			sign_in @user, :bypass => true
-			redirect_to after_update_path_for(@user)
+			sign_in @resource, :bypass => true
+			redirect_to after_update_path_for(@resource)
 		else
 			render "edit"
 		end
 	end
+
+  # PUT /pzz_users
+  # PUT /pzz_users.json
+  api :put, "/pzz_users/:id.json", "update user info with token"
+  def update_with_token
+
+    respond_to do |format|
+      format.json {
+        resource = PzzUser.find(params[:id])
+        successfully_updated = if needs_password?(resource, params)
+          resource.update_with_password(devise_parameter_sanitizer.sanitize(:account_update))
+        else
+          # remove the virtual current_password attribute
+          # update_without_password doesn't know how to ignore it
+          params[:pzz_user].delete(:current_password)
+          resource.update_without_password(devise_parameter_sanitizer.sanitize(:account_update))
+        end
+
+        if successfully_updated
+          head :ok
+        else
+          head :unauthroized
+        end
+      }
+    end
+    
+  end
 
 	private
 
@@ -52,9 +81,10 @@ class PzzUsers::RegistrationsController < Devise::RegistrationsController
 	# ie if password or email was changed
 	# extend this as needed
 	def needs_password?(user, params)
-	user.email != params[:user][:email] ||
-	params[:user][:password].present? ||
-	params[:user][:password_confirmation].present?
+		#user.email != params[:pzz_user][:email] ||
+		params[:pzz_user][:email].present? ||
+		params[:pzz_user][:password].present? ||
+		params[:pzz_user][:password_confirmation].present?
 	end
 
 

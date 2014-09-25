@@ -17,7 +17,7 @@ class PzzUser < ActiveRecord::Base
   enum user_status: [:active, :disabled, :locked]
   enum user_contact_prefer: [:email, :phone, :both]
   enum user_grade: [:low, :middle, :high]
-  has_attached_file :user_avatar, :styles => { :medium => "100x100>", :thumb => "50x50>" }, 
+  has_attached_file :user_avatar, :styles => { :medium => "100x100#", :thumb => "50x50#" }, 
   :default_url => "/images/:style/head.jpg"
 
   # validates 
@@ -30,6 +30,7 @@ class PzzUser < ActiveRecord::Base
         :case_sensitive => false
       }#, 
       #:format => {}
+
 
   # relationships
   has_many :pzz_user_metas, dependent: :destroy 

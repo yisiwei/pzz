@@ -1,11 +1,12 @@
 class PzzUsers::UsersController < ApplicationController
   before_action :set_pzz_user, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user_from_token!
   before_filter :authenticate_pzz_user!
 
   # GET /pzz_users
   # GET /pzz_users.json
   def index
-    @pzz_users = PzzPost.all
+    @pzz_users = PzzUser.all
   end
 
   # GET /pzz_users/1
@@ -26,7 +27,7 @@ class PzzUsers::UsersController < ApplicationController
   def avatar
     respond_to do |format|
       format.json {
-        resource = PzzUser.find_by(id: params[:user_id])
+        resource = PzzUser.find_by(authentication_token: params[:auth_token])
         if resource.nil?
           head :not_found 
         else
@@ -45,10 +46,12 @@ class PzzUsers::UsersController < ApplicationController
 
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_pzz_user
       @pzz_user = PzzUser.find(params[:id])
     end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pzz_user_params
@@ -56,4 +59,6 @@ class PzzUsers::UsersController < ApplicationController
       :email, :password, :password_confirmation, :user_description, :user_status, 
       :user_display_name, :user_age, :user_contact_prefer, :user_qq)
     end
+
+
 end

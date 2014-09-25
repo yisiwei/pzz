@@ -59,7 +59,6 @@ class ApplicationController < ActionController::Base
   def authenticate_user_from_token!
     login = params[:login].presence
     user       = login && PzzUser.find_by(email: login) || PzzUser.find_by(user_phone: login)
- 
     # Notice how we use Devise.secure_compare to compare the token
     # in the database with the token given in the params, mitigating
     # timing attacks.

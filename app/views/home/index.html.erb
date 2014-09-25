@@ -30,15 +30,27 @@
                     <!-- <a href="" class="left-phone-a">
                     <img src="images/home-tel.png" height="20">手机版</a>
                     -->
-                    <!-- <a class="pl30 f14 cr666 pr10" href="">登录</a>
-                    -->
+                    <% if pzz_user_signed_in? %>
+ 
                     <a class="pl30 f14 cr666 pr10" href="user-center.html">
-                        心情
+                        <%= current_pzz_user.user_nickname %>
                     </a>
-                    <%= link_to destroy_pzz_user_session_path, method: :delete, data: { confirm: 'Sign out?' }, onclick: "clear_session()" do %> Sign Out<% end %>
-                    <!-- <span class="f12 crd9d">|</span>
-                    <a class="pl10 f14 cr666" href="">免费注册</a>
-                    -->
+                    <%= link_to destroy_pzz_user_session_path, class: "f14 cr666 pr10", method: :delete, data: { confirm: '您确认要退出登录么？' }, onclick: "clear_session()" do %> 
+                        退出
+                    <%end %>
+
+                    <% else %>
+
+                    <%= link_to new_pzz_user_session_path, class: "pl30 f14 cr666 pr10" do %> 
+                        登录
+                    <% end %>
+                    <span class="f12 crd9d">|</span>
+                    <%= link_to new_pzz_user_registration_path, class: "pl10 f14 cr666" do %> 
+                        免费注册
+                    <% end %>
+
+                    <% end %>
+                   
                 </div>
                 <ul class="nav nav-pills pull-right">
                     <li class="pull-right dropdown">
