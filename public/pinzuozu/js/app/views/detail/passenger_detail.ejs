@@ -1,0 +1,139 @@
+<div class="header" >
+    <div id="header-top" class="wmw top-bg">
+        
+    </div>
+    <div id="header-bottom" class="container header_top" >
+        
+    </div>
+</div>
+<div id="banner" class="wmw">
+    <img class="img-responsive" src="images/show.png" />        
+</div>
+<div class="container" id="main">
+  <div class="row mt20">
+    <form class="form-horizontal col-xs-8" role="form">
+      <div class="page-list-bg">
+        <div id="list-title" class="pl15 pr15">
+          <h4 class="page-header passenger-h">
+            <%= line.attr("line_depart_city") %>:
+            <%= line.attr("line_depart_address") %>
+            <i>→</i>
+            <%= line.attr("line_dest_city") %>:
+            <%= line.attr("line_dest_address") %>
+          </h4>
+        </div>
+        <div id="allmap" class="h300">
+        </div>
+        <div class="form-group passenger-form">
+          <label class="col-sm-2 control-label">起点</label>
+          <div class="col-sm-10">
+            <p class="form-control-static"> 
+              <i class="cr3b fa fa-map-marker fa-lg mr10"></i>
+              <span id="line_depart_address">
+                <%= line.attr("line_depart_address") %>
+              </span>
+            </p>
+          </div>
+        </div>
+        <div class="form-group passenger-form">
+          <label class="col-sm-2 control-label">终点</label>
+          <div class="col-sm-10">
+            <p class="form-control-static">
+              <i class="crfb fa fa-map-marker fa-lg mr10"></i>
+              <span id="line_dest_address">
+                <%= line.attr("line_dest_address") %>
+              </span>
+            </p>
+          </div>
+        </div>
+        <div class="form-group passenger-form">
+          <label class="col-sm-2 control-label">出发时间</label>
+          <div class="col-sm-10 ">
+            <p class="form-control-static cr3b">
+              <span>
+                <i class="fa fa-clock-o mr10 fa-lg"></i>
+                <%= line.attr("line_depart_datetime") %>
+              </span>
+              <!--<span class="ml20">07:05</span>-->
+            </p>
+          </div>
+        </div>
+        <div class="form-group passenger-form">
+          <label class="col-sm-2 control-label">
+            提供座位
+          </label>
+          <div class="col-sm-10">
+            <p class="form-control-static"> 
+            <strong class="cr2e"><%= line.attr("line_participants") %>
+            </strong>
+              个
+            </p>
+          </div>
+        </div>
+        <div class="form-group passenger-form">
+          <label class="col-sm-2 control-label">补充说明</label>
+          <div class="col-sm-10">
+            <p class="form-control-static f14">
+              <%= line.attr("line_remark") %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="col-xs-4 ">
+      <div class="page-list-bg com-overflow pb10">
+        <div id="list-title" class="pl15 pr15">
+          <h4 class="page-header passenger-h">发布者</h4>
+        </div>
+        <!-- host-->
+        <div id="host" class="passenger-host">
+          <div class="fl">
+            <img class="img-responsive fl m10"  src="http://192.168.1.115:3000/<%=line.extras.user_avatar_url %>">
+            <div class="pt15 fl">
+              <p>
+                <b><%= line.attr("user_nickname") %></b>
+              </p>
+              <p>
+                <i class="fa fa-female fa-lg cr2e"></i>
+              </p>
+              <p class="cr999 f14">来自：<%= line.attr("line_depart_city") %></p>
+            </div>
+            <p class="ti passenger-host-descrp cr333 f14">
+              <%= line.attr("user_nickname") %>是一位乘客，他于<%= line.attr("created_at") %>发布了一条<%= line.attr("line_depart_datetime")%>出发从 <%= line.attr("line_depart_address")%> 到 <%= line.attr("line_dest_address")%>  的拼车线路；总计需要<%= line.attr("line_participants")%>个空座位，每位乘客愿意分摊<%= line.attr("line_price")%>元，该线路总里程<%= line.attr("line_milleage")%>公里，预计行驶时间<%= line.attr("line_elapse")%>分钟。
+            </p>
+          </div>
+
+        </div>
+        <!-- host end --> </div>
+      <!--  -->
+      <div class="page-list-bg com-overflow mt10 pb10">
+
+        <div id="list-title" class="pl15 pr15">
+          <h4 class="page-header">费用</h4>
+        </div>
+        <div class="pl15 plr15 ">
+          <span>
+            总费用： <strong class="crcor f26" id="price">
+            ¥<%= line.attr("line_price") %></strong>
+          </span>
+        </div>
+        <div class="text-center">
+          <button type="button" class="btn btn-info border-radius-style passenger-submit-btn">立即接单</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var map = new BMap.Map("allmap");
+  map.centerAndZoom(new BMap.Point(116.404, 39.915), 12);
+  map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+  map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+   var transit = new BMap.DrivingRoute(map, {
+      renderOptions: {
+          map: map
+      },  
+  });
+  transit.search($("#line_depart_address").text(),$("#line_dest_address").text());
+</script>

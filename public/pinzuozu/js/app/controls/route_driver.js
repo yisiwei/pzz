@@ -2,12 +2,19 @@
 	//发布线路
 	RouteDriver = can.Control({
 		init:function(element,options){
-			
+			if(this.options.route === 'route_driver'){
+				this.showRouteDriver();
+			}
 		},
-		'route_driver route':function(){
-			var username = this.options.secret.attr("username");
+		showRouteDriver:function(){
 			var isLogin = false;
-			if(username != null && username != ""){
+
+			var userid = this.options.secret.attr("userid");
+			var nickname = this.options.secret.attr("nickname");
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
+
+			if(nickname != null && nickname != ""){
 				isLogin = true;
 			}
 
@@ -16,7 +23,7 @@
 			));
 
 			$("#header-top").html(can.view(
-				"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:username}
+				"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:nickname}
 			));
 			$("#header-bottom").html(can.view(
 				"js/app/views/head/headBottom.ejs"
@@ -26,11 +33,19 @@
 			));
 			$("#menu-route").parent().addClass('current');
 		},
+		'route_driver route':function(){
+			this.showRouteDriver();
+		},
         '#driver-submit click':function(){//司机发布路线
+        	var userid = this.options.secret.attr("userid");
+        	var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
+
         	$("input[name='line_depart_datetime']").val($("#d").val()+" "+$("#t").val()+":00");
-			$("input[name='line_return_datetime']").val($("#db").val()+" "+$("#tb").val()+":00");
+			
 			var form = this.element.find("form");
 			var values = can.deparam(form.serialize());
+			
 			if($.trim(values.line_depart_city).length<=0 ||
 				$.trim(values.line_depart_address).length<=0){
 				$("#depart-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
@@ -49,15 +64,27 @@
 				return;
 			}
 			if($("#isBack").prop("checked")==true){//返程
+				//$("input[name='line_return_datetime']").val($("#db").val()+" "+$("#tb").val()+":00");
 				if($.trim($("#db").val()).length<=0 || $.trim($("#tb").val()).length<=0){
 					$("#backtime-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
 					$("#backtime-msg").text("请输入返程时间");		
 					return;
 				}
+			}else{
+				//$("input[name='line_return_datetime']").val("0000-01-01 00:00:00");
 			}
 			var line = new Line();
-			line.attr(values).save();
-			alert("发布成功"+line.line_depart_datetime);
+			line.attr(values);
+			line.attr("pzz_user_id",userid);
+			line.attr("auth_token",token);
+			line.attr("login",login);
+
+			Line.create(line,function(line){
+				console.log(line);
+			},function(error){
+				console.log(error);
+			});
+			//alert("发布成功"+line.line_depart_datetime);
         },
         '#isBack click':function(){ //是否返程
 			if($("#isBack").prop("checked")==true){

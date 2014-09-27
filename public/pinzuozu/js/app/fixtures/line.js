@@ -42,34 +42,34 @@ var LINES = [
 }
 ];
 //findAll
-can.fixture("GET /pzz_lines",function(){
-	return LINES;
+// can.fixture("GET /pzz_lines",function(){
+// 	return LINES;
 	
-});
-//findOne
-can.fixture("GET /pzz_lines/{id}",function(request){
-	return LINES[(+request.data.id)-1];
-	// return {
-	// 	id:2,
-	// 	start:'长沙',
-	// 	end:'岳阳',
-	// 	startTime:'2014-09-10',
-	// 	seat:2,
-	// 	price:20
-	// }
-});
+// });
+// //findOne
+// can.fixture("GET /pzz_lines/{id}",function(request){
+// 	return LINES[(+request.data.id)-1];
+// 	// return {
+// 	// 	id:2,
+// 	// 	start:'长沙',
+// 	// 	end:'岳阳',
+// 	// 	startTime:'2014-09-10',
+// 	// 	seat:2,
+// 	// 	price:20
+// 	// }
+// });
 //create
-can.fixture("POST /pzz_lines",function(request){
-	var id = LINES.length + 1;
-	LINES.push($.extend({id:id},request.data));
-	return {id:id};
-});
-//update
-can.fixture("PUT /pzz_lines/{id}",function(){
-	$.extend(LINES[(+request.data.id)-1],request.data);	
-	return {};
-});
-//delete
-can.fixture("DELETE /pzz_lines/{id}",function(){
-	return {};
-});
+// can.fixture("POST /pzz_lines",function(request){
+// 	var id = LINES.length + 1;
+// 	LINES.push($.extend({id:id},request.data));
+// 	return {id:id};
+// });
+// //update
+// can.fixture("PUT /pzz_lines/{id}",function(){
+// 	$.extend(LINES[(+request.data.id)-1],request.data);	
+// 	return {};
+// });
+// //delete
+// can.fixture("DELETE /pzz_lines/{id}",function(){
+// 	return {};
+// });

@@ -1,115 +1,95 @@
-<div class="mt20 ml20">
-  <H4>我的基本信息</H4>
-</div>
-<div class="user-cr">
-  <form class="form-horizontal w90" role="form">
-    <div class="form-group">
-      <label class="col-xs-3 control-label">手机号码：</label>
-      <div class="col-xs-4">
-        <p class="form-control-static">13303360636</p>
-      </div>
-      <div class="col-xs-5">
-        <a class="ele-a form-control-static f14" href="">
-          修改
-        </a>
-      </div>
+<div class="page-list-bg p10 mt20 frame-border">
+    <div class="mt10 ml20">
+        <H4>我的基本信息</H4>
     </div>
-    <div class="form-group">
-      <label class="col-xs-3 control-label">邮箱：</label>
-      <div class="col-xs-4">
-        <p class="form-control-static">yuhongjie@mointe.cn</p>
-      </div>
-      <div class="col-xs-5">
-        <a class="ele-a form-control-static f14" href="">修改</a>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="col-xs-3 control-label">密码安全级别：</label>
-      <div class="col-xs-4">
-        <img class="form-control-static" src="images/psw.png"></div>
-      <div class="col-xs-5">
-        <a class="ele-a form-control-static f14" href="">修改</a>
-      </div>
-    </div>
-    <div class="form-group form-group-sm has-success has-feedback">
-      <label for="nickName" class="col-xs-3 control-label">昵称/姓名：</label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control" id="nickName" placeholder="心情">
-        <span class="glyphicon glyphicon-ok form-control-feedback"></span>
-      </div>
-    </div>
+    <div class="user-cr mt10">
+        <form class="form-horizontal  mt30" role="form">
+            <input type="hidden" name="id" value="<%= user.id %>" />
+            <div class="form-group">
+                <label class="col-xs-3 control-label f14 cr666">手机号码：</label>
+                <div class="col-xs-3">
+                    <p class="form-control-static">
+                        <%= user.user_phone %>
+                    </p>
+                </div>
+                <div class="col-xs-5 pt5">
+                    <a class="form-control-static f12" href="bound-mobile.html">修改</a>
+                </div>
+            </div>
+            <div class="form-group form-group-xs  has-feedback">
+                <label for="nickName" class="col-xs-3 control-label f14 cr666">昵称/姓名：</label>
+                <div class="col-xs-3">
+                    <input type="text" class="form-control input-sm frame-nradius" id="nickName" name="user_nickname" value="<%=user.user_nickname %>" placeholder="姓名/昵称"/>
+                </div>
+                <span id="nickname-msg" class="col-xs-4 f12 crred control-label tl">
+                </span>
 
-    <div class="form-group  form-group-sm  has-success has-feedback">
-      <label for="nickName" class="col-xs-3 control-label">所在地：</label>
-      <div class="col-sm-2">
-        <input type="text" class="form-control" id="nickName" placeholder="河北省">
-        <span class="glyphicon glyphicon-ok form-control-feedback"></span>
-      </div>
-      <div class="col-sm-2">
-        <input type="text" class="form-control" id="nickName" placeholder="廊坊市">
-        <span class="glyphicon glyphicon-ok form-control-feedback"></span>
-      </div>
-      <div class="col-sm-5">
-        <input type="text" class="form-control" id="nickName" placeholder="固安"></div>
-    </div>
-    <div class="form-group">
-      <label for="nickName" class="col-xs-3 control-label">性别：</label>
-      <div class="col-sm-9">
-        <label class="radio-inline">
-          <input type="radio" name="inlineRadioOptions" id="man" value="option1">男士</label>
-        <label class="radio-inline">
-          <input type="radio" name="inlineRadioOptions" id="woman" value="option1">女士</label>
-      </div>
-    </div>
-    <div class="form-group form-group-sm ">
-      <label for="nickName" class="col-xs-3 control-label">出生年月：</label>
-      <div class="col-sm-3">
-        <select class="form-control">
-          <option>2014</option>
-          <option>2013</option>
-          <option>2012</option>
-          <option>2011</option>
-          <option>2010</option>
-        </select>
-      </div>
-      <div class="col-sm-3">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
-          <option>7</option>
-          <option>8</option>
-          <option>9</option>
-          <option>10</option>
-          <option>11</option>
-          <option>12</option>
-        </select>
-      </div>
-      <div class="col-sm-3">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="col-xs-3 control-label">个性签名：</label>
-      <div class="col-xs-9">
-        <textarea class="form-control" rows="3"></textarea>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-xs-offset-3 col-xs-9">
-        <button type="submit" class="btn btn-primary">确认</button>
-        <button type="reset" class="btn btn-default">重置</button>
-      </div>
-    </div>
-  </form>
+            </div>
 
+            <div class="form-group">
+                <label class="col-xs-3 control-label f14 cr666">邮箱地址：</label>
+                <div class="col-xs-4">
+                    <p class="form-control-static">yuhongjie@mointe.cn</p>
+                </div>
+                <div class="col-xs-5 pt5">
+                    <a class="ele-a form-control-static f12" href="bound-mail.html">修改</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label f14 cr666">密码等级：</label>
+                <div class="col-xs-4 f12 pt10">
+                    <div class="com-overflow">
+                        <span id="pwd-low-security" class="user-center-pwd-security">低</span>
+                        <span class="user-center-pwd-security">中</span>
+                        <span class="user-center-pwd-security" >高</span>
+                    </div>
+                </div>
+                <div class="col-xs-5 pt5">
+                    <a class="ele-a form-control-static f12" href="pwd-change.html">修改</a>
+                </div>
+            </div>
+
+            <div class="form-group form-group-xs  has-feedback">
+                <label for="qq" class="col-xs-3 control-label f14 cr666">
+                    QQ：
+                </label>
+                <div class="col-xs-3">
+                    <input type="text" class="form-control input-sm frame-nradius" id="user_qq" name="user_qq" value="<%=user.user_qq%>" placeholder="QQ号"/>
+                </div>
+                <span id="qq-msg" class="col-xs-4 f12 crred control-label tl">
+                </span>
+
+            </div>
+            <div class="form-group form-group-xs  has-feedback">
+                <label for="age" class="col-xs-3 control-label f14 cr666">
+                    年龄：
+                </label>
+                <div class="col-xs-2">
+                    <input type="text" class="form-control input-sm frame-nradius" id="user_age" value="<%= user.user_age%>" name="user_age"  placeholder="年龄"/>
+                </div>
+                <span id="mobile-verify" class="col-xs-1 f14 control-label tl">
+                    岁
+                </span>
+                 <span id="mobile-verify" class="col-xs-4 f12 crred control-label tl">
+                </span>
+
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label f14 cr666">
+                    自我介绍：
+                </label>
+                <div class="col-xs-6">
+                    <textarea class="form-control frame-nradius" rows="5" name="user_description" id="user_description"><%= user.user_description %></textarea>
+                </div>
+                <span id="mobile-verify" class="col-xs-3 f12 crred control-label tl">
+                </span>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-3 col-xs-6">
+                    <button type="button" id="basic-btn" class="btn btn-primary frame-nradius" onFocus="this.blur()">确认</button>
+                    <button type="reset" class="btn btn-default frame-nradius" onFocus="this.blur()">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

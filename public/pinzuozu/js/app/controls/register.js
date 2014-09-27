@@ -2,9 +2,11 @@
 	//RegisterView
 	Register = can.Control({
 		init:function(element,options){
-			
+			if(this.options.route === 'register'){
+				this.showRegister();
+			}
 		},
-		'register route':function(){
+		showRegister:function(){
 			this.element.html(can.view(
 				"js/app/views/register/register.ejs"
 			));
@@ -14,41 +16,25 @@
 			$("#footer").html(can.view(
 				"js/app/views/footer/footer.ejs"
 			));
-			console.log("username="+this.options.secret.attr("username"));
+		},
+		'register route':function(){
+			this.showRegister();
 		},
 		'#email-submit click':function(el,event){//邮箱注册提交
-			//alert("a");
-			var user = new User();
-			var form = this.element.find("form");
-			var values = can.deparam(form.serialize());
-			user.attr(values);
-			//alert(user.email);
-			User.register(user,function(results){
-				console.log("返回："+results)
-			 	// var err = eval("(" + results + ")");
-  			// 	console.log("返回："+err.userp_hone);
-  				$("#phone-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
-				$("#phone-msg").text("手机号已被注册");	
-			});
-		},
-		'#phone-submit click':function(el){//手机注册提交
-			this.register(el);
-		},
-		register:function(){//注册
-			var userphone = $("#userphone").val();
-			var code = $("#code").val();
+
+			var email = $("#email").val();
 			var password = $("#password").val();
 			var cfPwd = $("#confirmPwd").val();
 			var nickname = $("#nickname").val();
 			var agreement = $("#agreement").prop("checked");
-			if($.trim(userphone).length<=0){
-				$("#phone-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
-				$("#phone-msg").text("请输入手机号");		
+			if($.trim(email).length<=0){
+				$("#email-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
+				$("#email-msg").text("请输入邮箱");		
 				return;
 			}
 			if($.trim(password).length<=0){
-				$("#wd-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
-				$("#wd-msg").text("请输入密码");	
+				$("#pwd-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
+				$("#pwd-msg").text("请输入密码");	
 				return;
 			}
 			if($.trim(cfPwd).length<=0){
@@ -72,42 +58,101 @@
 				return;
 			}
 
-			// User.findByPhone({},function(user){
-			// 	//alert(user.user_phone);
-				
+			//alert("a");
+			var user = new User();
+			var form = this.element.find("form");
+			var values = can.deparam(form.serialize());
+			user.attr(values);
+
+			// user.bind("created", function(ev){
+			//   	console.log("created");
 			// });
-			User.findOne({id:1},function(user){
-				//alert(user.user_phone);
-				if(user.user_phone === userphone){
-					$("#phone-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
-					$("#phone-msg").text("手机号已被注册");		
-					return;
-				}
+			//alert(user.email);
+			// var results = user.save();
+			// console.log("返回："+results[0]);
+
+			// console.log("返回："+results)
+		 // 	var err = eval("(" + results + ")");
+			// 	console.log("返回："+err.userp_hone);
+			// 	$("#phone-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
+			// $("#phone-msg").text("手机号已被注册");	
+			User.register(user,function(success){
+				alert("success");
+			},function(error){
+				console.log(error.status+error.responseText);
+				$("#email-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
+				$("#email-msg").text("邮箱已被注册");	
 			});
+			
+		},
+		'#phone-submit click':function(el,event){//手机注册提交
+			var userphone = $("#userphone").val();
+			var code = $("#code").val();
+			var password = $("#password").val();
+			var cfPwd = $("#confirmPwd").val();
+			var nickname = $("#nickname").val();
+			var agreement = $("#agreement").prop("checked");
+			if($.trim(userphone).length<=0){
+				$("#phone-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
+				$("#phone-msg").text("请输入手机号");		
+				return;
+			}
+			if($.trim(password).length<=0){
+				$("#pwd-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
+				$("#pwd-msg").text("请输入密码");	
+				return;
+			}
+			if($.trim(password).length<3){
+				$("#pwd-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
+				$("#pwd-msg").text("密码长度最少3位");	
+				return;
+			}
+			if($.trim(cfPwd).length<=0){
+				$("#cfPwd-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
+				$("#cfPwd-msg").text("请输入确认密码");	
+				return;
+			}
+			if(cfPwd != password){
+				$("#cfPwd-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
+				$("#cfPwd-msg").text("两次密码输入不一致");	
+				return;
+			}
+			if($.trim(nickname).length<=0){
+				$("#nickname-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
+				$("#nickname-msg").text("请输入姓名/昵称");	
+				return;
+			}
+			if(agreement == false){
+				$("#agreement-msg").addClass('crred fa fa-times-circle');
+				$("#agreement-msg").text("请接受");	
+				return;
+			}
+
 			var user = new User();
 			var form = this.element.find("form");
 			values = can.deparam(form.serialize());
-			user.attr(values).save();
+			user.attr(values);
 			//alert(user.attr("user_phone"));
-			window.location.href="user-login.html";
 
-			//alert("success");
-			// console.log("in");
-			// $.ajax({
-			// 	url: '/pzz_users/phone_registered',
-			// 	type: 'GET',
-			// 	data: "18612696655",
-			// 	success:function(d){
-			// 		alert(d);
-			// 	},
-			// 	error:function(d) {
-			// 		alert(1);
-			// 	}
-			// });
+			User.register(user,function(success){
+				alert("success");
+				can.route.attr("route","email_active");
+			},function(error){
+				console.log(error.status+error.responseText);
+				$("#phone-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
+				$("#phone-msg").text("手机已被注册");	
+			});
+			
 
-			// User.findByPhone({},function(results){
-			// 	alert("11");
-			// });
+		},
+		'#code-btn click':function(){//获取短信验证码
+			var userphone = $("#userphone").val();
+			User.findByPhone(userphone,function(success){
+				alert("已发送");
+			},function(error){
+				$("#phone-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
+				$("#phone-msg").text("手机已被注册");
+			});
 		},
 		'#mobile-reg click':function(){//邮箱注册
 			$("#register").html(can.view(
@@ -119,8 +164,9 @@
 				"js/app/views/register/registerViewPhone.ejs"
 			));
 		},
-		'#userphone blur':function(){
+		'#userphone blur':function(){//手机验证
 			var phone = $("#userphone").val();
+
 			if($.trim(phone).length<=0){
 				$("#phone-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
 				$("#phone-msg").text("请输入手机号");	
@@ -130,6 +176,14 @@
 			}else{
 				$("#phone-msg").removeClass('crred fa fa-times-circle').addClass('cr5a fa fa-check-circle');
 				$("#phone-msg").text("");
+				// User.findByPhone(phone,function(success){
+				// 	alert("已发送");
+				// 	$("#phone-msg").removeClass('crred fa fa-times-circle').addClass('cr5a fa fa-check-circle');
+				// 	$("#phone-msg").text("");
+				// },function(error){
+				// 	$("#phone-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
+				// 	$("#phone-msg").text("手机已被注册");
+				// });
 			}
 		},
 		'#email blur':function(el,event){
@@ -146,6 +200,9 @@
 			if($.trim(password).length<=0){
 				$("#pwd-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
 				$("#pwd-msg").text("请输入密码");	
+			}else if($.trim(password).length<3){
+				$("#pwd-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
+				$("#pwd-msg").text("密码长度最少3位");
 			}else{
 				$("#pwd-msg").removeClass('crred fa fa-times-circle').addClass('cr5a fa fa-check-circle');
 				$("#pwd-msg").text("");
@@ -180,15 +237,6 @@
 				$("#agreement-msg").removeClass('crred fa fa-times-circle');
 				$("#agreement-msg").text("");	
 			}
-		},
-		'#code-btn click':function(){
-			var userphone = $("#userphone").val();
-			User.findOne({id:1},function(user){
-				if(user.user_phone === userphone){
-					$("#phone-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
-					$("#phone-msg").text("手机号已被注册");		
-				}
-			});
 		},
 		'#userphone input':function(){ //监听输入框值变化
 			var username = $("#userphone").val();

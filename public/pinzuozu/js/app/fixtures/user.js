@@ -14,13 +14,13 @@ var USERS = [
 }
 ];
 //findAll
-can.fixture("GET /pzz_users",function(){
-	return USERS;
-});
+// can.fixture("GET /pzz_users",function(){
+// 	return USERS;
+// });
 //findOne 
-can.fixture("GET /pzz_users/{id}",function(request){
-	return USERS[(+request.data.id)-1];
-});
+// can.fixture("GET /pzz_users/{id}",function(request){
+// 	return USERS[(+request.data.id)-1];
+// });
 //findByPhone 
 // can.fixture("GET /pzz_users/phone_registered",function(request){
 // 	return USERS[0];
@@ -32,11 +32,11 @@ can.fixture("GET /pzz_users/{id}",function(request){
 // 	return {id:id};
 // });
 //update
-can.fixture("PUT /pzz_users/{id}",function(request){
-	$.extend(USERS[(+request.data.id)-1],request.data);	
-	return {};
-});
-//delete
-can.fixture("DELETE /pzz_users/{id}",function(){
-	return {};
-});
+// can.fixture("PUT /pzz_users/{id}",function(request){
+// 	$.extend(USERS[(+request.data.id)-1],request.data);	
+// 	return {};
+// });
+// //delete
+// can.fixture("DELETE /pzz_users/{id}",function(){
+// 	return {};
+// });

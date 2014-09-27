@@ -1,12 +1,12 @@
 <div class=" text-center m10">
     <h3>用户注册</h3>
 </div>
-<form class="form-horizontal m50" role="form">
+<form class="form-horizontal mt50 mb50" role="form">
 
     <div class="form-group m30">
         <label for="inputMobile" class="col-xs-3 control-label">手机号码：</label>
         <div class="col-xs-5">
-            <input type="text" pattern="[0-9]" name="user_phone" class="form-control frame-nradius" id="userphone" placeholder="手机号码">
+            <input type="tel" name="user_phone" class="form-control frame-nradius" id="userphone" placeholder="手机号码">
         </div>
         <span id="phone-msg" class="col-xs-4 f14 control-label tl">亲，请输入真实手机号
         </span>
@@ -15,7 +15,7 @@
         <div class="col-xs-offset-3  col-xs-9">
             <label>
                 没有手机？
-                <a id="mobile-reg" href="javascript:void(0)">用邮箱注册</a>
+                <a id="mobile-reg" href="javascript:void(0)" onFocus="this.blur()" >用邮箱注册</a>
             </label>
         </div>
     </div>
@@ -26,16 +26,17 @@
             <input type="text" class="form-control frame-nradius" id="code" placeholder="验证码" />
         </div>
 
-        <div class="col-xs-5">
-            <button type="button" id="code-btn" class="btn btn-default frame-nradius">获取验证码</button>
+        <div class="col-xs-2 register-mobile-verify">
+            <button type="button" id="code-btn" class="btn btn-default frame-nradius" onFocus="this.blur()" >获取验证码</button>
         </div>
-
+        <span id="code-msg" class="col-xs-4 f14 control-label tl">
+        </span>
     </div>
 
     <div class="form-group m30 ">
         <label for="inputPassword" class="col-xs-3 control-label">密码：</label>
         <div class="col-xs-5">
-            <input type="password" name="user_password" class="form-control frame-nradius" id="password" placeholder="密码" />
+            <input type="password" name="password" class="form-control frame-nradius" id="password" placeholder="密码" />
         </div>
         <span id="pwd-msg" class="col-xs-4 f14 control-label tl">
         </span>
@@ -61,11 +62,11 @@
         <div class="col-xs-offset-3 col-xs-7">
             <div class="checkbox">
                 <label class="f12">
-                    <input type="checkbox" id="agreement">
+                    <input onFocus="this.blur()" type="checkbox" id="agreement">
                     我接受
-                    <a class="f12" href="">《拼座族服务使用协议》</a>
+                    <a class="f12" href="javascript:void(0)">《拼座族服务使用协议》</a>
                     及
-                    <a class="f12" href="">《隐私条款》</a>
+                    <a class="f12" href="javascript:void(0)">《隐私条款》</a>
                 </label>
                 
             </div>
@@ -75,7 +76,7 @@
     </div>
     <div class="form-group m30">
         <div class="col-xs-offset-3 col-xs-5">
-            <button id="phone-submit" type="button" class="btn btn-lg w btn-info p20 frame-nradius">
+            <button id="phone-submit" type="button" class="btn btn-lg w btn-info p20 frame-nradius" onFocus="this.blur()" >
                 立即注册
             </button>
         </div>

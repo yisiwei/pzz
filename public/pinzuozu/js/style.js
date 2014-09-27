@@ -8,3 +8,10 @@
 //   $('#db').val(todaydate);
 // });
 /*date end*/
+$(document).ready(function() {
+	
+});
+function formatDate(date){
+	var formatDate = date.substr(0,9)+date.substr(11,date.length-2);
+	return formatDate;
+}

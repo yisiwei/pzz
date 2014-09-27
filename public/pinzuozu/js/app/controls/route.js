@@ -2,12 +2,19 @@
 	//发布线路
 	Route = can.Control({
 		init:function(element,options){
-			
+			if(this.options.route === 'route'){
+				this.showRoute();
+			}
 		},
-		'route route':function(){
-			var username = this.options.secret.attr("username");
+		showRoute:function(){
 			var isLogin = false;
-			if(username != null && username != ""){
+
+			var userid = this.options.secret.attr("userid");
+			var nickname = this.options.secret.attr("nickname");
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
+
+			if(nickname != null && nickname != ""){
 				isLogin = true;
 			}
 
@@ -16,18 +23,21 @@
 			));
 
 			$("#header-top").html(can.view(
-				"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:username}
+				"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:nickname}
 			));
 			$("#header-bottom").html(can.view(
 				"js/app/views/head/headBottom.ejs"
 			));
-			$("#banner").html(can.view(
-				"js/app/views/head/banner.ejs"
-			));
+			// $("#banner").html(can.view(
+			// 	"js/app/views/head/banner.ejs"
+			// ));
 			$("#footer").html(can.view(
 				"js/app/views/footer/footer.ejs"
 			));
 			$("#menu-route").parent().addClass('current');
+		},
+		'route route':function(){
+			this.showRoute();
 		},
 		'#select-passenger click':function(el,event) {
             $("#select-passenger").css({

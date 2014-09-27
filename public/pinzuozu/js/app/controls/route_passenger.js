@@ -4,9 +4,11 @@
 	//发布线路
 	RoutePassenger = can.Control({
 		init:function(element,options){
-			
+			if(this.options.route === 'route_passenger'){
+				this.showRoutePassenger();
+			}
 		},
-		'route_passenger route':function(){
+		showRoutePassenger:function(){
 			username = this.options.secret.attr("username");
 			var isLogin = false;
 			if(username != null && username != ""){
@@ -27,6 +29,9 @@
 				"js/app/views/footer/footer.ejs"
 			));
 			$("#menu-route").parent().addClass('current');
+		},
+		'route_passenger route':function(){
+			this.showRoutePassenger();
 		},
         '#passenger-submit click':function(){//乘客发布路线
 

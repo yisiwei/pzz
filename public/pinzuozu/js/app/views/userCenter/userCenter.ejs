@@ -1,24 +1,74 @@
 <div class="header">
-  <div id="header-top" class="wmw top-bg"></div>
-  <div id="header-bottom" class="container header_top" ></div>
+  <div class="wmw top-bg-usercenter">
+    <div class="container">
+      <div class="left-content h50">
+        <div class="navbar">
+          <a class="mt5 fl" href="#!home">
+            <img src="images/user-center-logo.png">
+          </a>
+          <ul class="nav nav-pills pull-left mt5">
+            <li class="dropdown">
+              <a class="crfff frame-nradius p5" href="javascript:void(0)">
+                  <%= username %>
+                  <b class="pl2">▼</b>
+              </a>
+              <ul class="dropdown-menu user-top-dropdown-menu frame-nradius">
+                <li>
+                  <a href="user-account-basic.html">账号信息</a>
+                </li>
+                <li>
+                  <a href="user-indentifdriver.html">账号认证</a>
+                </li>
+                <li>
+                  <a id="logout" href="javascript:void(0)">退出</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a class="frame-nradius p5 ml10" href="javascript:void(0)">
+                <i class="fa crfff  fa-envelope"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <ul class="nav nav-pills  pull-right pt10">
+        <li class="pull-right dropdown">
+          <a class="f14 crfff frame-nradius p5" href="#menu4">
+            网址导航 <b class="pl2 ">▼</b>
+          </a>
+          <ul class="dropdown-menu user-top-dropdown-menu frame-nradius">
+            <li>
+              <a href="#!home">首页</a>
+            </li>
+            <li>
+              <a href="user-indentifdriver.html">账号认证</a>
+            </li>
+            <li>
+              <a href="#!home">退出</a>
+            </li>
+          </ul>
+        </li>
+        <li class="pull-right dropdown">
+          <a class="f14 crfff right-padding right-li" href="index.html">如何拼座？</a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 <div class="container" id="main">
-  
-  <div class="page-list-bg p10 mt20 frame-border">
-    <div class="row">
-      <!-- left menu -->
-      <div id="user-menu" class="col-xs-3 frame-rborder user-center-menu-col">
-      </div>
-      <!-- left menu -->
-      <div id="user-content" class="col-xs-9 ">
 
-      </div>
+  <div class="row">
+    <div id="user-menu" class="col-xs-3 user-center-menu-col">
+
+    </div>
+    <div id="user-content" class="col-xs-9">
+
     </div>
   </div>
 
   <div class="row">
-
-    <div class=" page-list-bg p10 mt20 frame-border  friends-links" style="">
+    <div class=" page-list-bg p10 mt20 frame-border  friends-links">
       <dl >
         <dt class="cr333 mb10 f14">新手上路</dt>
         <dd >
@@ -109,7 +159,12 @@
           <a class="cr999 f12 p5" href="">新手入门</a>
         </dd>
       </dl>
-
+      <dl class="friends-links-code-dl">
+        <dt class="cr333 f14 mb5">加我们微信</dt>
+        <dd class="friends-links-code-dd">
+          <img class="friends-links-code-img" src="images/code.png">
+        </dd>
+      </dl>
     </div>
 
   </div>

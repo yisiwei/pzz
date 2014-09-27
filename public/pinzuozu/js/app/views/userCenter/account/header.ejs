@@ -1,0 +1,100 @@
+<form>
+<input type="hidden" name="x" id="x" />
+<input type="hidden" name="y" id="y" />
+<input type="hidden" name="w" id="w" />
+<input type="hidden" name="h" id="h" />
+<div class="page-list-bg p10 mt20 frame-border com-overflow" >
+    <div class="mt20 ml20 ">
+        <h4>修改头像</h4>
+    </div>
+    <div class="user-cr m10">
+        <div id="area-jcrop">
+            <div class="col-xs-6">
+                <!-- 原始图 -->
+                <div id="picture_original">
+                    <div  class="user-header-btn-div" >
+                        <div class="user-header-btn-style">上传图片</div>
+
+                        <input type="file" class="user-header-btn-inputstyle"  name="user_avatar" id="imgOne" onchange="loadLocalImage(this.id,'local-image');" />
+
+                    </div>
+                    <span class="f12 cr666 com-block p10">仅支持JPG、GIF、PNG图片文件，且不超过2M</span>
+                    <img class="h w" src="http://192.168.1.115:3000/<%=user.avatar_urls.orignal %>" />
+                </div>
+                <div class="mt20">
+
+                    <input type="button" class="btn btn-success  frame-nradius" value="保存" id="save_btn" />
+                </div>
+
+            </div>
+            <div class="col-xs-6">
+
+                <!--- 缩略图 -->
+                <span class="f20  mb10 mt60 com-block">头像效果预览</span>
+                <div id="picture_200"></div>
+                <span class="f14 mt10 mb10 com-block">大尺寸头像100*100像素</span>
+                <div id="picture_50"></div>
+                <span class="f14 mt10 mb10 com-block">中尺寸头像50*50像素</span>
+                <div id="picture_30"></div>
+                <span class="f14 mt10 mb10 com-block">小尺寸头像30*30像素</span>
+            </div>
+            <!-- 修改头像 --> 
+        </div>
+        <!-- 修改头像  end --> 
+    </div>
+</div>
+<form>
+<script type="text/javascript">
+    var cutter = new jQuery.UtrialAvatarCutter({
+        //主图片所在容器ID
+        content: "picture_original",
+
+        //缩略图配置,ID:所在容器ID;width,height:缩略图大小
+        purviews: [{
+            id: "picture_200",
+            width: 100,
+            height: 100
+        },
+        {
+            id: "picture_50",
+            width: 50,
+            height: 50
+        },
+        {
+            id: "picture_30",
+            width: 30,
+            height: 30
+        }],
+
+        //选择器默认大小
+        selector: {
+            width: 200,
+            height: 200
+        }
+    });
+
+    $(document).ready(function() {
+        cutter.init();
+
+        
+    });
+
+    // by kevin
+    // 使用html5 FileReader API实现加载本地图片
+    function loadLocalImage(sourceId, targetId) {  
+        if (typeof FileReader === 'undefined') {  
+            alert('Your browser does not support FileReader...');  
+            return;  
+        }  
+        var reader = new FileReader();  
+      
+        reader.onload = function(e) {   
+            var img = document.getElementById(targetId); 
+            console.log(this.result); 
+            $("#area-jcrop img").attr("src", this.result);
+            
+            //cutter.reload(this.result);
+        }  
+        reader.readAsDataURL(document.getElementById(sourceId).files[0]);  
+    } 
+</script>

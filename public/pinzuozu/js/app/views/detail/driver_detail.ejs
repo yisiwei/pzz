@@ -1,0 +1,177 @@
+<div class="header" >
+    <div id="header-top" class="wmw top-bg">
+        
+    </div>
+    <div id="header-bottom" class="container header_top" >
+        
+    </div>
+</div>
+<div id="banner" class="wmw">
+    <img class="img-responsive" src="images/show.png" />        
+</div>
+<div class="container" id="main">
+  <div class="row mt20">
+    <form class="form-horizontal col-xs-8" role="form">
+      <div class="page-list-bg frame-border">
+        <div id="list-title" class="pl15 pr15">
+          <h4 class="page-header passenger-h">
+            <%= line.attr("line_depart_city") %>：
+            <%= line.attr("line_depart_address") %> 
+            <i>→</i>
+            <%= line.attr("line_dest_city") %>:
+            <%= line.attr("line_dest_address") %>
+          </h4>
+        </div>
+        <div class="form-group passenger-form">
+          <div id="allmap" class="h300"></div>
+          <label class="col-xs-2 control-label">起点</label>
+          <div class="col-xs-10">
+            <p class="form-control-static"> 
+              <i class="cr3b fa fa-map-marker fa-lg mr10"></i>
+              <span id="line_depart_address">
+                <%= line.attr("line_depart_address") %>
+              </span>
+            </p>
+          </div>
+        </div>
+        <div class="form-group passenger-form">
+          <label class="col-xs-2 control-label">终点</label>
+          <div class="col-xs-10">
+            <p class="form-control-static">
+              <i class="crfb fa fa-map-marker fa-lg mr10"></i>
+              <span id="line_dest_address">
+                <%= line.attr("line_dest_address") %>
+              </span>
+            </p>
+          </div>
+        </div>
+        <div class="form-group passenger-form">
+          <label class="col-xs-2 control-label">出发时间</label>
+          <div class="col-xs-10 ">
+            <p class="form-control-static cr3b">
+              <span>
+                <i class="fa fa-clock-o mr10 fa-lg"></i>
+                <%= line.attr("line_depart_datetime") %>
+              </span>
+            </p>
+          </div>
+        </div>
+        <div class="form-group passenger-form">
+          <label class="col-xs-2 control-label">提供座位</label>
+          <div class="col-xs-10">
+            <p class="form-control-static"> 
+              <strong class="cr2e"><%= line.attr("line_participants") %></strong>个
+            </p>
+          </div>
+        </div>
+        <div class="form-group passenger-form">
+          <label class="col-xs-2 control-label">车辆信息</label>
+          <div class="col-xs-10">
+            <p class="form-control-static"> 
+              <strong class="cr2e">辽A***5U 黑色</strong>
+            </p>
+          </div>
+        </div>
+        <div class="form-group passenger-form">
+          <label class="col-xs-2 control-label">补充说明</label>
+          <div class="col-xs-10">
+            <p class="form-control-static f14">
+              <%= line.attr("line_remark") %>
+              </p>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="col-xs-4 ">
+      <div class="page-list-bg com-overflow pb10 frame-border">
+        <div id="list-title" class="pl15 pr15">
+          <h4 class="page-header passenger-h">发布者</h4>
+        </div>
+        <!-- host-->
+        <div id="host" class="passenger-host">
+          <div>
+            <img class="fl m10" src="http://192.168.1.115:3000/<%=line.extras.user_avatar_url %>">
+            <div class="pt15 fl">
+              <p>
+                <b><%= line.attr("user_nickname") %></b>
+              </p>
+              <p>
+                <i class="fa fa-female fa-lg cr2e"></i>
+              </p>
+              <p class="cr999 f14">来自：<%= line.attr("line_depart_city") %></p>
+              <button type="button" class="btn btn-primary border-radius-style btn-xs">查看联系方式</button>
+            </div>
+            <p class="ti passenger-host-descrp cr333 f14">
+               <%= line.attr("user_nickname") %>
+              是一位司机，他于<%= line.attr("created_at") %>发布了一条<%= line.attr("line_depart_datetime")%>出发从 <%= line.attr("line_depart_address")%> 到 
+              <%= line.attr("line_dest_address")%> 的拼车线路；总计提供<%= line.attr("line_participants_avaiable")%>个空座位，每位乘客需分摊<%= line.attr("line_price")%>元，该线路总里程<%= line.attr("line_milleage")%>公里，预计行驶时间<%= line.attr("line_elapse")%>分钟
+            </p>
+          </div>
+
+        </div>
+        <!-- host end --> 
+      </div>
+      
+      <div class="page-list-bg com-overflow mt10 pb10 frame-border">
+
+        <div id="list-title" class="pl15 pr15">
+          <h4 class="page-header">费用：
+            ¥<input type="text" id="single-price" style="background-color:transparent;border:none;" value="<%= line.attr("line_price") %>" />
+          </h4>
+        </div>
+        <div class="pl15 plr15 ">
+            总费用：
+            <strong class="crcor f26">
+              ¥<input type="text" id="priceCount" value="<%=line.attr("line_price")%>" />
+            </strong>
+        </div>
+        <form class="form-horizontal text-center w80 mt20" role="form">
+          <div class="form-group">
+            <label class="col-xs-6 control-label tc">申请座位:</label>
+            <div class="col-xs-6">
+              <select class="form-control" id="seatCount">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+          </div>
+        </form>
+        <div class="text-center mb20">
+          <button type="button" class="btn btn-info border-radius-style passenger-submit-btn" id="passenger-submit">申请加入</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer" class="text-center wmw p30 mt15 footer-bg">
+        
+</div>
+
+<script type="text/javascript">
+    var map = new BMap.Map("allmap");
+    map.centerAndZoom(new BMap.Point(116.404, 39.915), 12);
+    map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+    map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+    var transit = new BMap.DrivingRoute(map, {
+      renderOptions: {
+          map: map,
+          //panel: "r-result",
+          //enableDragging : true //起终点可进行拖拽
+      },  
+    });
+    //var myCity = new BMap.LocalCity();
+    //myCity.get(myFun);
+
+    //var cityName;
+    //function myFun(result){
+    //    cityName = result.name;
+    //    map.setCenter(cityName);
+    //}
+    transit.search($("#line_depart_address").text(),$("#line_dest_address").text());
+    
+    
+</script>

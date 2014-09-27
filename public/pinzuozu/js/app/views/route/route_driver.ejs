@@ -12,14 +12,16 @@
 <div class="container" id="main">
   <div id="driver-add-roude" class="row page-list-bg mt15">
     <div id="drivernewmap" class="m30 h300"></div>
-    <form class="form-horizontal mauto  m50" role="form">
-      <input type="hidden" name="line_type" value=""/>
-      <input type="hidden" name="user_id" value=""/>
-      <input type="hidden" name="user_nickname" value=""/>
-      <input type="hidden" name="user_realname" value=""/>
+    <form class="form-horizontal mauto m50" role="form">
+      <input type="hidden" name="line_type" value="0"/>
+      <input type="hidden" name="user_type" value="1"/>
+      <input type="hidden" name="user_nickname" value="yisiwei"/>
+      <input type="hidden" name="user_realname" value="yisiwei"/>
       <input type="hidden" name="line_depart_datetime" value=""/>
       <input type="hidden" name="line_return" value="0"/>
-      <input type="hidden" name="line_return_datetime" value=""/>
+      <input type="hidden" name="line_return_datetime" value="0000-01-01 00:00:00"/>
+      <input type="hidden" name="line_depart_gps" value="12.24"/>
+      <input type="hidden" name="line_dest_gps" value="54.45"/>
       <div class="form-group has-feedback">
         <label for="originCar" class="col-xs-2  f16 control-label"> <b class="crred f12 p2">*</b>
           出发地点：
@@ -39,7 +41,7 @@
           目的地点：
         </label>
         <div class="col-xs-2">
-          <input  class="form-control border-radius-style" id="line_dest_city" name="line_dest_city" placeholder="目的城市" /></div>
+          <input class="form-control border-radius-style" id="line_dest_city" name="line_dest_city" placeholder="目的城市" /></div>
         <div class="col-xs-4">
           <input class="form-control border-radius-style" id="line_dest_address" name="line_dest_address" placeholder="详细地址" />
           <span onclick="mark('end')" class="crfb offer-position-icon fa fa-map-marker fa-lg form-control-feedback"></span>
@@ -51,15 +53,15 @@
       <div class="form-group">
         <label for="destinationCar" class="col-xs-2 control-label">途径哪里：</label>
         <div class="col-xs-6">
-          <input class="form-control border-radius-style" id="line_midway" name="line_midway" placeholder="途径地" /></div>
-        
+          <input class="form-control border-radius-style" id="line_midway" name="line_midway" placeholder="途径地" />
+        </div>
+        <input id="route-btn" onclick="loadMilleage()" type="button" value="查看路线" />
       </div>
       <div class="form-group">
-        <label for="destinationCar" class="col-xs-2 control-label">途径里程：</label>
+        <label for="destinationCar" class="col-xs-2 control-label">里程：</label>
         <div class="col-xs-10">
-          <input name="line_milleage" type="text" value="0" 
+          <input name="line_milleage" id="line_milleage" type="text" value="0" 
           class="form-control-static offer-kilometre-span offer-kilometre-span-font" style="background-color:transparent;border:none;" size='5' onfocus=this.blur()>
-          <span class="form-control-static offer-kilometre-span">km</span>
         </div>
       </div>
       <!--start time -->
@@ -74,7 +76,7 @@
               <span class="add-on input-group-addon border-radius-style">
                 <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
               </span>
-              <input type="text" id='d' class="form-control border-radius-style offer-date-input" placeholder="出发日期"  />
+              <input type="text" id='d' class="form-control border-radius-style offer-date-input" placeholder="出发日期" value="2014-09-27"  />
             </div>
           </div>
         </div>
@@ -84,7 +86,7 @@
               <span class="add-on input-group-addon border-radius-style">
                 <i class="glyphicon glyphicon-calendar fa fa fa-clock-o"></i>
               </span>
-              <input type="text" id='t' class="form-control border-radius-style offer-date-input" placeholder="出发时间"  />
+              <input type="text" id='t' class="form-control border-radius-style offer-date-input" placeholder="出发时间" value="08:10"  />
             </div>
           </div>
         </div>
@@ -122,7 +124,7 @@
               <span class="add-on input-group-addon border-radius-style">
                 <i class="glyphicon glyphicon-calendar fa fa fa-clock-o"></i>
               </span>
-              <input type="text" id='tb' class="form-control border-radius-style offer-date-input" placeholder="返程时间"  />
+              <input type="text" id='tb' class="form-control border-radius-style offer-date-input" placeholder="返程时间" />
             </div>
           </div>
         </div>
@@ -136,7 +138,7 @@
           联系电话：
         </label>
         <div class="col-xs-10">
-          <p name="user_phone" class="form-control-static">13303360636</p>
+          <input type="text" name="user_phone" class="form-control-static" value="18310204748" />
         </div>
       </div>
       <!-- phone end -->
@@ -176,7 +178,7 @@
         <label class="col-xs-2 control-label">
         <b class="crred f12 p2">*</b>期望价格：</label>
         <div class="col-xs-2">
-          <input type="number" id="line_price" class="form-control border-radius-style offer-date-input" />
+          <input type="number" id="line_price" name="line_price" class="form-control border-radius-style offer-date-input" value="20"/>
         </div>
         <span  class="col-xs-4  control-label tl">元/人</span>
 
@@ -222,6 +224,8 @@
     function myFun(result){
         cityName = result.name;
         map.setCenter(cityName);
+        $("#line_depart_city").val(cityName);
+        $("#line_dest_city").val(cityName);
     }
     //transit.search("固安","廊坊市");
     
@@ -250,14 +254,14 @@
       var _value = e.fromitem.value;
       var value = "";
       if(e.fromitem.index > -1){
-        value = _value.province + _value.city + _value.district + 
+        value = _value.district + 
         _value.street + _value.business;
       }
       str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
       value = "";
       if(e.toitem.index > -1){
         _value = e.toitem.value;
-        value = _value.province + _value.city + _value.district +
+        value = _value.district +
         _value.street + _value.business;
       }
       str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
@@ -269,14 +273,14 @@
       var _value = e.fromitem.value;
       var value = "";
       if(e.fromitem.index > -1){
-        value = _value.province + _value.city + _value.district + 
+        value = _value.district + 
         _value.street + _value.business;
       }
       str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
       value = "";
       if(e.toitem.index > -1){
         _value = e.toitem.value;
-        value = _value.province + _value.city + _value.district +
+        value =  _value.district +
         _value.street + _value.business;
       }
       str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
@@ -289,7 +293,7 @@
     //鼠标点击下拉列表后的事件
     startPlace.addEventListener("onconfirm",function(e){
       var _value = e.item.value;
-      myStartValue = _value.province + _value.city + _value.district +
+      myStartValue =  _value.district +
       _value.street + _value.business;
       $("#searchDepartCity").innerHTML = "onconfirm<br />index="+e.item.index+"<br />myStartValue= " + myStartValue;
       setStartPlace();
@@ -297,7 +301,7 @@
     endPlace.addEventListener("onconfirm",function(e){
       var _value = e.item.value;
 
-      myEndValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+      myEndValue = _value.district + _value.street + _value.business;
       $("#searchDestCity").innerHTML = "onconfirm<br />index="+e.item.index+"<br />myEndValue= " + myEndValue;
       setEndPlace();
     });
@@ -369,6 +373,7 @@
               myGeo.getLocation(e.point,function(rs){
                 var addComp = rs.addressComponents;
                 //alert(addComp.street+addComp.streetNumber);
+                $("#line_depart_city").val(addComp.city);
                 $("#line_depart_address").val(addComp.district +addComp.street+addComp.streetNumber);
               });
             });
@@ -391,6 +396,7 @@
               // $("#detail-e-place").val(e.point.lng + ", " + e.point.lat);
               myGeo.getLocation(e.point,function(rs){
                 var addComp = rs.addressComponents;
+                $("#line_dest_city").val(addComp.city);
                 $("#line_dest_address").val(addComp.district +addComp.street+addComp.streetNumber);
               });
             });
@@ -398,4 +404,28 @@
         });
       }
     }
+  function loadMilleage(){
+    //var output="总距离：";
+    var searchComplete = function (results){
+      if (transit.getStatus() != BMAP_STATUS_SUCCESS){
+        return ;
+      }
+      var plan = results.getPlan(0);
+      //output += plan.getDuration(true) + "\n";                //获取时间
+      //output += "总路程为：" ;
+      //output += plan.getDistance(true) + "\n";             //获取距离
+      $("#line_milleage").val(plan.getDistance(true));
+    }
+
+    var transit = new BMap.DrivingRoute(map, {
+    renderOptions: {map: map},
+      onSearchComplete: searchComplete,
+    //  onPolylinesSet: function(){        
+    //    setTimeout(function(){alert(output)},"1000");
+    //}
+    });
+    var s_address = $("#line_depart_city").val() + $("#line_depart_address").val();
+    var e_address = $("#line_dest_city").val() + $("#line_dest_address").val()
+    transit.search(s_address, e_address);
+  }
 </script>
