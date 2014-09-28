@@ -1,6 +1,5 @@
 (function(namespace) {
 
-	var username;
 	//发布线路
 	RoutePassenger = can.Control({
 		init:function(element,options){
@@ -9,9 +8,14 @@
 			}
 		},
 		showRoutePassenger:function(){
-			username = this.options.secret.attr("username");
 			var isLogin = false;
-			if(username != null && username != ""){
+
+			var userid = this.options.secret.attr("userid");
+			var nickname = this.options.secret.attr("nickname");
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
+
+			if(nickname != null && nickname != ""){
 				isLogin = true;
 			}
 
@@ -20,7 +24,7 @@
 			));
 
 			$("#header-top").html(can.view(
-				"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:username}
+				"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:nickname}
 			));
 			$("#header-bottom").html(can.view(
 				"js/app/views/head/headBottom.ejs"
@@ -35,14 +39,28 @@
 		},
         '#passenger-submit click':function(){//乘客发布路线
 
-        	if(username == null || $.trim(username).length<=0){
+        	var userid = this.options.secret.attr("userid");
+			var nickname = this.options.secret.attr("nickname");
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
+
+			//未登录跳转到登录界面
+        	if(nickname == null || $.trim(nickname).length<=0){
         		can.route.attr("route","login");
+        		return;
         	}
 
         	$("input[name='line_depart_datetime']").val($("#d").val()+" "+$("#t").val()+":00");
-			$("input[name='line_return_datetime']").val($("#db").val()+" "+$("#tb").val()+":00");
+			
+        	if($("#isBack").prop("checked")==true){
+				$("input[name='line_return_datetime']").val($("#db").val()+" "+$("#tb").val()+":00");
+			}else{
+				$("input[name='line_return_datetime']").val("0000-01-01 00:00:00");
+			}
+
 			var form = this.element.find("form");
 			var values = can.deparam(form.serialize());
+
 			if($.trim(values.line_depart_city).length<=0 ||
 				$.trim(values.line_depart_address).length<=0){
 				$("#depart-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
@@ -67,9 +85,19 @@
 					return;
 				}
 			}
+
 			var line = new Line();
-			line.attr(values).save();
-			alert("发布成功"+line.line_depart_datetime);
+			line.attr(values);
+			line.attr("pzz_user_id",userid);
+			line.attr("auth_token",token);
+			line.attr("login",login);
+			Line.create(line,function(line){
+				alert("发布成功");
+				console.log(line);
+			},function(error){
+				console.log(error);
+			});
+			
         },
         '#isBack click':function(){ //是否返程
 			if($("#isBack").prop("checked")==true){

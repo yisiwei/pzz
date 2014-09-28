@@ -14,68 +14,18 @@
         <!-- left start -->
         <div class="col-xs-8">
             <div id="work" class="page-list-bg p10 mt20 frame-border">
-                <div class="page-list-title">
-                    <h4 class="page-header passenger-h">
-                        <i class="fa fa-car cr5b mr10"></i>
-                        上下班拼座
-                    </h4>
-                    <a href="#" class="more">
-                        更多
-                    </a>
-                </div>
-                <div class="page-list">
-                    <ul>
-                      <% local_lines.each(function(line,i){ %> 
-                      <li class="<%= i==local_lines.length-1?'last':'' %>">
-                        <%== can.view.render('js/app/views/home/pincheLocal.ejs',{line:line}) %>
-                      </li>
-                      <% }); %>
-                    </ul>
-                </div>
+                
             </div>
             <!-- 上下班 end -->
             <div id="long-distance" class="page-list-bg p10 mt20 frame-border">
-                <div class="page-list-title">
-                    <h4 class="page-header passenger-h">
-                        <i class="fa fa-car cr5b mr10"></i>
-                        长途拼座
-                    </h4>
-                    <a href="#" class="more">
-                        更多
-                    </a>
-                </div>
-                <div class="page-list">
-                    <ul>
-                      <% long_lines.each(function(line,i){ %> 
-                      <li class="<%= i==long_lines.length-1?'last':'' %>">
-                        <%== can.view.render('js/app/views/home/pincheLong.ejs',{line:line}) %>
-                      </li>
-                      <% }); %>
-                    </ul>
-                </div>
+                
             </div>
             <!-- 长途 end -->
             <div id="passenger-need" class="page-list-bg p10 mt20 frame-border">
-                <div class="page-list-title">
-                    <h4 class="page-header passenger-h">
-                        <i class="fa fa-user cr5b mr10"></i>
-                        乘客需求
-                    </h4>
-                    <a href="#" class="more">
-                        更多
-                    </a>
-                </div>
-                <div class="page-list">
-                    <ul>
-                      <% need_lines.each(function(line,i){ %> 
-                      <li class="<%= i==need_lines.length-1?'last':'' %>">
-                        <%== can.view.render('js/app/views/home/pincheNeed.ejs',{line:line}) %>
-                      </li>
-                      <% }); %>
-                    </ul>
-                </div>
+                
             </div>
-            <!-- 乘客需求 end --> </div>
+            <!-- 乘客需求 end --> 
+        </div>
         <!-- left end -->
         <!-- right start-->
         <div class="col-xs-4">

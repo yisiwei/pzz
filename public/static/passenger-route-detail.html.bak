@@ -214,7 +214,7 @@
                     <i class="fa fa-female fa-lg cr2e"></i>
                   </p>
                   <p class="cr999 f14">来自：廊坊市</p>
-                  <button type="button" class="btn  btn-primary border-radius-style btn-xs " data-toggle="modal" id="lookphone">查看联系方式</button>
+                  <button type="button" class="btn  btn-primary border-radius-style btn-xs " data-toggle="modal" >查看联系方式</button>
                   <div class="modal fade bs-example-modal-sm " id="mymodal">
                   <div class="modal-dialog">
                     <div class="modal-content">

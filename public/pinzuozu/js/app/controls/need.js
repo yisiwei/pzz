@@ -35,9 +35,7 @@
 			));
 			$("#menu-need").parent().addClass('current');
 
-			//var el = this;
-			Line.findAll({user_type:0,line_type:0},function(lines){
-				//var lines = results.filter("上下班拼车");
+			Line.findAll({user_type:0},function(lines){
 				console.log(lines.length);
 				if(lines.length>0){
 					$("#work-need").html(can.view(

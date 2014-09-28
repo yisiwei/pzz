@@ -26,12 +26,6 @@
 							username:user.user_nickname
 						}
 					));
-					// $("#header-top").html(can.view(
-					// 	"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:username}
-					// ));
-					// $("#header-bottom").html(can.view(
-					// 	"js/app/views/head/headBottom.ejs"
-					// ));
 					$("#footer").html(can.view(
 						"js/app/views/footer/footer.ejs"
 					));
@@ -127,7 +121,6 @@
 				//can.route.attr("route","login");
 			});
 
-			
 		},
 		'#account-header click':function(el){//头像
 			$("#accordion li").removeClass('menu-current');
@@ -212,17 +205,6 @@
 			var token = this.options.secret.attr("token");
 			var login = this.options.secret.attr("login");
 
-			// Line.findAll({line_type:0},function(lines){
-
-			// 	lines.each(function(line) {
-			// 		console.log(line.user_nickname);
-			// 	});
-
-			// },function(error){
-			// 	console.log(error);
-			// });
-
-
 			Line.findLinesByUser({userid:userid,token:token,login:login}, function(lines){
 				console.log(lines.length+"-"+lines[1].user_nickname);
 				//使用each报错
@@ -232,6 +214,18 @@
 			},function(error){
 				console.log(error);
 			});
+		},
+		'.addseat click':function(el,event){
+			var t = el.parent().find('input[class*=numseat]'); 
+	        t.val(parseInt(t.val())+1);
+	        // setTotal(); 
+		},
+		'.minseat click':function(el,event){
+			var t = el.parent().find('input[class*=numseat]'); 
+	        t.val(parseInt(t.val())-1);
+	        if(parseInt(t.val())<0){ 
+	        	t.val(0); 
+	        }
 		},
 		'.line_participants_available click':function(el,event){//修改座位数量
 			var userid = this.options.secret.attr("userid");

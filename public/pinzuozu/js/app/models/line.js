@@ -11,7 +11,9 @@
 				dataType: 'json',
 				data:{
 					line_type:params.line_type,
-					user_type:params.user_type
+					user_type:params.user_type,
+					page:params.page,
+					per_page:params.per_page
 				},
 				success:success,
 				error:error
@@ -100,7 +102,9 @@
 					line_price:params.line_price,
 					line_midway:params.line_midway,
 					line_milleage:params.line_milleage,
-					line_participants:params.line_participants
+					line_participants:params.line_participants,
+					line_elapse:params.line_elapse,
+					line_remark:params.line_remark
 				},
 				success:success,
 				error:error

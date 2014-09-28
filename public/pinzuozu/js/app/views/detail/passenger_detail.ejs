@@ -97,9 +97,24 @@
                 <i class="fa fa-female fa-lg cr2e"></i>
               </p>
               <p class="cr999 f14">来自：<%= line.attr("line_depart_city") %></p>
+              <button type="button" class="btn btn-primary border-radius-style btn-xs " data-toggle="modal" id="lookContact">查看联系方式</button>
+              <div class="modal fade bs-example-modal-sm" id="mymodal">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                      <h4 class="modal-title"><%=line.user_nickname %>的手机号</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p><%=line.user_phone %></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <p class="ti passenger-host-descrp cr333 f14">
-              <%= line.attr("user_nickname") %>是一位乘客，他于<%= line.attr("created_at") %>发布了一条<%= line.attr("line_depart_datetime")%>出发从 <%= line.attr("line_depart_address")%> 到 <%= line.attr("line_dest_address")%>  的拼车线路；总计需要<%= line.attr("line_participants")%>个空座位，每位乘客愿意分摊<%= line.attr("line_price")%>元，该线路总里程<%= line.attr("line_milleage")%>公里，预计行驶时间<%= line.attr("line_elapse")%>分钟。
+              <b class="cr3b"><%= line.attr("user_nickname") %></b>是一位乘客，他于<b class="cr3b"><%= line.attr("created_at") %></b>发布了一条<b class="cr3b"><%= line.attr("line_depart_datetime")%></b>出发从<b class="cr3b"><%= line.attr("line_depart_address")%></b>到<b class="cr3b"> 
+              <%= line.attr("line_dest_address")%></b> 的拼车线路；总计需要<b class="cr3b"><%= line.attr("line_participants")%></b>个空座位，每位乘客需分摊<b class="cr3b"><%= line.attr("line_price")%></b>元，该线路总里程<b class="cr3b"><%= line.attr("line_milleage")%></b>公里，预计行驶时间<b class="cr3b"><%= line.attr("line_elapse")%></b>分钟。
             </p>
           </div>
 
@@ -109,20 +124,29 @@
       <div class="page-list-bg com-overflow mt10 pb10">
 
         <div id="list-title" class="pl15 pr15">
-          <h4 class="page-header">费用</h4>
+          <div class="page-header">
+            费用：¥&nbsp;<%= line.attr("line_price") %>/位
+          </div>
         </div>
         <div class="pl15 plr15 ">
           <span>
-            总费用： <strong class="crcor f26" id="price">
-            ¥<%= line.attr("line_price") %></strong>
+            总费用：
+            <strong class="crcor">
+              ¥&nbsp;
+              <%= line.attr("line_price")*line.attr("line_participants") %>
+            </strong>
           </span>
         </div>
         <div class="text-center">
-          <button type="button" class="btn btn-info border-radius-style passenger-submit-btn">立即接单</button>
+          <button type="button" class="btn btn-info border-radius-style passenger-submit-btn">邀请加入</button>
         </div>
       </div>
     </div>
   </div>
+</div>
+
+<div id="footer" class="text-center wmw p30 mt15 footer-bg">
+        
 </div>
 
 <script type="text/javascript">

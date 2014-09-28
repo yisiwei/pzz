@@ -34,6 +34,7 @@
 		new RouteDriver("#wrapper",{'secret':secret,'route':route});
 		//路线详情
 		new RouteDriverDetail("#wrapper",{'secret':secret,'route':route});
+		new RoutePassengerDetail("#wrapper",{'secret':secret,'route':route});
 
 		new UserCenter("#wrapper",{'secret':secret,'route':route});
 
