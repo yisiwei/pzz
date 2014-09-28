@@ -22,6 +22,17 @@
         </script>
         <script src="js/style.js">
         </script>
+        <script type="text/javascript">
+                $(document).ready(function() {
+                    $("#account-low-security").css({
+                        background: 'red',
+                        color: '#fff'
+                    });
+                $('#bound-mail').click(function() {
+                    window.location.href="bound-mail.html"
+                });
+                });
+        </script>
     </head>
     
     <body>
@@ -296,16 +307,18 @@
                         </div>
                         <!-- --End left-menu-- -->
                         <div class="col-xs-9 ">
-                        <div class="page-list-bg p10 mt20 frame-border">
+                        <div class="page-list-bg p10 mt20 frame-border h636">
 
                             <div class="mt20 ml20">
                                 <H4>
                                     账号安全
                                 </H4>
                             </div>
-                            <div class="ml30">
-                                <img src="images/level.png">
-                            </div>
+                            <div class="com-overflow ml30 mt15">
+                                               <span id="account-low-security" class="user-center-security">低</span>
+                                               <span id="account-center-security" class="user-center-security">中</span>
+                                               <span id="account-hight-security" class="user-center-security" >高</span>
+                                           </div>
                             <div class="user-cr">
                                 <table class="table user-center-an-table">
                                     <tbody>
@@ -314,7 +327,7 @@
                                                 <span class=" cr44">
                                                     <i class="fa  fa-mobile fa-lg  mr20">
                                                     </i>
-                                                    绑定手机：
+                                                   
                                                 </span>
                                                 <b class="f12 cr44">
                                                     已绑定
@@ -325,7 +338,7 @@
                                                 <span>
                                                     13303360636
                                                 </span>
-                                                <a class="f12 ml10" href="">
+                                                <a class="f12 ml10" href="bound-mobile.html">
                                                     更换号码
                                                 </a>
                                             </td>
@@ -338,7 +351,7 @@
                                                 <span class="cr666">
                                                     <i class="fa fa-envelope fa-lg mr20">
                                                     </i>
-                                                    绑定邮箱：
+                                                    
                                                 </span>
                                                 <b class=" cr66 f12">
                                                     未绑定
@@ -348,7 +361,7 @@
                                                 绑定邮箱账号更安全
                                             </td>
                                             <td>
-                                                <button type="button" class="btn btn-success btn-sm">
+                                                <button id="bound-mail" type="button" class="btn btn-success btn-sm frame-nradius">
                                                     立即绑定
                                                 </button>
                                             </td>

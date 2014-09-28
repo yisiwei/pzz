@@ -1,0 +1,266 @@
+<!DOCTYPE HTML>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>
+        </title>
+        <link href="css/comm.css" rel='stylesheet' type='text/css' />
+        <link href="css/cssreset.css" rel='stylesheet' type='text/css' />
+        <link href="css/module.css" rel='stylesheet' type='text/css' />
+        <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+        <!-- Custom Theme files -->
+        <link href="css/style.css" rel='stylesheet' type='text/css' />
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="js/jquery.min.js">
+        </script>
+        <script src="js/bootstrap.min.js">
+        </script>
+        <script src="js/style.js">
+        </script>
+        <style type="text/css">
+        </style>
+        <script type="text/javascript">
+                $(document).ready(function() {
+                    $("#account-low-security").css({
+                        background: 'red',
+                        color: '#fff'
+                    });
+                });
+        </script>
+    </head>
+    
+    <body>
+        <div class="wrapper">
+            <!----start-header---->
+            <div class="header">
+                <!-- top1 -->
+                <div class="wmw top-bg-usercenter">
+                    <div class="container">
+                           <a class="mt5 fl"  onFocus="this.blur()"  href="index.html">
+                               
+                            <img src="images/user-center-logo.png">
+                           </a>
+                           
+                          
+                                <ul class="nav nav-pills pull-left mt5">
+                                    <!-- <li>
+                                        <a class="frame-nradius com-initial" href="index.html">
+                                            <img src="images/user-center-logo.png">
+                                        </a>
+                                    </li> -->
+                                    <li class="dropdown">
+                                        <a class="crfff frame-nradius p5" href="index.html">
+                                            Sprite
+                                            <b class="pl2 ">
+                                                ▼
+                                            </b>
+                                        </a>
+                                        <ul class="dropdown-menu user-top-dropdown-menu frame-nradius">
+                                            <li>
+                                                <a href="user-account-basic.html">
+                                                    账号信息
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="user-indentifdriver.html">
+                                                    账号认证
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    退出
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a class="frame-nradius p5 ml10" href="index.html">
+                                            <i class="fa crfff  fa-envelope">
+                                            </i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            
+                      
+                        <ul class="nav nav-pills  pull-right pt10">
+                            <li class=" dropdown">
+                                <a class="f14 crfff right-padding" onFocus="this.blur()" href="index.html">
+                                    如何拼座？
+                                </a>
+                            </li>
+                            <li class=" dropdown">
+                                <a class="f14 crfff frame-nradius p5" onFocus="this.blur()" href="#menu4">
+                                    网址导航
+                                    <b class="pl2 ">
+                                        ▼
+                                    </b>
+                                </a>
+                                <ul class="dropdown-menu user-top-dropdown-menu frame-nradius">
+                                    <li>
+                                        <a href="index.html">
+                                            首页
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="user-indentifdriver.html">
+                                            账号认证
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            退出
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                <!-- top1 end -->
+            </div>
+            <!---- //End-header---->
+                    <div class="container mb50">
+            <div class="row ">
+                <div class="col-xs-7">
+                    <img src="images/lgr.png">
+                </div>
+
+                <div class="col-xs-5 frame-bgw mt30 frame-border">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                      <li class="active"><a href="#home" role="tab" data-toggle="tab">实名认证</a></li>
+                      <li><a href="#profile" role="tab" data-toggle="tab">驾驶认证</a></li>
+                      <li><a href="#messages" role="tab" data-toggle="tab">车辆认证</a></li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                      <div class="tab-pane active" id="home">
+                             <form class="form-horizontal m30" role="form">
+                                 <div class="form-group ">
+                                    <span id="mobile-name" class="col-xs-offset-3 col-xs-9  f12 p10 crred control-label tl fa fa-times-circle">
+                                    手机格式不对
+                                   </span>
+                                  </div>
+                                 <div class="form-group">
+                                    <label for="" class="col-xs-3 control-label">真实姓名</label>
+                                    <div class="col-xs-9">
+                                      <input type="text" class="form-control frame-nradius" id="inputEmail3" placeholder="真实姓名">
+                                    </div>
+                                  </div>
+                                    <div class="form-group">
+                                    <label  class="col-xs-3 control-label ">身份证号</label>
+                                    <div class="col-xs-9">
+                                      <input type="text" class="form-control frame-nradius" id="inputEmail3" placeholder="身份证号">
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label  class="col-xs-3  control-label ">证件照</label>
+                                     <div class="col-xs-9">
+                                    <input type="file"  class=""   id="exampleInputFile">
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <div class="col-xs-offset-3 col-xs-10">
+                                       <button type="submit " class="btn btn-info frame-nradius">提交认证</button>
+                                    </div>
+                                  </div>
+                                                  
+                   
+                    </form>
+                      </div>
+                      <div class="tab-pane" id="profile">
+                                 <form class="form-horizontal m30" role="form">
+                                 <div class="form-group ">
+                                    <span id="mobile-name" class="col-xs-offset-3 col-xs-9  f12 p10 crred control-label tl fa fa-times-circle">
+                                    手机格式不对
+                                   </span>
+                                  </div>
+                                 <div class="form-group">
+                                    <label for="" class="col-xs-3 control-label">真实姓名</label>
+                                    <div class="col-xs-9">
+                                      <input type="text" class="form-control frame-nradius" id="inputEmail3" placeholder="真实姓名">
+                                    </div>
+                                  </div>
+                                    <div class="form-group">
+                                    <label  class="col-xs-3 control-label ">身份证号</label>
+                                    <div class="col-xs-9">
+                                      <input type="text" class="form-control frame-nradius" id="inputEmail3" placeholder="身份证号">
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label  class="col-xs-3  control-label ">证件照</label>
+                                     <div class="col-xs-9">
+                                    <input type="file"  class=""   id="exampleInputFile">
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <div class="col-xs-offset-3 col-xs-10">
+                                       <button type="submit " class="btn btn-info frame-nradius">提交认证</button>
+                                    </div>
+                                  </div>
+                                                  
+                   
+                    </form>
+                      </div>
+                      <div class="tab-pane" id="messages">
+                                 <form class="form-horizontal m30" role="form">
+                                 <div class="form-group ">
+                                    <span id="mobile-name" class="col-xs-offset-3 col-xs-9  f12 p10 crred control-label tl fa fa-times-circle">
+                                    手机格式不对
+                                   </span>
+                                  </div>
+                                 <div class="form-group">
+                                    <label for="" class="col-xs-3 control-label">真实姓名</label>
+                                    <div class="col-xs-9">
+                                      <input type="text" class="form-control frame-nradius" id="inputEmail3" placeholder="真实姓名">
+                                    </div>
+                                  </div>
+                                    <div class="form-group">
+                                    <label  class="col-xs-3 control-label ">身份证号</label>
+                                    <div class="col-xs-9">
+                                      <input type="text" class="form-control frame-nradius" id="inputEmail3" placeholder="身份证号">
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label  class="col-xs-3  control-label ">证件照</label>
+                                     <div class="col-xs-9">
+                                    <input type="file"  class=""   id="exampleInputFile">
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <div class="col-xs-offset-3 col-xs-10">
+                                       <button type="submit " class="btn btn-info frame-nradius">提交认证</button>
+                                    </div>
+                                  </div>
+                                                  
+                   
+                    </form>
+                      </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+       <!-- footer start -->
+<div id="footer" class="text-center wmw p30 " >
+    <div class="container frame-tborder ">
+    
+        <p class="pt20 cr666">
+           
+            Copyright Reserved 2014-2015 拼座族拼车、搭乘顺风车，仅在拼座族网ICP备585858588
+          
+            </p>
+    </div>
+
+</div>
+<!-- footer end -->
+        </div>
+        <!-- wrapper -->
+    </body>
+
+</html>

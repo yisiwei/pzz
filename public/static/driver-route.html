@@ -23,6 +23,22 @@
   <!-- time add date -->
   
   <!-- date end -->
+    <script> 
+        $(function(){ 
+        $(".addseat").click(function(){ 
+        var t=$(this).parent().find('input[class*=numseat]'); 
+        t.val(parseInt(t.val())+1) 
+        // setTotal(); 
+        }) 
+        $(".minseat").click(function(){ 
+        var t=$(this).parent().find('input[class*=numseat]'); 
+        t.val(parseInt(t.val())-1) 
+        if(parseInt(t.val())<0){ 
+        t.val(0); 
+        } 
+        }) 
+        }) 
+        </script>
  <script>
     $(document).ready(function(){
         $("#dendplace").hide();
@@ -257,14 +273,10 @@
   <!-- give-seat   -->
   <div class="form-group">
     <label class="col-xs-2 control-label"><b class="crred f12 p2">*</b>提供座位：</label>
-    <div class="col-xs-2">
-      <select class="form-control border-radius-style">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
+    <div class="col-xs-6">
+      <input class="minseat btn btn-default btn-xs frame-nradius" name="" type="button" value="-" /> 
+        <input class="numseat  frame-nradius wp50 p0 text-center" name="" type="text" value="1" /> 
+        <input class="addseat btn btn-default btn-xs frame-nradius" name="" type="button" value="+" />
     </div>
   </div>
   <!-- give-seat end -->

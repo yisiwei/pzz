@@ -39,6 +39,9 @@
 .com-block{
 	display: block !important;
 }
+.com-webkit-inline{
+	display: -webkit-inline-box !important;
+}
 .com-initial{
 	display: initial !important; 
 }

@@ -18,7 +18,22 @@
   <script type="text/javascript" 
         src="http://api.map.baidu.com/api?v=2.0&ak=xmyNRRC4grtX6rp4hv0rp7q8">
         </script>
-
+    <script> 
+        $(function(){ 
+        $(".addseat").click(function(){ 
+        var t=$(this).parent().find('input[class*=numseat]'); 
+        t.val(parseInt(t.val())+1) 
+        // setTotal(); 
+        }) 
+        $(".minseat").click(function(){ 
+        var t=$(this).parent().find('input[class*=numseat]'); 
+        t.val(parseInt(t.val())-1) 
+        if(parseInt(t.val())<0){ 
+        t.val(0); 
+        } 
+        }) 
+        }) 
+        </script> 
 </head>
 <body>
   <div class="wrapper">
@@ -217,9 +232,11 @@
         </p>
         <p class="cr999 f14">来自：廊坊市</p>
       </div>
-      <p class="ti passenger-host-descrp cr333 f14">
-        心情是一位乘客，他于2014年09月01日发布了一条2014-09-01 出发（08:00)出发从 廊坊市 固安县 到 北京市 海淀区 的拼车线路； 总计提供1个空座位，每位乘客需分摊1261元，该线路总里程3602.7公里，预计行驶时间2天14时41分
-      </p>
+       <p class="ti passenger-host-descrp cr333 f14">
+                  <b class="cr3b">心情</b>是一位乘客，他于<b class="cr3b">
+                    2014年09月01日
+                  </b>发布了一条<b class="cr3b">2014-09-01</b>出发从<b class="cr3b"> 廊坊市 固安县</b> 到<b class="cr3b"> 北京市 海淀区 </b>的拼车线路； 总计提供<b class="cr3b">1</b>个空座位，每位乘客需分摊<b class="cr3b">1261</b>元，该线路总里程<b class="cr3b">3602.7</b>公里，预计行驶时间<b class="cr3b">2天14时41分</b>
+                </p>
     </div>
 
   </div>
@@ -237,20 +254,14 @@
       <strong class="crcor f26" id="price">¥110</strong>
     </span>
   </div>
-  <form class="form-horizontal text-center w80 mt20" role="form">
-    <div class="form-group">
-      <label class="col-xs-6 control-label tc">申请座位:</label>
-      <div class="col-xs-6">
-        <select class="form-control">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
+  <div class="pl15 plr15 mt15 com-webkit-inline">
+    <span class="mr10">申请座位:</span>
+    <div >
+        <input class="minseat btn btn-default btn-xs frame-nradius" name="" type="button" value="-" /> 
+        <input class="numseat  frame-nradius wp50 p0 text-center" name="" type="text" value="1" /> 
+        <input class="addseat btn btn-default btn-xs frame-nradius" name="" type="button" value="+" />
       </div>
-    </div>
-  </form>
+  </div>
   <div class="text-center mb20">
 
     <button type="button" class="btn btn-info border-radius-style passenger-submit-btn">申请加入</button>
