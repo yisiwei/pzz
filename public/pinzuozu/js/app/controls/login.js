@@ -68,7 +68,12 @@
 				self.options.secret.attr({'nickname':success.user_nickname});
 				self.options.secret.attr({'token':success.authentication_token});
 				self.options.secret.attr({'login':username});
+
+				//console.log("line_id="+can.route.attr("id"));
+				//var line_id = can.route.attr("id");
+				
 				can.route.attr("route","home");
+
 			},function(error){
 				console.log(error);
 				$("#msg").text("用户名或密码错误");

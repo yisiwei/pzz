@@ -60,7 +60,7 @@
           <label class="col-xs-2 control-label">提供座位</label>
           <div class="col-xs-10">
             <p class="form-control-static"> 
-              <strong class="cr2e"><%= line.attr("line_participants") %></strong>个
+              <strong class="cr2e" id="line_participants"><%= line.attr("line_participants") %></strong>个
             </p>
           </div>
         </div>
@@ -128,7 +128,7 @@
 
         <div id="list-title" class="pl15 pr15">
           <div class="page-header">费用：¥&nbsp;
-            <input type="text" id="single-price" style="background-color:transparent;border:none;" onfocus=this.blur() value="<%= line.attr("line_price") %>" />/位
+            <span id="single-price"><%= line.attr("line_price") %></span>/位
           </div>
         </div>
         <div class="pl15 plr15 ">
@@ -138,22 +138,14 @@
             </strong>
             <input class="crcor" style="background-color:transparent;border:none;" type="text" id="priceCount" value="<%=line.attr("line_price")%>" onfocus=this.blur()/>
         </div>
-        <form class="form-horizontal text-center w80 mt20" role="form">
-          <div class="form-group">
-            <label class="col-xs-6 control-label tc">申请座位:</label>
-            <div class="col-xs-6">
-              <select class="form-control" id="seatCount">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-            </div>
-          </div>
-        </form>
+        <div class="pl15 plr15 mt15 com-webkit-inline">
+          <span class="mr10">申请座位：</span>
+          <input id="minseat" class="btn btn-default btn-xs frame-nradius" type="button" value="-" /> 
+          <input class="frame-nradius wp50 p0 text-center" id="seatCount" type="text" value="1" /> 
+          <input id="addseat" class="btn btn-default btn-xs frame-nradius" type="button" value="+" />
+        </div>
         <div class="text-center mb20">
-          <button type="button" class="btn btn-info border-radius-style passenger-submit-btn" id="passenger-submit">申请加入</button>
+          <button type="button" class="btn btn-info border-radius-style passenger-submit-btn" id="passenger-join-submit">申请加入</button>
         </div>
       </div>
     </div>

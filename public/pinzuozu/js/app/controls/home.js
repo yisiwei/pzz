@@ -37,9 +37,6 @@
             });
 
 			Line.findAll({user_type:1,line_type:0,page:'1',per_page:'5'},function(results){
-				// var local_lines = results.filter("上下班拼车");
-				// var long_lines = results.filter("长途拼车");
-				// var need_lines = results.filter("乘客需求");
 				$("#work").html(can.view(
 					"js/app/views/home/pincheLocalList.ejs",{
 						local_lines:results
@@ -75,10 +72,18 @@
 			},function(error){
 				console.log(error);
 			});
+
+			User.findAll({page:"1",per_page:"9"},function(users){
+				console.log(users);
+				$("#all-user").html(can.view(
+					"js/app/views/home/users.ejs",{users:users}
+				));
+			},function(error){
+				console.log(error);
+			});
 			
 		},
 		'home route':function(){
-			console.log("home load");
 			this.showHome();			
 		},
 		'#logout click':function(){

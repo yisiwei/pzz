@@ -55,14 +55,31 @@
 				$("#mymodal").modal('show');
 			}
 		},
-		'#passenger-submit click':function(el,event){
+		'#driver-join-submit click':function(el,event){//邀请加入
 			var userid = this.options.secret.attr("userid");
 			var token = this.options.secret.attr("token");
 			var login = this.options.secret.attr("login");
+			var pzz_line_id = can.route.attr("id");
 			if(token == null || token == ""){
 				can.route.attr("route","login");
 			}else{
 
+				userid = parseInt(userid);
+				pzz_line_id = parseInt(pzz_line_id);
+
+				console.log("-----"+Object.prototype.toString.apply(userid));
+				console.log("-----"+Object.prototype.toString.apply(pzz_line_id));
+				
+				Order.joinLine({
+					auth_token:token,
+					login:login,
+					pzz_user_id:userid,
+					pzz_line_id:pzz_line_id
+				},function(order){
+					console.log(order);
+				},function(error){
+					console.log(error);
+				});
 			}
 		}
         

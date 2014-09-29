@@ -1,7 +1,20 @@
 (function(namespace) {
 
 	var User = can.Model({
-		findAll:'GET /pzz_users',
+		findAll:function(params,success,error){
+			console.log("page:"+params.page);
+			return $.ajax({
+				url: 'http://192.168.1.115:3000/pzz_users.json?page='+params.page+'&per_page='+params.per_page,
+				type: 'GET',
+				dataType: 'json',
+				// data: {
+				// 	page:params.page,
+				// 	per_page:params.per_page
+				// },
+				success:success,
+				error:error
+			});
+		},
 		findOne:'GET /pzz_users/{id}.json',
 		findById:function(params,success,error){
 			console.log("token:"+params.token+"-login:"+params.login);

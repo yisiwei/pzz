@@ -136,7 +136,7 @@
 
 			User.register(user,function(success){
 				alert("success");
-				can.route.attr("route","email_active");
+				can.route.attr("route","login");
 			},function(error){
 				console.log(error.status+error.responseText);
 				$("#phone-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');

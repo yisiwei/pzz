@@ -1,18 +1,18 @@
-var USERS = [
-{
-	id:1,
-	user_phone:'18310204743',
-	user_nickname:'yisiwei',
-	user_email:'yisiwei@mointe.cn',
-	user_password:'yisiwei'
-},{
-	id:2,
-	user_phone:'10000',
-	user_nickname:'admin',
-	user_email:'admin@mointe.cn',
-	user_password:'admin'
-}
-];
+// var USERS = [
+// {
+// 	id:1,
+// 	user_phone:'18310204743',
+// 	user_nickname:'yisiwei',
+// 	user_email:'yisiwei@mointe.cn',
+// 	user_password:'yisiwei'
+// },{
+// 	id:2,
+// 	user_phone:'10000',
+// 	user_nickname:'admin',
+// 	user_email:'admin@mointe.cn',
+// 	user_password:'admin'
+// }
+// ];
 //findAll
 // can.fixture("GET /pzz_users",function(){
 // 	return USERS;

@@ -55,18 +55,30 @@
 				$("#mymodal").modal('show');
 			}
 		},
-		'#passenger-submit click':function(el,event){//申请加入
+		'#passenger-join-submit click':function(el,event){//申请加入
 			var userid = this.options.secret.attr("userid");
 			var token = this.options.secret.attr("token");
 			var login = this.options.secret.attr("login");
+			var pzz_line_id = can.route.attr("id");
 			if(token == null || token == ""){
 				can.route.attr("route","login");
 			}else{
-				//TODO 申请数量
+				var line_participants = $("#seatCount").val();
+
+				userid = parseInt(userid);
+				pzz_line_id = parseInt(pzz_line_id);
+				line_participants = parseInt(line_participants);
+
+				console.log("-----"+Object.prototype.toString.apply(userid));
+				console.log("-----"+Object.prototype.toString.apply(pzz_line_id));
+				console.log("-----"+Object.prototype.toString.apply(line_participants));
+
+				
 				Order.joinLine({
 					auth_token:token,
 					login:login,
-					userid:userid,
+					pzz_user_id:userid,
+					pzz_line_id:pzz_line_id,
 					line_participants:line_participants
 				},function(order){
 					console.log(order);
@@ -75,9 +87,23 @@
 				});
 			}
 		},
-		'#seatCount change':function(el,event){
-			//alert(el.val());
-			var priceCoute = (el.val()*$("#single-price").val()).toFixed(1);
+		'#addseat click':function(el,event){
+			var joinCount = $("#seatCount");
+        	joinCount.val(parseInt(joinCount.val()) + 1);
+        	var count = $("#line_participants").text();
+        	if (parseInt(joinCount.val()) > parseInt(count)) {
+        		joinCount.val(parseInt(count));
+        	}
+        	var priceCoute = (joinCount.val()*$("#single-price").text()).toFixed(1);
+			$("#priceCount").val(priceCoute);
+		},
+		'#minseat click':function(el,event){
+			var joinCount = $("#seatCount"); 
+	        joinCount.val(parseInt(joinCount.val()) - 1);
+	        if(parseInt(joinCount.val()) < 1){ 
+	        	joinCount.val(1); 
+	        }
+	        var priceCoute = (joinCount.val()*$("#single-price").text()).toFixed(1);
 			$("#priceCount").val(priceCoute);
 		}
         

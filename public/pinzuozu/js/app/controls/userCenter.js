@@ -11,10 +11,7 @@
 			var nickname = this.options.secret.attr("nickname");
 			var token = this.options.secret.attr("token");
 			var login = this.options.secret.attr("login");
-			// var isLogin = false;
-			// if(username != null && username != ""){
-			// 	isLogin = true;
-			// }
+		
 			console.log("userid="+userid);
 			var self = this;
 			if (userid != null && userid != "") {
@@ -46,37 +43,6 @@
 		},
 		'userCenter route':function(){
 			this.showUserCenter();
-		},
-		'#save_btn click':function(el,event){//修改头像
-			var token = this.options.secret.attr("token");
-			var login = this.options.secret.attr("login");
-            
-            var data = cutter.submit();
-            //alert("x=" + data.x + "\ny=" + data.y + "\nw=" + data.w + "\nh=" + data.h + "\ns=" + $("#area-jcrop img").attr("src"));
-			
-			$("#x").val(data.x);
-			$("#y").val(data.y);
-			$("#w").val(data.w);
-			$("#h").val(data.h);
-			
-			var user = new User();
-			var form = this.element.find("form");
-			values = can.deparam(form.serialize());
-			user.attr(values);
-
-			user.attr("auth_token",token);
-			user.attr("login",login);
-			user.attr("user_avatar",$("#area-jcrop img").attr("src"));
-			
-			//console.log($("#area-jcrop img").attr("src"));
-			var self = this;
-			User.updateAvatar(user,function(success){
-				console.log(success);
-				self.showUserCenter();
-				//window.location.reload();
-			},function(error){
-				console.log(error);
-			});
 		},
 		'#basic-btn click':function(el,event){//修改基本信息
 			var user = new User();
@@ -130,17 +96,46 @@
 			var nickname = this.options.secret.attr("nickname");
 			var token = this.options.secret.attr("token");
 			var login = this.options.secret.attr("login");
+
 			User.findById({id:userid,token:token,login:login},function(user){
 				// console.log(user.user_phone);
-				// $("#user-content").html(can.view(
-				// 	"js/app/views/userCenter/account/basic.ejs",{user:user}
-				// ));
 				$("#user-content").html(can.view(
 					"js/app/views/userCenter/account/header.ejs",{user:user}
 				));
 			},function(error){
 				console.log(error);
-				//can.route.attr("route","login");
+			});
+		},
+		'#save_btn click':function(el,event){//修改头像
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
+            
+            var data = cutter.submit();
+            //alert("x=" + data.x + "\ny=" + data.y + "\nw=" + data.w + "\nh=" + 
+            	//data.h + "\ns=" + $("#area-jcrop img").attr("src"));
+			
+			$("#x").val(data.x);
+			$("#y").val(data.y);
+			$("#w").val(data.w);
+			$("#h").val(data.h);
+			
+			var user = new User();
+			var form = this.element.find("form");
+			values = can.deparam(form.serialize());
+			user.attr(values);
+
+			user.attr("auth_token",token);
+			user.attr("login",login);
+			user.attr("user_avatar",$("#area-jcrop img").attr("src"));
+			
+			//console.log($("#area-jcrop img").attr("src"));
+			var self = this;
+			User.updateAvatar(user,function(success){
+				console.log(success);
+				self.showUserCenter();
+				//window.location.reload();
+			},function(error){
+				console.log(error);
 			});
 		},
 		'#account-number click':function(el){
@@ -180,21 +175,92 @@
 			));
 		},
 		//我的拼座
-		'#myroute-passenger click':function(el){
+		'#myroute-driver click':function(el){//我是司机
+			var userid = this.options.secret.attr("userid");
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
+
+			$("#accordion li").removeClass('menu-current');
+			el.parent().addClass('menu-current');
+			
+			$("#user-content").html(can.view(
+				"js/app/views/userCenter/myroute/driver.ejs"
+			));
+
+			userid = parseInt(userid);
+			Order.findOrdersByUser({//申请加入的
+				auth_token:token,
+				login:login,
+				pzz_user_id:userid,
+				order_type:'driver',
+				order_status:'wait_confirm_by_driver'
+			},function(orders){
+				console.log(orders);
+				$("#driver-apply").html(can.view(
+					"js/app/views/userCenter/myroute/driver_apply.ejs",{orders:orders}
+				));
+			},function(error){
+				console.log(error);
+			});
+
+			Order.findOrdersByUser({//我邀请加入的
+				auth_token:token,
+				login:login,
+				pzz_user_id:userid,
+				order_type:'driver',
+				order_status:'wait_confirm_by_passenger'
+			},function(orders){
+				console.log(orders);
+				$("#driver-invite").html(can.view(
+					"js/app/views/userCenter/myroute/driver_invite.ejs",{orders:orders}
+				));
+			},function(error){
+				console.log(error);
+			});
+
+		},
+		'#myroute-passenger click':function(el){//我是乘客
+			var userid = this.options.secret.attr("userid");
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
+
 			$("#accordion li").removeClass('menu-current');
 			el.parent().addClass('menu-current');
 			$("#user-content").html(can.view(
 				"js/app/views/userCenter/myroute/passenger.ejs"
 			));
-		},
-		'#myroute-driver click':function(el){
-			$("#accordion li").removeClass('menu-current');
-			el.parent().addClass('menu-current');
 
-			
-			$("#user-content").html(can.view(
-				"js/app/views/userCenter/myroute/driver.ejs"
-			));
+			userid = parseInt(userid);
+
+			Order.findOrdersByUser({
+				auth_token:token,
+				login:login,
+				pzz_user_id:userid,
+				order_type:'passenger',
+				order_status:'wait_confirm_by_driver'
+			},function(orders){
+				console.log(orders);
+				$("#passenger-apply").html(can.view(
+					"js/app/views/userCenter/myroute/passenger_apply.ejs",{orders:orders}
+				));
+			},function(error){
+				console.log(error);
+			});
+
+			Order.findOrdersByUser({
+				auth_token:token,
+				login:login,
+				pzz_user_id:userid,
+				order_type:'passenger',
+				order_status:'wait_confirm_by_passenger'
+			},function(orders){
+				console.log(orders);
+				$("#passenger-invite").html(can.view(
+					"js/app/views/userCenter/myroute/passenger_invite.ejs",{orders:orders}
+				));
+			},function(error){
+				console.log(error);
+			});
 		},
 		'#myroute-route click':function(el){//我的线路
 			$("#accordion li").removeClass('menu-current');
@@ -267,10 +333,31 @@
 					console.log(error);
 				});
 			}
-		}
+		},
+		'#share-myarticle click':function(el,event){//我的帖子
+			$("#accordion li").removeClass('menu-current');
+			el.parent().addClass('menu-current');
+			$("#user-content").html(can.view(
+				"js/app/views/userCenter/share/myarticle.ejs"
+			));
+		},
+		'#message-message click':function(el,event){//通知消息
+			$("#accordion li").removeClass('menu-current');
+			el.parent().addClass('menu-current');
+			$("#user-content").html(can.view(
+				"js/app/views/userCenter/message/message.ejs"
+			));
+		},
+		'#car-mycar click':function(el,event){//车辆信息
+			$("#accordion li").removeClass('menu-current');
+			el.parent().addClass('menu-current');
+			$("#user-content").html(can.view(
+				"js/app/views/userCenter/car/mycar.ejs"
+			));
+		},
 	});
 
 	can.extend(namespace,{
 		UserCenter:UserCenter
-	})
+	});
 })(window);

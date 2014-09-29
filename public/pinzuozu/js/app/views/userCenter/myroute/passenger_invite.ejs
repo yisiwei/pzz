@@ -1,0 +1,29 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>出发日期</th>
+      <th>线路</th>
+      <th>司机姓名</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(var i=0;i<orders.length;i++){ %>
+
+    <tr>
+      <td><%= orders[i].line_depart_datetime.substr(0,10) %></td>
+      <td>
+        <a href=""><%= orders[i].line_depart_city %>：<%= orders[i].line_depart_address %>
+          -><%= orders[i].line_dest_city %>：<%= orders[i].line_dest_address %>
+        </a>
+      </td>
+      <td><%= orders[i].driver_nickname %></td>
+      <td>
+        <a class="line_participants_available" href="javascript:void(0)" id="<%=orders[i].id%>">同意</a>
+        <a class="ml10 cancelOrder" href="javascript:void(0)" id="cancel_<%=orders[i].id%>">拒绝</a>
+      </td>
+    </tr>
+    
+    <% } %>
+  </tbody>
+</table>

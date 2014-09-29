@@ -49,6 +49,15 @@
 			},function(error){
 				console.log(error);
 			});
+
+			User.findAll({page:"1",per_page:"9"},function(users){
+				console.log(users);
+				$("#all-user").html(can.view(
+					"js/app/views/home/users.ejs",{users:users}
+				));
+			},function(error){
+				console.log(error);
+			});
 		},
 		'need route':function(){
 			this.showNeed();
