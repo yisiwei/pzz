@@ -22,6 +22,14 @@
         </script>
         <style type="text/css">
         </style>
+        <script type="text/javascript">
+                $(document).ready(function() {
+                    $("#account-low-security").css({
+                        background: 'red',
+                        color: '#fff'
+                    });
+                });
+        </script>
     </head>
     
     <body>
@@ -31,18 +39,20 @@
                 <!-- top1 -->
                 <div class="wmw top-bg-usercenter">
                     <div class="container">
-                        <div class="left-content h50">
-                            <!-- <img style="margin-top:5px" src="images/user-center-logo.png">
-                            -->
-                            <div class="navbar">
+                           <a class="mt5 fl"  onFocus="this.blur()"  href="index.html">
+                               
+                            <img src="images/user-center-logo.png">
+                           </a>
+                           
+                          
                                 <ul class="nav nav-pills pull-left mt5">
-                                    <li>
+                                    <!-- <li>
                                         <a class="frame-nradius com-initial" href="index.html">
                                             <img src="images/user-center-logo.png">
                                         </a>
-                                    </li>
+                                    </li> -->
                                     <li class="dropdown">
-                                        <a class="crfff frame-nradius p5" href="#menu3">
+                                        <a class="crfff frame-nradius p5" href="index.html">
                                             Sprite
                                             <b class="pl2 ">
                                                 ▼
@@ -73,11 +83,16 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </div>
-                        </div>
+                            
+                      
                         <ul class="nav nav-pills  pull-right pt10">
-                            <li class="pull-right dropdown">
-                                <a class="f14 crfff frame-nradius p5" href="#menu4">
+                            <li class=" dropdown">
+                                <a class="f14 crfff right-padding" onFocus="this.blur()" href="index.html">
+                                    如何拼座？
+                                </a>
+                            </li>
+                            <li class=" dropdown">
+                                <a class="f14 crfff frame-nradius p5" onFocus="this.blur()" href="#menu4">
                                     网址导航
                                     <b class="pl2 ">
                                         ▼
@@ -101,11 +116,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="pull-right dropdown">
-                                <a class="f14 crfff right-padding right-li" href="index.html">
-                                    如何拼座？
-                                </a>
-                            </li>
+                            
                         </ul>
                     </div>
                 </div>
@@ -136,7 +147,7 @@
                                 <div class="mt15">
                                     <div class="panel-group" id="accordion">
                                         <div class="panel text-center user-left-menu-h4">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                            <a  onFocus="this.blur()"  data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                                                 <div class="panel-heading">
                                                     <h4 class="panel-title ">
                                                         <i class="fa fa-user  pr10">
@@ -149,7 +160,7 @@
                                                 <div class="panel-body user-left-menu-body">
                                                     <ul id="userMsg" class="nav nav-list collapse.in menu-second ">
                                                         <li >
-                                                            <a href="user-account-basic.html">
+                                                            <a href="user-account-basic.html" >
                                                                 基本信息
                                                             </a>
                                                         </li>
@@ -302,7 +313,7 @@
                                                 心情
                                             </span>
                                         </dt>
-                                        <dd class="f16 mb10">
+                                        <dd class="mb10 f14 cr999">
                                             <label>
                                                 可使用短信数：
                                             </label>
@@ -312,18 +323,22 @@
                                                     元
                                                 </strong>
                                             </span>
-                                            <button type="button" class="btn btn-default ml20">
+                                            <button type="button" class="btn btn-default ml20 frame-nradius">
                                                 充值
                                             </button>
                                         </dd>
-                                        <dd class="f16 mb10">
-                                            <label class="fl">
+                                        <dd class="f14 cr999 mb10">
+                                            <label class="fl ">
                                                 诚信等级：
                                             </label>
-                                            <img src="images/level.png">
+                                           <div class="com-overflow">
+                                               <span id="account-low-security" class="user-center-security">低</span>
+                                               <span id="account-center-security" class="user-center-security">中</span>
+                                               <span id="account-hight-security" class="user-center-security" >高</span>
+                                           </div>
                                         </dd>
-                                        <dd class="f16 mb10">
-                                            <label class="fl">
+                                        <dd class="f14 cr999 mb10">
+                                            <label class="fl pt5">
                                                 验证信息：
                                             </label>
                                             <span class="cr999">
@@ -343,7 +358,7 @@
                                         </dd>
                                         <dd class="comm-line">
                                         </dd>
-                                        <dd class="f16 mb10">
+                                        <dd class="f14 cr999 mb10">
                                             <label class="fl">
                                                 拼座成功次数：
                                             </label>

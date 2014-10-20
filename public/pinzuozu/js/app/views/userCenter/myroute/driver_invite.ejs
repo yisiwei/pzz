@@ -1,0 +1,29 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>出发日期</th>
+      <th>线路</th>
+      <th>乘客姓名</th>
+      <th>状态</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(var i=0;i<orders.length;i++){ %>
+
+    <tr>
+      <td><%= orders[i].line_depart_datetime.substr(0,10) %></td>
+      <td>
+        <a href=""><%= orders[i].line_depart_city %>：<%= orders[i].line_depart_address %>
+          -><%= orders[i].line_dest_city %>：<%= orders[i].line_dest_address %>
+        </a>
+      </td>
+      <td><%= orders[i].driver_nickname %></td>
+      <td>
+        <a><%= orders[i].order_status %></a>
+      </td>
+    </tr>
+    
+    <% } %>
+    
+  </tbody>
+</table>

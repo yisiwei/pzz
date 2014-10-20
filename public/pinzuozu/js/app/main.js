@@ -1,4 +1,37 @@
-$(function() {
-	//alert("上下班拼车");
-	new ShangxiabanList("#shangxiaban");
+//alert("加载成功!");
+require.config({
+	paths:{
+		jquery:'js/jquery.min',
+		cookie:'js/jquery.cookie',
+		can:'js/can.jquery',
+		ejs:'js/can.ejs',
+		fixture:'js/can.fixture',
+		bootstrap:'js/bootstrap.min',
+		baiduMap:[
+			'//api.map.baidu.com/api?v=2.0&ak=xmyNRRC4grtX6rp4hv0rp7q8'
+		]
+	},
+	shim:{
+		can:{
+			deps:['jquery'],
+			exports:'can'
+		},
+		ejs:{
+			deps:['can'],
+			exports:'can.fixture'
+		},
+		fixture:{
+			deps:['can'],
+			exports:'can.fixture'
+		},
+		bootstrap:['jquery']
+	}
+});
+
+require([
+	//'app',
+	'router'
+],function(Router){
+	//App.init(Config);
+	Router.init();
 });

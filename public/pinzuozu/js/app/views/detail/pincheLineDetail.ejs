@@ -1,0 +1,154 @@
+<form class="form-horizontal col-xs-8" role="form">
+  <div class="page-list-bg frame-border">
+    <div id="list-title" class="pl15 pr15">
+      <h4 class="page-header passenger-h">
+        <%= line.attr("line_depart_city") %>：
+        <%= line.attr("line_depart_address") %> 
+        <i>→</i>
+        <%= line.attr("line_dest_city") %>:
+        <%= line.attr("line_dest_address") %>
+      </h4>
+    </div>
+    <div class="form-group passenger-form">
+      <div id="allmap" class="h300"></div>
+      <label class="col-xs-2 control-label">起点</label>
+      <div class="col-xs-10">
+        <p class="form-control-static"> 
+          <i class="cr3b fa fa-map-marker fa-lg mr10"></i>
+          <span id="line_depart_address">
+            <%= line.attr("line_depart_address") %>
+          </span>
+        </p>
+      </div>
+    </div>
+    <div class="form-group passenger-form">
+      <label class="col-xs-2 control-label">终点</label>
+      <div class="col-xs-10">
+        <p class="form-control-static">
+          <i class="crfb fa fa-map-marker fa-lg mr10"></i>
+          <span id="line_dest_address">
+            <%= line.attr("line_dest_address") %>
+          </span>
+        </p>
+      </div>
+    </div>
+    <div class="form-group passenger-form">
+      <label class="col-xs-2 control-label">出发时间</label>
+      <div class="col-xs-10 ">
+        <p class="form-control-static cr3b">
+          <span>
+            <i class="fa fa-clock-o mr10 fa-lg"></i>
+            <%= line.attr("line_depart_datetime") %>
+          </span>
+        </p>
+      </div>
+    </div>
+    <div class="form-group passenger-form">
+      <label class="col-xs-2 control-label">提供座位</label>
+      <div class="col-xs-10">
+        <p class="form-control-static"> 
+          <strong class="cr2e"><%= line.attr("line_participants") %></strong>个
+        </p>
+      </div>
+    </div>
+    <div class="form-group passenger-form">
+      <label class="col-xs-2 control-label">车辆信息</label>
+      <div class="col-xs-10">
+        <p class="form-control-static"> 
+          <strong class="cr2e">辽A***5U 黑色</strong>
+        </p>
+      </div>
+    </div>
+    <div class="form-group passenger-form">
+      <label class="col-xs-2 control-label">补充说明</label>
+      <div class="col-xs-10">
+        <p class="form-control-static f14">
+          <%= line.attr("user_nickname") %>是一位乘客，他于2014年09月01日发布了一条2014-09-01 出发（08:00)出发从 <b class="cr3b">廊坊市 固安县</b>
+          到 <b class="cr3b">北京市 海淀区</b>
+          的拼车线路； 总计提供1个空座位，每位乘客需分摊1261元，该线路总里程3602.7公里，预计行驶时间2天14时41分 ，如果您搭顺风车合乘该线路您将为地球减少778.18公斤碳排放，为我们的社会节约288.22 升油，请和我们一起爱护地球，节约能源，做汽车共享的开拓者。
+        </p>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="col-xs-4 ">
+  <div class="page-list-bg com-overflow pb10 frame-border">
+    <div id="list-title" class="pl15 pr15">
+      <h4 class="page-header passenger-h">发布者</h4>
+    </div>
+    <!-- host-->
+    <div id="host" class="passenger-host">
+      <div class="fl">
+        <img class="img-responsive fl m10"  src="images/header.png">
+        <div class="pt15 fl">
+          <p>
+            <b><%= line.attr("user_nickname") %></b>
+          </p>
+          <p>
+            <i class="fa fa-female fa-lg cr2e"></i>
+          </p>
+          <p class="cr999 f14">来自：<%= line.attr("line_depart_city") %></p>
+        </div>
+        <p class="ti passenger-host-descrp cr333 f14">
+          心情是一位乘客，他于2014年09月01日发布了一条2014-09-01 出发（08:00)出发从 廊坊市 固安县 到 北京市 海淀区 的拼车线路； 总计提供1个空座位，每位乘客需分摊1261元，该线路总里程3602.7公里，预计行驶时间2天14时41分
+        </p>
+      </div>
+
+    </div>
+    <!-- host end --> </div>
+  <!--  -->
+  <div class="page-list-bg com-overflow mt10 pb10 frame-border">
+
+    <div id="list-title" class="pl15 pr15">
+      <h4 class="page-header">费用：¥<%= line.attr("line_price") %></h4>
+    </div>
+    <div class="pl15 plr15 ">
+      <span>
+        总费用：
+        <strong class="crcor f26" id="price">¥110</strong>
+      </span>
+    </div>
+    <form class="form-horizontal text-center w80 mt20" role="form">
+      <div class="form-group">
+        <label class="col-xs-6 control-label tc">申请座位:</label>
+        <div class="col-xs-6">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
+    </form>
+    <div class="text-center mb20">
+      <button type="button" class="btn btn-info border-radius-style passenger-submit-btn">申请加入</button>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    var map = new BMap.Map("allmap");
+    map.centerAndZoom(new BMap.Point(116.404, 39.915), 12);
+    map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+    map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+    var transit = new BMap.DrivingRoute(map, {
+      renderOptions: {
+          map: map,
+          //panel: "r-result",
+          //enableDragging : true //起终点可进行拖拽
+      },  
+    });
+    //var myCity = new BMap.LocalCity();
+    //myCity.get(myFun);
+
+    //var cityName;
+    //function myFun(result){
+    //    cityName = result.name;
+    //    map.setCenter(cityName);
+    //}
+    transit.search($("#line_depart_address").text(),$("#line_dest_address").text());
+    
+    
+</script>

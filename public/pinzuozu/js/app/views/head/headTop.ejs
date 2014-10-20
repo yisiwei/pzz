@@ -1,0 +1,45 @@
+<div class="container">
+    <ul id="head-top-left" class="nav nav-pills pull-left">
+        <li class="dropdown">
+            <span class="f14 cr666 right-padding right-li com-block" href="javascript:void(0)">
+                拼座族，拼车的最佳选择
+            </span>
+        </li>
+        <%== isLogin==true?can.view.render('js/app/views/head/login.ejs',{username:username}) : can.view.render('js/app/views/head/logout.ejs',{})%>
+    </ul>
+    <ul class="nav nav-pills pull-right">
+        <li class="pull-right dropdown">
+            <a class="f14 cr666 right-padding" data-toggle="dropdown" href="javascript:void(0)" onFocus="this.blur()">
+                网站导航
+                <b class="pl5">▼</b>
+            </a>
+            <ul class="dropdown-menu user-top-dropdown-menu frame-nradius">
+                <li class="text-center">
+                    <a href="javascript:void(0)">
+                        test
+                    </a>
+                </li>
+                <li class="text-center">
+                    <a href="javascript:void(0)">
+                        test
+                    </a>
+                </li>
+                <li class="text-center">
+                    <a href="javascript:void(0)">
+                        test
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="pull-right dropdown">
+            <a class="f14 cr666 right-padding right-li" href="javascript:void(0)">
+                如何拼座？
+            </a>
+        </li>
+        <li class="pull-right dropdown">
+            <a class="f14 cr666 right-padding right-li" href="#!home" onFocus="this.blur()">
+                返回首页
+            </a>
+        </li>
+    </ul>
+</div>
