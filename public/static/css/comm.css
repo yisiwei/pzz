@@ -55,3 +55,9 @@
 	 height:50px;
 	 background:#3399cc;"
 }
+.com-rposition{
+	position: relative !important ;
+}
+.com-clear{
+	clear: both !important;
+}

@@ -19,11 +19,14 @@
     <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript">
             $(document).ready(function() {
-                $("#pwd-success").click(function() {
-                    window.location.href = "pwd-back-success.html"
+                $("#choice-mobile").click(function() {
+                    window.location.href = "pwd-back-verify-mobile.html"
+                });
+                $("#choice-mail").click(function() {
+                    window.location.href = "pwd-back-verify-mail.html"
                 });
             });
-    </script>
+        </script>
 </head>
 
 <body>
@@ -85,39 +88,28 @@
                         找回密码
                     </H3>
                     <ul class="mod-sub-nav mod-sub-nav-ul">
-                        <li class="mod-sub-list1 ">确认帐号</li>
-                        <li class="mod-sub-list2 ">安全验证</li>
-                        <li class="mod-sub-list3 list3-active ">重置密码</li>
+                        <li class="mod-sub-list1 list1-active ">确认帐号</li>
+                        <li class="mod-sub-list2">安全验证</li>
+                        <li class="mod-sub-list3">重置密码</li>
                     </ul>
-                    <form class="form-horizontal m50 text-left" role="form">
-                        <div class="form-group">
-                            <label for="inputMobile" class="col-xs-3 control-label">新密码：</label>
-                            <div class="col-xs-4">
-                                <input type="tel" class="form-control frame-nradius" id="inputMobile"
-                                    placeholder="新密码"></div>
-                            <span id="mobile-num" class="col-xs-5 f12 control-label tl">亲，请输入真实有效手机号</span>
+                    <div class="m50">
+                        <div class="col-xs-6 text-center mb50">
+                            <a class="cr666" id="choice-mobile" href="javascript:void(0)"> <i class="fa fa-3x fa-mobile"></i>
+                                <p>手机验证</p>
+                            </a>
                         </div>
-                        <div class="form-group">
-                            <label for="inputMobile" class="col-xs-3 control-label">确认密码：</label>
-                            <div class="col-xs-4">
-                                <input type="tel" class="form-control frame-nradius" id="inputMobile"
-                                    placeholder="确认密码"></div>
-                            <span id="mobile-verify" class="col-xs-4 f12 crred control-label tl"> <i class="fa fa-times-circle crred fa-lg mr5"></i>
-                                输入正确验证码
-                            </span>
+                        <div class="col-xs-6 text-center mb50">
+                            <a class="cr666" id="choice-mail" href="javascript:void(0)">
+                                <i class="fa  fa-2x fa-envelope"></i>
+                                <p>邮箱验证</p>
+                            </a>
+
                         </div>
-                        <div class="form-group mt30">
-                            <div class="col-xs-offset-3 col-xs-2">
-                                <button type="button" id="pwd-success"  class="btn   btn-info w frame-nradius">确定</button>
-                            </div>
-                            <div class="col-xs-3 pt10 com-block">
-                                <a href="">返回</a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                        <!-- col-6 end --> </div>
+                    <!-- col6  --> </div>
             </div>
-        </div>
+            <!-- row --> </div>
+        <!-- container end -->
         <!-- footer start -->
         <div id="footer" class="text-center wmw p30 ">
             <div class="container frame-tborder ">

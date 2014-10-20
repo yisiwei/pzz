@@ -17,13 +17,6 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-            $(document).ready(function() {
-                $("#pwd-success").click(function() {
-                    window.location.href = "pwd-back-success.html"
-                });
-            });
-    </script>
 </head>
 
 <body>
@@ -89,32 +82,12 @@
                         <li class="mod-sub-list2 ">安全验证</li>
                         <li class="mod-sub-list3 list3-active ">重置密码</li>
                     </ul>
-                    <form class="form-horizontal m50 text-left" role="form">
-                        <div class="form-group">
-                            <label for="inputMobile" class="col-xs-3 control-label">新密码：</label>
-                            <div class="col-xs-4">
-                                <input type="tel" class="form-control frame-nradius" id="inputMobile"
-                                    placeholder="新密码"></div>
-                            <span id="mobile-num" class="col-xs-5 f12 control-label tl">亲，请输入真实有效手机号</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputMobile" class="col-xs-3 control-label">确认密码：</label>
-                            <div class="col-xs-4">
-                                <input type="tel" class="form-control frame-nradius" id="inputMobile"
-                                    placeholder="确认密码"></div>
-                            <span id="mobile-verify" class="col-xs-4 f12 crred control-label tl"> <i class="fa fa-times-circle crred fa-lg mr5"></i>
-                                输入正确验证码
-                            </span>
-                        </div>
-                        <div class="form-group mt30">
-                            <div class="col-xs-offset-3 col-xs-2">
-                                <button type="button" id="pwd-success"  class="btn   btn-info w frame-nradius">确定</button>
-                            </div>
-                            <div class="col-xs-3 pt10 com-block">
-                                <a href="">返回</a>
-                            </div>
-                        </div>
-                    </form>
+                    <div class="m50 text-center">
+                        <H3> <i class="fa cr5b fa-lg fa-check-circle-o mr15"></i>
+                            恭喜新密码设置成功！
+                        </H3>
+
+                    </div>
                 </div>
             </div>
         </div>
