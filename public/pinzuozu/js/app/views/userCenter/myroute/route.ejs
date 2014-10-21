@@ -13,38 +13,8 @@
           <th>操作</th>
         </tr>
       </thead>
-      <tbody>
-        <% for(var i=0;i<lines.length;i++){ %>
-        <tr>
-          <td><i class="fa pr15 <%= lines[i].user_type=='passenger'?'fa-user cr3b9':'fa-car cr999' %>"></i>
-            <%= lines[i].line_depart_datetime %>
-          </td>
-
-          <td>
-            <a href="#!<%= lines[i].user_type=='passenger'?'passenger_detail':'driver_detail' %>&id=<%=lines[i].id %>">
-              <%=lines[i].line_depart_city %>:<%=lines[i].line_depart_address %> 
-              ->
-              <%=lines[i].line_dest_city %>:<%=lines[i].line_dest_address %>
-            </a>
-          </td>
-
-          <% if(lines[i].user_type=='passenger'){ %>
-          <td>
-            <sapn class="text-center"><%=lines[i].line_participants_available %></sapn>
-          </td>
-          <% }else{%>
-          <td>
-            <input class="minseat btn btn-default btn-xs frame-nradius" type="button" value="-" /> 
-            <input id="line_participants_available<%=lines[i].id%>" class="numseat input-sm frame-nradius wp30 p0 text-center" type="text" value="<%=lines[i].line_participants_available %>" /> 
-            <input class="addseat btn btn-default btn-xs frame-nradius" type="button" value="+" /> 
-          </td>
-          <% } %>
-          <td>
-            <a class="line_participants_available" href="javascript:void(0)" id="<%=lines[i].id%>">保存</a>
-            <a class="ml10 cancelLine" href="javascript:void(0)" id="cancel_<%=lines[i].id%>">取消</a>
-          </td>
-        </tr>
-        <% } %>
+      <tbody id="myroute-list">
+        
         
       </tbody>
     </table>

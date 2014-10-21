@@ -40,9 +40,15 @@
 			Line.findAll({user_type:1,line_type:0},function(lines){
 				//var lines = results.filter("上下班拼车");
 				console.log(lines);
-				$("#work-local").html(can.view(
-					"js/app/views/local/localListView.ejs",{lines:lines}
-				));
+				if(lines.length>0){
+					$("#work-local").html(can.view(
+						"js/app/views/local/localListView.ejs",{lines:lines}
+					));
+				}else{
+					$("#work-long").html(can.view(
+						"js/app/views/local/localNullView.ejs"
+					));
+				}
 				
 			},function(error){
 				console.log(error);
@@ -60,6 +66,20 @@
 		'local route':function(){
 			this.showLocal();
 		}
+	});
+
+	NextPrev = can.Control({
+		init:function(){
+			this.element.html(can.view('nextPrevStache',this.options));
+		},
+		".next click" : function(){
+	    	var paginate = this.options.paginate;
+	    	paginate.next();
+	  	},
+	  	".prev click" : function(){
+	    	var paginate = this.options.paginate;
+	    	paginate.prev();
+	  	}
 	});
 
 	can.extend(namespace,{

@@ -186,6 +186,17 @@
 				}
 			}
 		},
+		'#passenger-minseat click':function(el,event){
+			var seatCount = $("#passenger-seatCount");
+			seatCount.val(parseInt(seatCount.val()) - 1);
+			if(parseInt(seatCount.val()) < 2){
+				seatCount.val(1);
+			}
+		},
+		'#passenger-addseat click':function(el,event){
+			var seatCount = $("#passenger-seatCount");
+			seatCount.val(parseInt(seatCount.val()) + 1);
+		},
 		"#btn-back click":function(){//返回
 			window.location.href="#!route";
 		}

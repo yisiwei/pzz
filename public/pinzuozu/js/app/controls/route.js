@@ -28,9 +28,7 @@
 			$("#header-bottom").html(can.view(
 				"js/app/views/head/headBottom.ejs"
 			));
-			// $("#banner").html(can.view(
-			// 	"js/app/views/head/banner.ejs"
-			// ));
+			
 			$("#footer").html(can.view(
 				"js/app/views/footer/footer.ejs"
 			));
@@ -49,26 +47,26 @@
                 color: '#fff'
             });
             $("#select-passenger b").css("color","#fff");
-            //window.location.href="#!route_passenger";
-        	can.route.attr('route','route_passenger');
+
+            if(login == "" || login == null){
+            	can.route.attr("route","login");
+            }else{
+            	can.route.attr('route','route_passenger');	
+            }
         },
         '#select-driver click':function(el,event) {//我是司机
+        	var login = this.options.secret.attr("login");
             $("#select-driver").css({
                 backgroundColor: '#6DC5DD',
                 color: '#fff'
             });
             $("#select-driver b").css("color","#fff");
-            //window.location.href="#!route_driver"
-        	can.route.attr('route','route_driver');
-        	// $("#banner").html(can.view(
-        	// 	"js/app/views/head/banner2.ejs"
-        	// ));
-        	// $("#banner").removeClass('banner-bg home-search-banner h500')
-        	// $("#main").html(can.view(
-        	// 	"js/app/views/route/driver_route.ejs"
-        	// ));
+            if(login == "" || login == null){
+            	can.route.attr("route","login");
+            }else{
+            	can.route.attr('route','route_driver');
+            }
         }
-        
 	});
 
 	can.extend(namespace,{

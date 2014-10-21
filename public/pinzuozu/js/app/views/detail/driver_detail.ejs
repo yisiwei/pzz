@@ -99,8 +99,8 @@
                 <i class="fa fa-female fa-lg cr2e"></i>
               </p>
               <p class="cr999 f14">来自：<%= line.attr("line_depart_city") %></p>
-              <button type="button" class="btn btn-primary border-radius-style btn-xs " data-toggle="modal" id="lookContact">查看联系方式</button>
-              <div class="modal fade bs-example-modal-sm" id="mymodal">
+              <button type="button" class="btn btn-primary border-radius-style btn-xs " data-toggle="modal" id="driver-lookContact" onFocus="this.blur()">查看联系方式</button>
+              <div class="modal fade bs-example-modal-sm" id="driver-modal">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -140,12 +140,12 @@
         </div>
         <div class="pl15 plr15 mt15 com-webkit-inline">
           <span class="mr10">申请座位：</span>
-          <input id="minseat" class="btn btn-default btn-xs frame-nradius" type="button" value="-" /> 
+          <input id="minseat" class="btn btn-default btn-xs frame-nradius" type="button" value="-" onFocus="this.blur()"/> 
           <input class="frame-nradius wp50 p0 text-center" id="seatCount" type="text" value="1" /> 
-          <input id="addseat" class="btn btn-default btn-xs frame-nradius" type="button" value="+" />
+          <input id="addseat" class="btn btn-default btn-xs frame-nradius" type="button" value="+" onFocus="this.blur()" />
         </div>
         <div class="text-center mb20">
-          <button type="button" class="btn btn-info border-radius-style passenger-submit-btn" id="passenger-join-submit">申请加入</button>
+          <button type="button" class="btn btn-info border-radius-style passenger-submit-btn" id="passenger-join-submit" onFocus="this.blur()">申请加入</button>
         </div>
       </div>
     </div>
@@ -163,7 +163,7 @@
     map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
     var transit = new BMap.DrivingRoute(map, {
       renderOptions: {
-          map: map,
+          map: map
           //panel: "r-result",
           //enableDragging : true //起终点可进行拖拽
       },  

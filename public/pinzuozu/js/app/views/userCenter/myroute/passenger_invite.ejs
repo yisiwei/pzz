@@ -13,14 +13,21 @@
     <tr>
       <td><%= orders[i].line_depart_datetime.substr(0,10) %></td>
       <td>
-        <a href=""><%= orders[i].line_depart_city %>：<%= orders[i].line_depart_address %>
+        <a href="#!passenger_detail&id=<%=orders[i].pzz_line_id%>" onFocus="this.blur()">
+        <%= orders[i].line_depart_city %>：<%= orders[i].line_depart_address %>
           -><%= orders[i].line_dest_city %>：<%= orders[i].line_dest_address %>
         </a>
       </td>
       <td><%= orders[i].driver_nickname %></td>
       <td>
-        <a class="line_participants_available" href="javascript:void(0)" id="<%=orders[i].id%>">同意</a>
-        <a class="ml10 cancelOrder" href="javascript:void(0)" id="cancel_<%=orders[i].id%>">拒绝</a>
+
+        <% if(orders[i].order_status=='confirmed'){ %>
+          <a>已同意</a>
+        <% }else{ %>
+          <a class="passenger-confirm-invite" href="javascript:void(0)" id="passenger-confirm-invite_<%=orders[i].id%>">同意</a>
+          <a class="passenger-cancel-invite ml10 cancelOrder" href="javascript:void(0)" id="passenger-cancel-invite_<%=orders[i].id%>">拒绝</a>
+        <% } %>
+        
       </td>
     </tr>
     

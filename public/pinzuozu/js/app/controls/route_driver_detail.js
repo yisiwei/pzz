@@ -45,14 +45,18 @@
 		'driver_detail route':function(){
 			this.showRouteDriverDetail();
 		},
-		'#lookContact click':function(el,event){//查看联系方式
+		'#driver-lookContact click':function(el,event){//查看联系方式
 			var userid = this.options.secret.attr("userid");
 			var token = this.options.secret.attr("token");
 			var login = this.options.secret.attr("login");
 			if(token == null || token == ""){
-				can.route.attr("route","login");
+				//can.route.attr("route","login");
+				$("#driver-modal").html(can.view(
+					"js/app/views/detail/message.ejs"
+				));
+				$("#driver-modal").modal('show');
 			}else{
-				$("#mymodal").modal('show');
+				$("#driver-modal").modal('show');
 			}
 		},
 		'#passenger-join-submit click':function(el,event){//申请加入

@@ -1,0 +1,103 @@
+<div class="header" >
+    <div id="header-top" class="wmw top-bg">
+        
+    </div>
+</div>
+
+<div class="text-left m30">
+    <div class="container">
+       <a href="#!home"><img src="images/logo-pwd-back.png"></a>
+    </div>
+</div>
+
+<div class="container" id="main">
+    <div class="row frame-border frame-bgw">
+        <div class="text-left m30  pb30">
+            <h3>
+                <i class="fa cr5b fa-exclamation-circle mr10"></i>找回密码
+            </h3>
+            <ul class="mod-sub-nav mod-sub-nav-ul">
+                <li class="mod-sub-list1">填写用户名</li>
+                <li class="mod-sub-list2 list2-active">验证身份</li>
+                <li class="mod-sub-list3">设置新密码 </li>
+            </ul>
+            <div class="form-horizontal m50 text-left" id="verify-content">
+
+                <div class="form-group ">
+                    <label for="inputMobile" class="col-xs-4 control-label">选择验证方式：</label>
+                    <div class="col-xs-3">
+                        <select class="form-control frame-nradius" id="verify-type">
+                            <option value="phone">手机</option>
+                            <option value="email">邮箱</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="phone-verify">
+                    <div class="form-group">
+                        <label for="inputMobile" class="col-xs-4 control-label">已验证手机：</label>
+                        <div class="col-xs-3">
+                            <input type="text" value="183****4743" class="form-control frame-nradius" id="user_phone" />
+                        </div>
+                        <div class="col-xs-2">
+                            <input type="button" value="获取短信验证码" class="form-control frame-nradius" id="sms-code" />
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="inputMobile" class="col-xs-4 control-label">
+                            短信验证码：
+                        </label>
+                        <div class="col-xs-3">
+                            <input type="text" class="form-control frame-nradius" id="fp-code" />
+                        </div>
+                        <span id="code-msg" class="col-xs-4 f14 crred control-label tl">
+                        </span>
+                    </div>
+
+                    <div class="form-group ">
+                        <div class="col-xs-offset-4 col-xs-1">
+                            <button type="button" id="findPwd-newPwd" class="btn btn-info p20 frame-nradius">下一步</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="email-verify" style="display:none;">
+
+                    <div class="form-group ">
+                        <label for="inputMobile" class="col-xs-4 control-label">
+                            邮箱地址：
+                        </label>
+                        <div class="col-xs-3">
+                            <input type="text" class="form-control frame-nradius" value="y****i@163.com" />
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <div class="col-xs-offset-4 col-xs-1">
+                            <button type="button" id="send-verify-email" class="btn btn-info p20 frame-nradius">发送验证邮箱</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="footer" class="text-center wmw p30" >
+        
+</div>
+<script>
+    $(function(){
+        $("#verify-type").change(function() {
+            //alert($("#verify-type").val());
+            if($("#verify-type").val() == 'email'){
+                $("#phone-verify").hide();
+                $("#email-verify").show();
+            }else{
+                $("#phone-verify").show();
+                $("#email-verify").hide();
+            }
+        });
+    });
+</script>

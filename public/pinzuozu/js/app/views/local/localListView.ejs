@@ -12,34 +12,43 @@
   </ul>
 </div>
 <!-- paging start  -->
-<div class="text-right">
-  <ul class="pagination">
-    <li class="disabled">
-      <a href="#">&laquo;</a>
-    </li>
-    <li class="active">
-      <a href="#">
-        1
-        <span class="sr-only">(current)</span>
-      </a>
-    </li>
-    <li>
-      <a href="#">2</a>
-    </li>
-    <li>
-      <a href="#">3</a>
-    </li>
-    <li>
-      <a href="#">4</a>
-    </li>
-    <li>
-      <a href="#">5</a>
-    </li>
-    <li>
-      <a href="#">&raquo;</a>
-    </li>
-    <li>
-      共<%= lines.length %>条
-    </li>
-  </ul>
-</div>
+<div id="pagination"></div>
+
+<script>
+  var options = {  
+    currentPage: 1,  
+      totalPages :10,               
+      itemContainerClass: function (type, page, current) {  
+      return (page === current) ? "active" : "pointer-cursor";  
+    },  
+    itemTexts: function (type, page, current) {  
+        switch (type) {  
+        case "first":  
+            return "首页";  
+        case "prev":  
+            return "上一页";  
+        case "next":  
+            return "下一页";  
+        case "last":  
+            return "末页";  
+        case "page":  
+            return page;  
+        }  
+    },  
+    onPageClicked: function(e,originalEvent,type,page){  
+
+      e.stopImmediatePropagation();  
+      var currentTarget = $(e.currentTarget);  
+      var pages = currentTarget.bootstrapPaginator("getPages");  
+      // Ajax calling  
+      setTableData(page);  
+      currentTarget.bootstrapPaginator("show",page);  
+      updatePagesInfo($("#totalRecord").val(), page);  
+    },  
+    pageUrl: function(type, page, current){  
+        return "#";  
+    }  
+  };  
+  
+  $('#pagination').bootstrapPaginator(options);
+</script>

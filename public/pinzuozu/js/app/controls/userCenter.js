@@ -20,7 +20,9 @@
 					console.log(user.user_phone);
 					self.element.html(can.view(
 						"js/app/views/userCenter/userCenter.ejs",{
-							username:user.user_nickname
+							username:user.user_nickname,
+							token:token,
+							login:login
 						}
 					));
 					$("#footer").html(can.view(
@@ -159,19 +161,108 @@
 				"js/app/views/userCenter/account/awardrecord.ejs"
 			));
 		},
-
-		'#certificate-realname click':function(el){
+		//认证
+		'#certificate-realname click':function(el){//实名认证
 			$("#accordion li").removeClass('menu-current');
 			el.parent().addClass('menu-current');
 			$("#user-content").html(can.view(
 				"js/app/views/userCenter/certificate/realname.ejs"
 			));
 		},
-		'#certificate-driver click':function(el){
+		'#identity-realname-btn click':function(el,event){//提交实名认证
+			var userid = this.options.secret.attr("userid");
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
+
+			if($("#identity_realname").val() == null || $("#identity_realname").val() == ""){
+				$("#realname-name-msg").addClass('crred fa fa-times-circle');
+				$("#realname-name-msg").text("请填写真实姓名");
+				return;	
+			}
+			
+			if($("#identity_card_no").val() == null || $("#identity_card_no").val() == ""){
+				$("#realname-card_no-msg").addClass('crred fa fa-times-circle');
+				$("#realname-card_no-msg").text("请填写有效身份证");
+				return;	
+			}
+			
+			if($("#identity_card_image").val() == null || $("#identity_card_image").val() == ""){
+				$("#realname-card_image-msg").addClass('crred fa fa-times-circle');
+				$("#realname-card_image-msg").text("请上传身份证扫描件");
+				return;	
+			}
+
+			var identity = new Identity();
+			var form = this.element.find("form");
+			values = can.deparam(form.serialize());
+			identity.attr(values);
+
+			userid = parseInt(userid);
+			//alert(Object.prototype.toString.apply(userid));
+			// identity.attr("auth_token",token);
+			// identity.attr("login",login);
+			// identity.attr("pzz_user_id",userid);
+			
+			// identity.attr("identity_card_image",$("#card-image").attr("src"));
+			var identity_card_image = $("#card-image").attr("src");
+		
+			Identity.identity_realname({
+				auth_token:token,
+				login:login,
+				pzz_user_id:userid,
+				identity_realname:identity.identity_realname,
+				identity_gender:identity.identity_gender,
+				identity_card_no:identity.identity_card_no,
+				identity_card_image:identity_card_image
+			},function(identity){
+				console.log(identity);
+			},function(error){
+				console.log(error);
+			});
+			//alert(identity.identity_realname);
+		},
+		'#identity_realname input':function(el,event){ //监听真实姓名输入框值变化
+			var realname = el.val();
+			if($.trim(realname).length>0){
+				$("#realname-name-msg").removeClass('crred fa fa-times-circle');
+				$("#realname-name-msg").text("");	
+			}
+		},
+		'#identity_card_no input':function(el,event){ //监听身份证输入框值变化
+			var card_no = el.val();
+			if($.trim(card_no).length>0){
+				$("#realname-card_no-msg").removeClass('crred fa fa-times-circle');
+				$("#realname-card_no-msg").text("");	
+			}
+		},
+		'#certificate-driver click':function(el){//驾驶认证
 			$("#accordion li").removeClass('menu-current');
 			el.parent().addClass('menu-current');
 			$("#user-content").html(can.view(
 				"js/app/views/userCenter/certificate/driver.ejs"
+			));
+		},
+		'#identity-driver-btn click':function(el,event){//驾驶认证提交
+			var userid = this.options.secret.attr("userid");
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
+
+			var identity = new Identity();
+			var form = this.element.find("form");
+			values = can.deparam(form.serialize());
+			identity.attr(values);
+
+			// Identity.identity_realname(identity,function(identity){
+			// 	console.log(identity);
+			// },function(error){
+			// 	console.log(error);
+			// });
+		},
+		'#certificate-car click':function(el){//车辆认证
+			$("#accordion li").removeClass('menu-current');
+			el.parent().addClass('menu-current');
+			$("#user-content").html(can.view(
+				"js/app/views/userCenter/certificate/car.ejs"
 			));
 		},
 		//我的拼座
@@ -219,7 +310,25 @@
 			});
 
 		},
-		'#myroute-passenger click':function(el){//我是乘客
+		'.driver-confirm-apply click':function(el,event){//司机同意申请
+			var userid = this.options.secret.attr("userid");
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
+			var id = el.attr("id").split("_")[1];
+			userid = parseInt(userid);
+			id = parseInt(id);
+			Order.confirmOrder({
+				auth_token:token,
+				login:login,
+				pzz_user_id:userid,
+				id:id
+			},function(orders){
+				console.log(orders);
+			},function(error){	
+				console.log(error);
+			});
+		},
+		'#myroute-passenger click':function(el,event){//我是乘客
 			var userid = this.options.secret.attr("userid");
 			var token = this.options.secret.attr("token");
 			var login = this.options.secret.attr("login");
@@ -262,6 +371,24 @@
 				console.log(error);
 			});
 		},
+		'.passenger-confirm-invite click':function(el,event){//乘客同意邀请
+			var userid = this.options.secret.attr("userid");
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
+			var id = el.attr("id").split("_")[1];
+			userid = parseInt(userid);
+			id = parseInt(id);
+			Order.confirmOrder({
+				auth_token:token,
+				login:login,
+				pzz_user_id:userid,
+				id:id
+			},function(orders){
+				console.log(orders);
+			},function(error){	
+				console.log(error);
+			});
+		},
 		'#myroute-route click':function(el){//我的线路
 			$("#accordion li").removeClass('menu-current');
 			el.parent().addClass('menu-current');
@@ -271,12 +398,18 @@
 			var token = this.options.secret.attr("token");
 			var login = this.options.secret.attr("login");
 
+			$("#user-content").html(can.view(
+				"js/app/views/userCenter/myroute/route.ejs"
+			));
+
 			Line.findLinesByUser({userid:userid,token:token,login:login}, function(lines){
-				console.log(lines.length+"-"+lines[1].user_nickname);
+				//console.log(lines.length);
 				//使用each报错
-				$("#user-content").html(can.view(
-					"js/app/views/userCenter/myroute/route.ejs",{lines:lines}
-				));
+				if(lines.length > 0){
+					$("#myroute-list").html(can.view(
+						"js/app/views/userCenter/myroute/routeList.ejs",{lines:lines}
+					));
+				}
 			},function(error){
 				console.log(error);
 			});
@@ -284,7 +417,6 @@
 		'.addseat click':function(el,event){
 			var t = el.parent().find('input[class*=numseat]'); 
 	        t.val(parseInt(t.val())+1);
-	        // setTotal(); 
 		},
 		'.minseat click':function(el,event){
 			var t = el.parent().find('input[class*=numseat]'); 
@@ -347,6 +479,23 @@
 			$("#user-content").html(can.view(
 				"js/app/views/userCenter/message/message.ejs"
 			));
+			var userid = this.options.secret.attr("userid");
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
+			userid = parseInt(userid);
+			Message.findMessageByUser({
+				userid:userid,
+				token:token,
+				login:login
+			},function(messages){
+				console.log(messages);
+				$("#messageList").html(can.view(
+					"js/app/views/userCenter/message/messageList.ejs",{messages:messages}
+				));
+			},function(error){
+				console.log(error);
+			});
+
 		},
 		'#car-mycar click':function(el,event){//车辆信息
 			$("#accordion li").removeClass('menu-current');
@@ -354,7 +503,7 @@
 			$("#user-content").html(can.view(
 				"js/app/views/userCenter/car/mycar.ejs"
 			));
-		},
+		}
 	});
 
 	can.extend(namespace,{

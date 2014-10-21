@@ -175,3 +175,43 @@
 <div id="footer" class="text-center wmw p30 mt15 footer-bg" >
 
 </div>
+
+
+<script>
+var source;
+$(function(){
+    var token = '<%== token %>';
+    var login = '<%== login %>';
+    if(token != null && token != ""){
+        //fetchMessages(token,login);
+    }
+    
+});
+
+function fetchMessages(token,login) {
+
+    setTimeout(function(){
+        source = new EventSource('http://192.168.1.115:3000/pzz_messages/sync_messages?auth_token='+token+'&login='+login);
+        source.addEventListener('new', function(e) {
+            // 有新消息
+            console.log('有新消息');
+        }, false);
+
+        source.addEventListener('uptodate', function(e) {
+           // 没有新消息 
+           console.log('没有新消息');
+        }, false);
+
+        source.addEventListener('open', function(e) {
+            // Connection was opened.
+        }, false);
+
+        source.addEventListener('error', function(e) {
+           if (e.readyState == EventSource.CLOSED) {
+             // Connection was closed.
+             console.log(e.message);
+            }
+        }, false);
+    }, 2000);
+}
+</script>

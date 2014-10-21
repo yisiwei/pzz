@@ -13,13 +13,18 @@
     <tr>
       <td><%= orders[i].line_depart_datetime.substr(0,10) %></td>
       <td>
-        <a href=""><%= orders[i].line_depart_city %>：<%= orders[i].line_depart_address %>
+        <a href="#!passenger_detail&id=<%=orders[i].pzz_line_id%>" onFocus="this.blur()">
+        <%= orders[i].line_depart_city %>：<%= orders[i].line_depart_address %>
           -><%= orders[i].line_dest_city %>：<%= orders[i].line_dest_address %>
         </a>
       </td>
       <td><%= orders[i].driver_nickname %></td>
       <td>
-        <a><%= orders[i].order_status %></a>
+        <% if(orders[i].order_status=='confirmed'){ %>
+          <a>已同意</a>
+        <% }else{ %>
+          <a>等待确认</a>
+        <% } %>
       </td>
     </tr>
     

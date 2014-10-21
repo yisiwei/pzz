@@ -67,8 +67,8 @@
 				userid = parseInt(userid);
 				pzz_line_id = parseInt(pzz_line_id);
 
-				console.log("-----"+Object.prototype.toString.apply(userid));
-				console.log("-----"+Object.prototype.toString.apply(pzz_line_id));
+				// console.log("-----"+Object.prototype.toString.apply(userid));
+				// console.log("-----"+Object.prototype.toString.apply(pzz_line_id));
 				
 				Order.joinLine({
 					auth_token:token,
