@@ -30,6 +30,9 @@ class DeviseCreatePzzUsers < ActiveRecord::Migration
       t.string   :unlock_token # Only if unlock strategy is :email or :both
       t.datetime :locked_at
 
+      ## Token authenticatable
+      t.string   :authentication_token
+
 
       # pzz fields
       # user virtual accessor user_login
@@ -42,8 +45,8 @@ class DeviseCreatePzzUsers < ActiveRecord::Migration
       t.integer     :user_status,               default: 0,   null: false
       t.string      :user_display_name,         default: "",  null: false
       t.integer     :user_age,                  default: 0,   null: false
-      t.integer     :user_msg_count,            default: 0,   null: false
-      t.string      :user_grade,                default: "",  null: false
+      t.integer     :user_msg_count,            default: 10,  null: false
+      t.integer     :user_grade,                default: 0,   null: false
       t.string      :user_contact_prefer,       default: 0,   null: false
       t.integer     :user_satisfaction_rating,  default: 0,   null: false
       t.integer     :user_breach_rating,        default: 0,   null: false
@@ -57,11 +60,12 @@ class DeviseCreatePzzUsers < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :pzz_users, :email,                unique: true
+    add_index :pzz_users, [:email, :user_phone], unique: true
    #add_index :pzz_users, :user_login,           unique: true
-    add_index :pzz_users, :user_phone,           unique: true
+   #add_index :pzz_users, :user_phone,           unique: true
     add_index :pzz_users, :reset_password_token, unique: true
     add_index :pzz_users, :confirmation_token,   unique: true
     add_index :pzz_users, :unlock_token,         unique: true
+    add_index :pzz_users, :authentication_token, unique: true
   end
 end

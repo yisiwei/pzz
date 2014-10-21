@@ -1,6 +1,7 @@
 class PzzIdentitiesController < ApplicationController
   before_action :set_pzz_identity, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_pzz_user!, except: ['index']
+
+  wrap_parameters PzzIdentity
 
   # GET /pzz_identities
   # GET /pzz_identities.json
@@ -70,6 +71,6 @@ class PzzIdentitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pzz_identity_params
-      params.require(:pzz_identity).permit(:user_id, :identity_realname, :identity_gender, :identity_card_no, :identity_card_image, :identity_dl_no, :identity_dl_type, :identity_dl_image, :identity_dl_starttime, :identity_dl_status, :identity_status)
+      params.require(:pzz_identity).permit(:pzz_user_id, :user_realname, :user_gender, :identity_card_no, :identity_image, :identity_status, :identity_remark)
     end
 end

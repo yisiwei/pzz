@@ -1,10 +1,16 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
+  # protect_from_forgery with: :exception
+  # protect_from_forgery with: :null_session
+
   before_action :set_locale
   before_filter :devise_parameter_sanitizer, if: :devise_controller?
 
+
+  def set_current_user
+      PzzUser.current = current_pzz_user
+  end
 
   # localization
   def set_locale
@@ -41,4 +47,24 @@ class ApplicationController < ActionController::Base
        end
        root_path
   end
+
+
+  # after sign out back to http, if using ssl
+  def after_sign_out_path_for(resource_or_scope)
+    root_url(:protocol => 'http')
+  end
+
+  private
+  
+  def authenticate_user_from_token!
+    login = params[:login].presence
+    user       = login && PzzUser.find_by(email: login) || PzzUser.find_by(user_phone: login)
+    # Notice how we use Devise.secure_compare to compare the token
+    # in the database with the token given in the params, mitigating
+    # timing attacks.
+    if user && Devise.secure_compare(user.authentication_token, params[:auth_token])
+      sign_in user, store: false
+    end
+  end
+
 end

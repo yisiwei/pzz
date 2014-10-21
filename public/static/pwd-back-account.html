@@ -19,127 +19,105 @@
     <script type="text/javascript">
             $(document).ready(function() {
                 $('#pwd-back-verify').click(function() {
-                    window.location.href="pwd-back-verify.html"
+                    window.location.href="pwd-back-choice.html"
                 });
             });
     </script>
 </head>
 
 <body>
-<div class="wrapper">
-    <!----start-header---->
-    <div class="header" >
-<!-- top -->
-                <div id="top1" class="wmw">
-                    <div class="container">
-                        <ul class="nav nav-pills pull-left">
-                            <li class="dropdown">
-                                <span class="f14 cr666 right-padding right-li com-block" href="#">
-                                    拼座族，拼车的最佳选择
-                                </span>
-                            </li>
-                            <li class="dropdown">
-                                <a class="f14 cr666 right-padding right-li" href="user-login.html">
-                                    登录
-                                </a>
-                            </li>
-                            <li class="dropdown">
-                                <a class="f14 cr666 right-padding" href="user-register.html">
-                                    注册
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="nav nav-pills pull-right">
-                            <li class="pull-right dropdown">
-                                <a class="f14 cr666 right-padding" data-toggle="dropdown" href="">
-                                    网站导航
-                                    <b class="pl5">
-                                        ▼
-                                    </b>
-                                </a>
-                                <ul class="dropdown-menu user-top-dropdown-menu frame-nradius">
-                                    <li class="text-center">
-                                        <a href="#">
-                                            test
-                                        </a>
-                                    </li>
-                                    <li class="text-center">
-                                        <a href="#">
-                                            test
-                                        </a>
-                                    </li>
-                                    <li class="text-center">
-                                        <a href="#">
-                                            test
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="pull-right dropdown">
-                                <a class="f14 cr666 right-padding right-li" href="#">
-                                    如何拼座？
-                                </a>
-                            </li>
-                            <li class="pull-right dropdown">
-                                <a class="f14 cr666 right-padding right-li" href="index.html">
-                                    返回首页
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+    <div class="wrapper">
+        <!----start-header---->
+        <div class="header" >
+            <!-- top -->
+            <div id="top1" class="wmw">
+                <div class="container">
+                    <ul class="nav nav-pills pull-left">
+                        <li class="dropdown">
+                            <span class="f14 cr666 right-padding right-li com-block" href="#">拼座族，拼车的最佳选择</span>
+                        </li>
+                        <li class="dropdown">
+                            <a class="f14 cr666 right-padding right-li" href="user-login.html">登录</a>
+                        </li>
+                        <li class="dropdown">
+                            <a class="f14 cr666 right-padding" href="user-register.html">注册</a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-pills pull-right">
+                        <li class="pull-right dropdown">
+                            <a class="f14 cr666 right-padding" data-toggle="dropdown" href="">
+                                网站导航 <b class="pl5">▼</b>
+                            </a>
+                            <ul class="dropdown-menu user-top-dropdown-menu frame-nradius">
+                                <li class="text-center">
+                                    <a href="#">test</a>
+                                </li>
+                                <li class="text-center">
+                                    <a href="#">test</a>
+                                </li>
+                                <li class="text-center">
+                                    <a href="#">test</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="pull-right dropdown">
+                            <a class="f14 cr666 right-padding right-li" href="#">如何拼座？</a>
+                        </li>
+                        <li class="pull-right dropdown">
+                            <a class="f14 cr666 right-padding right-li" href="index.html">返回首页</a>
+                        </li>
+                    </ul>
                 </div>
-                <!-- top end -->
-</div>
-<!-- header end -->
-<div class="text-left m30">
-    <div class="container">
-       <a href="index.html"><img src="images/logo-pwd-back.png"></a></div>
-    </div>
-<div class="container ">
-<div class="row frame-border frame-bgw">
-<div class="text-left m30  pb30">
-<H3> <i class="fa cr5b  fa-exclamation-circle mr10"></i>
-找回密码
-</H3>
+            </div>
+            <!-- top end --> </div>
+        <!-- header end -->
+        <div class="text-left m30">
+            <div class="container">
+                <a href="index.html">
+                    <img src="images/logo-pwd-back.png"></a>
+            </div>
+        </div>
+        <div class="container ">
+            <div class="row frame-border frame-bgw">
+                <div class="text-left m30  pb30">
+                    <H3> <i class="fa cr5b  fa-exclamation-circle mr10"></i>
+                        找回密码
+                    </H3>
 
-    <ul class="mod-sub-nav mod-sub-nav-ul">  <li class="mod-sub-list1 list1-active">确认帐号  </li><li class="mod-sub-list2">安全验证  </li><li class="mod-sub-list3">重置密码 </li></ul>
-  <form class="form-horizontal m50 text-left" role="form">
+                    <ul class="mod-sub-nav mod-sub-nav-ul">
+                        <li class="mod-sub-list1 list1-active">确认帐号</li>
+                        <li class="mod-sub-list2">安全验证</li>
+                        <li class="mod-sub-list3">重置密码</li>
+                    </ul>
+                    <form class="form-horizontal m50 text-left" role="form">
 
-                <div class="form-group ">
-                    <label for="inputMobile" class="col-xs-4 control-label">输入帐号：</label>
-                    <div class="col-xs-4">
-                        <input type="text" class="form-control frame-nradius" id="inputMobile" placeholder="手机/邮箱"></div>
-                      <span id="mobile-name" class="col-xs-4 f12 crred control-label tl fa fa-times-circle">
-                        姓名或昵称不能为空
-                    </span>
+                        <div class="form-group ">
+                            <label for="inputMobile" class="col-xs-4 control-label">输入帐号：</label>
+                            <div class="col-xs-4">
+                                <input type="text" class="form-control frame-nradius" id="inputMobile" placeholder="手机/邮箱"></div>
+                            <span id="mobile-name" class="col-xs-4 f12 crred control-label tl fa fa-times-circle">姓名或昵称不能为空</span>
+                        </div>
+
+                        <div class="form-group ">
+                            <div class="col-xs-offset-4 col-xs-8">
+                                <button type="button" id="pwd-back-verify" class="btn  btn-info p20 frame-nradius">下一步</button>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
-               
+            </div>
+        </div>
+        <!-- footer start -->
+        <div id="footer" class="text-center wmw p30 " >
+            <div class="container frame-tborder ">
 
-                <div class="form-group ">
-                     <div class="col-xs-offset-4 col-xs-8">
-                        <button type="button" id="pwd-back-verify" class="btn  btn-info p20 frame-nradius">下一步</button>
-                    </div>
-                </div>
-            </form>
+                <p class="pt20 cr666">Copyright Reserved 2014-2015 拼座族拼车、搭乘顺风车，仅在拼座族网ICP备585858588</p>
+            </div>
 
-</div>
-</div>
-</div>
-       <!-- footer start -->
-<div id="footer" class="text-center wmw p30 " >
-    <div class="container frame-tborder ">
-    
-        <p class="pt20 cr666">
-           
-            Copyright Reserved 2014-2015 拼座族拼车、搭乘顺风车，仅在拼座族网ICP备585858588
-          
-            </p>
-    </div>
-
-</div>
-<!-- footer end -->
-</div>
-<!-- wrapper end -->
+        </div>
+        <!-- footer end --> </div>
+    <!-- wrapper end -->
 
 </body>
 
