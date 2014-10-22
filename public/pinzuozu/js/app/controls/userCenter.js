@@ -163,11 +163,47 @@
 		},
 		//认证
 		'#certificate-realname click':function(el){//实名认证
+			var userid = this.options.secret.attr("userid");
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
+			userid = parseInt(userid);
+
 			$("#accordion li").removeClass('menu-current');
 			el.parent().addClass('menu-current');
-			$("#user-content").html(can.view(
-				"js/app/views/userCenter/certificate/realname.ejs"
-			));
+
+			Identity.find_identity_realname({
+				auth_token:token,
+				login:login,
+				pzz_user_id:userid
+			},function(identity,status){
+				console.log(status);
+				console.log(identity);
+				if(identity != null){
+					if(identity.identity_status == "pending"){//审核中
+						$("#user-content").html(can.view(
+							"js/app/views/userCenter/certificate/realname_wait.ejs",{identity:identity}
+						));
+					}else if(identity.identity_status == "failed"){
+						$("#user-content").html(can.view(
+							"js/app/views/userCenter/certificate/realname_fail.ejs",{identity:identity}
+						));
+					}else{
+						$("#user-content").html(can.view(
+							"js/app/views/userCenter/certificate/realname_success.ejs",{identity:identity}
+						));
+					}
+				}else{
+					
+				}
+			},function(error){
+				//console.log(status);
+				console.log(error.status);
+				$("#user-content").html(can.view(
+					"js/app/views/userCenter/certificate/realname.ejs"
+				));
+			});
+
+			
 		},
 		'#identity-realname-btn click':function(el,event){//提交实名认证
 			var userid = this.options.secret.attr("userid");
@@ -216,6 +252,9 @@
 				identity_card_image:identity_card_image
 			},function(identity){
 				console.log(identity);
+				$("#user-content").html(can.view(
+					"js/app/views/userCenter/certificate/realname_wait.ejs",{identity:identity}
+				));
 			},function(error){
 				console.log(error);
 			});
@@ -235,6 +274,74 @@
 				$("#realname-card_no-msg").text("");	
 			}
 		},
+		'#identity_realname_again click':function(el,event){//重新实名认证
+			var userid = this.options.secret.attr("userid");
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
+			Identity.find_identity_realname({
+				auth_token:token,
+				login:login,
+				pzz_user_id:userid
+			},function(identity){
+				$("#user-content").html(can.view(
+					"js/app/views/userCenter/certificate/realname_again.ejs",{identity:identity}
+				));
+			},function(error){
+
+			});
+			
+		},
+		'#identity_realname_again_btn click':function(el,event){//重新实名认证提交
+			var userid = this.options.secret.attr("userid");
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
+
+			if($("#identity_realname").val() == null || $("#identity_realname").val() == ""){
+				$("#realname-name-msg").addClass('crred fa fa-times-circle');
+				$("#realname-name-msg").text("请填写真实姓名");
+				return;	
+			}
+			
+			if($("#identity_card_no").val() == null || $("#identity_card_no").val() == ""){
+				$("#realname-card_no-msg").addClass('crred fa fa-times-circle');
+				$("#realname-card_no-msg").text("请填写有效身份证");
+				return;	
+			}
+			
+			if($("#identity_card_image").val() == null || $("#identity_card_image").val() == ""){
+				$("#realname-card_image-msg").addClass('crred fa fa-times-circle');
+				$("#realname-card_image-msg").text("请上传身份证扫描件");
+				return;	
+			}
+
+			var identity = new Identity();
+			var form = this.element.find("form");
+			values = can.deparam(form.serialize());
+			identity.attr(values);
+
+			userid = parseInt(userid);
+			var identity_card_image = $("#card-image").attr("src");
+
+			
+
+			Identity.update_identity_realname({
+				auth_token:token,
+				login:login,
+				pzz_user_id:userid,
+				id:identity.id,
+				identity_realname:identity.identity_realname,
+				identity_gender:identity.identity_gender,
+				identity_card_no:identity.identity_card_no,
+				identity_card_image:identity_card_image
+			},function(identity){
+				console.log(identity);
+				$("#user-content").html(can.view(
+					"js/app/views/userCenter/certificate/realname_wait.ejs",{identity:identity}
+				));
+			},function(error){
+				console.log(error);
+			});
+		},
 		'#certificate-driver click':function(el){//驾驶认证
 			$("#accordion li").removeClass('menu-current');
 			el.parent().addClass('menu-current');
@@ -246,17 +353,26 @@
 			var userid = this.options.secret.attr("userid");
 			var token = this.options.secret.attr("token");
 			var login = this.options.secret.attr("login");
+			userid = parseInt(userid);
 
 			var identity = new Identity();
 			var form = this.element.find("form");
 			values = can.deparam(form.serialize());
 			identity.attr(values);
 
-			// Identity.identity_realname(identity,function(identity){
-			// 	console.log(identity);
-			// },function(error){
-			// 	console.log(error);
-			// });
+			Identity.identity_driver({
+				auth_token:token,
+				login:login,
+				pzz_user_id:userid,
+				identity_realname:identity.identity_realname,
+				identity_gender:identity.identity_gender,
+				identity_card_no:identity.identity_card_no,
+				identity_card_image:identity_card_image
+			},function(identity){
+				console.log(identity);
+			},function(error){
+				console.log(error);
+			});
 		},
 		'#certificate-car click':function(el){//车辆认证
 			$("#accordion li").removeClass('menu-current');
@@ -497,13 +613,67 @@
 			});
 
 		},
-		'#car-mycar click':function(el,event){//车辆信息
-			$("#accordion li").removeClass('menu-current');
-			el.parent().addClass('menu-current');
-			$("#user-content").html(can.view(
-				"js/app/views/userCenter/car/mycar.ejs"
-			));
+		'.loadMessageDetail click':function(el,event){//查看消息
+			var userid = this.options.secret.attr("userid");
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
+			userid = parseInt(userid);
+
+			var message_id = el.attr("id").split("_")[1];
+			message_id = parseInt(message_id);
+			alert(message_id);
+
+			//查询消息
+			Message.findMessageById({
+				userid:userid,
+				token:token,
+				login:login,
+				messageId:messageId
+			},function(message){
+				$("#message-detail-model").html(can.view(
+					"js/app/views/userCenter/message/messageDetail.ejs",{message:message}
+				));
+				$("#message-detail-model").modal('show');
+			},function(error){
+				console.log(error);
+			});
+			
+
+		},
+		'.deleteMessage click':function(el,event){//删除消息
+			if(confirm("确定要删除该消息吗？")){
+				var userid = this.options.secret.attr("userid");
+				var token = this.options.secret.attr("token");
+				var login = this.options.secret.attr("login");
+				userid = parseInt(userid);
+
+				var message_id = el.attr("id").split("_")[1];
+				message_id = parseInt(message_id);
+				alert(message_id);
+
+				//删除消息
+				Message.findMessageById({
+					userid:userid,
+					token:token,
+					login:login,
+					messageId:messageId
+				},function(message){
+					$("#message-detail-model").html(can.view(
+						"js/app/views/userCenter/message/messageDetail.ejs",{message:message}
+					));
+					$("#message-detail-model").modal('show');
+				},function(error){
+					console.log(error);
+				});
+			}
 		}
+		// '#car-mycar click':function(el,event){//车辆信息
+		// 	$("#accordion li").removeClass('menu-current');
+		// 	el.parent().addClass('menu-current');
+		// 	$("#user-content").html(can.view(
+		// 		"js/app/views/userCenter/car/mycar.ejs"
+		// 	));
+		// }
 	});
 
 	can.extend(namespace,{

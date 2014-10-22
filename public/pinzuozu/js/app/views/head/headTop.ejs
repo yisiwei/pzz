@@ -62,11 +62,15 @@ function fetchMessages(token,login) {
         source.addEventListener('new', function(e) {
             // 有新消息
             console.log('有新消息');
+            $("#messageCount").show();
+            //查询未读消息数量
+            $("#messageCount").text("1");
         }, false);
 
         source.addEventListener('uptodate', function(e) {
            // 没有新消息 
            console.log('没有新消息');
+           $("#messageCount").hide();
         }, false);
 
         source.addEventListener('open', function(e) {

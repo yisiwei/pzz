@@ -1,0 +1,28 @@
+<div class="page-list-bg p10 mt20 frame-border">
+
+  <div class="mt20 ml20">
+    <h4>公安部实名认证</h4>
+  </div>
+  <div class="user-cr module-success">
+    <div class="">
+      <div class="text-center f26 cr5c">
+        <span>
+          正在审核中...
+      </span>
+    </div>
+
+    <p>姓名：<%=identity.user_realname %></p>
+    <p>性别：<%= identity.user_gender=='0'?'男':'女' %></p>
+    <p>身份证号：<%=identity.identity_card_no %></p>
+    <p>提交申请时间：<%=identity.created_at %></p>
+    <p>
+      <img src="http://192.168.1.115:3000/<%=identity.identity_image %>">
+    </p>
+    <!--
+    <div class="text-center mt10">
+      <button type="button" class="btn btn-success frame-nradius">重新认证</button>
+    </div>
+    -->
+  </div>
+</div>
+</div>

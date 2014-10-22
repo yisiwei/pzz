@@ -1,8 +1,11 @@
 <% for(var i=0;i<messages.length;i++){ %>
 <tr>
+  <td><%= messages[i].message_status %></td>
   <td>2014-10-1</td>
   <td><%= messages[i].message_subject %></td>
-  <td><%= messages[i].message_status %></td>
-  <td>删除</td>
+  <td>
+    <a class="cr666 pr10 loadMessageDetail" data-toggle="modal" href="javascript:void(0)" id="loadMessageDetail_<%= messages[i].message_id %>">查看</a>
+    <a id="message-delete-btn_<%= messages[i].message_id %>" class="cr666 deleteMessage" href="javascript:void(0)">删除</a>
+  </td>
 </tr>
 <% } %>
