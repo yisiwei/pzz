@@ -9,26 +9,26 @@
       <div class="form-group m30">
         <label for="inputMobile" class="col-xs-3 control-label cr666 f14">车牌号码：</label>
         <div class="col-xs-2">
-          <select class="form-control frame-nradius">
-            <option>京</option>
-            <option>冀</option>
-            <option>苏</option>
+          <select class="form-control frame-nradius" id='city-plate'>
+            <option value='京'>京</option>
+            <option value='冀'>冀</option>
+            <option value='苏'>苏</option>
           </select>
         </div>
         <div class="col-xs-4">
-          <input type="tel" class="form-control frame-nradius" id="inputMobile" placeholder="车牌号"></div>
-        <span id="mobile-verify" class="col-xs-3 f12 crred control-label tl"> 
-          <i class="fa fa-times-circle crred fa-lg mr5"></i>
-          输入车牌号
+          <input type="tel" class="form-control frame-nradius" id="car_plate_no" name="car_plate_no" placeholder="车牌号"></div>
+        <span id="car_plate_no-msg" class="col-xs-3 f12 crred control-label tl"> 
+          
         </span>
       </div>
       <div class="form-group form-group-sm ">
         <label for="nickName" class="col-xs-3 cr666 f14 control-label">座位数：</label>
         <div class="col-xs-2">
-          <select class="form-control">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
+          <select class="form-control" name="car_seats">
+            <option value='1'>1</option>
+            <option value='2'>2</option>
+            <option value='3'>3</option>
+            <option value='4'>4</option>
           </select>
         </div>
         <div class="col-xs-2">
@@ -38,35 +38,42 @@
       <div class="form-group m30">
         <label for="inputMobile" class="col-xs-3 control-label cr666 f14">发动机编号：</label>
         <div class="col-xs-6">
-          <input type="tel" class="form-control frame-nradius" id="inputMobile" placeholder="发动机编号" />
-        </div>
-        <span id="mobile-verify" class="col-xs-3 f12 crred control-label tl"> 
-          <i class="fa fa-times-circle crred fa-lg mr5"></i>
-          输入发动机编号
+          <input type="tel" class="form-control frame-nradius" id="car_engine_no" name="car_engine_no " placeholder="发动机编号"></div>
+        <span id="car_engine_no" class="col-xs-3 f12 crred control-label tl">
+          
         </span>
       </div>
       <div class="form-group form-group-sm ">
         <label for="nickName" class="col-xs-3 control-label cr666 f14">车种：</label>
         <div class="col-xs-3">
+          <select class="form-control" name="car_type">
+            <option value="城市越野车">城市越野车</option>
+            <option value="跑车">跑车</option>
+            <option value="多功能用途车">多功能用途车</option>
+            <option value="迷你轿车">迷你轿车</option>
+            <option value="小型轿车">小型轿车</option>
+            <option value="中级轿车">中级轿车</option>
+            <option value="小型客车">小型客车</option>
+            <option value="豪华轿车">豪华轿车</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group form-group-sm ">
+        <label for="nickName" class="col-xs-3 control-label cr666 f14">车型：</label>
+        <div class="col-xs-3">
           <select class="form-control">
-            <option>城市越野车</option>
-            <option>跑车</option>
-            <option>多功能用途车</option>
-            <option>迷你轿车</option>
-            <option>小型轿车</option>
-            <option>中级轿车</option>
-            <option>小型客车</option>
-            <option>豪华轿车</option>
+            <option value="宝马">宝马</option>
+            <option value="奔驰">奔驰</option>
+            <option value="奥迪">奥迪</option>
           </select>
         </div>
       </div>
       <div class="form-group m30">
         <label for="inputMobile" class="col-xs-3 control-label cr666 f14">保险公司名称：</label>
         <div class="col-xs-6">
-          <input type="tel" class="form-control frame-nradius" id="inputMobile" placeholder="保险公司名称"></div>
-        <span id="mobile-verify" class="col-xs-3 f12 crred control-label tl">
-          <i class="fa fa-times-circle crred fa-lg mr5"></i>
-          输入保险公司名称
+          <input type="tel" class="form-control frame-nradius" id="insurance_corporate" name="insurance_corporate " placeholder="保险公司名称"></div>
+        <span id="insurance_corporate-msg" class="col-xs-3 f12 crred control-label tl">
+          
         </span>
       </div>
       <div class="form-group form-group-xs ">
@@ -77,19 +84,18 @@
               <span class="add-on input-group-addon border-radius-style">
                 <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
               </span>
-              <input type="text" id='d' class="form-control border-radius-style offer-date-input" />
+              <input type="text" id='insurance_expired' class="form-control border-radius-style offer-date-input" name="insurance_expired" />
             </div>
           </div>
         </div>
         <span id="mobile-verify" class="col-xs-3 f12 crred control-label tl">
-          <i class="fa fa-times-circle crred fa-lg mr5"></i>
-          请选择请选
+          
         </span>
       </div>
       <div class="form-group m30">
         <label for="inputMobile" class="col-xs-3 control-label cr666 f14">保险单号：</label>
         <div class="col-xs-6">
-          <input type="tel" class="form-control frame-nradius" id="inputMobile" placeholder="保险单号"></div>
+          <input type="tel" class="form-control frame-nradius" id="insurance_no" name="insurance_no " placeholder="保险单号"></div>
         <span id="mobile-verify" class="col-xs-3 f12 crred control-label tl">
           <i class="fa fa-times-circle crred fa-lg mr5"></i>
           输入保险单号
@@ -99,7 +105,9 @@
       <div class="form-group form-group-sm ">
         <label for="nickName" class="col-xs-3 control-label cr666 f14">保险单扫描件：</label>
         <div class="col-xs-3">
-          <input type="file" id="exampleInputFile"></div>
+          <input type="file" id="insurance_image" name="insurance_image" />
+          <img id="insurance-image" src="" style="display:none;" />
+        </div>
       </div>
       <div class="form-group">
         <div class="col-xs-offset-3">
@@ -107,8 +115,8 @@
             <a class="com-rposition"  data-toggle="modal" data-target=".bs-example-modal-sm" >
               <i  class="fa fa-search module-identif-i"></i>
             </a>
-            <img class="module-identif-driversimg" src="images/driver1.jpg"></div>
-
+            <img class="module-identif-driversimg" src="images/driver1.jpg" />
+          </div>
         </div>
       </div>
       <div class="modal fade bs-example-modal-sm " id="mymodal">
@@ -124,16 +132,54 @@
             <div class="modal-body text-center">
               <img class="module-identif-driverimg" src="images/driver1.jpg"></div>
           </div>
-          <!-- /.modal-content --> 
-        </div>
-        <!-- /.modal-dialog --> 
-      </div>
+          <!-- /.modal-content --> </div>
+        <!-- /.modal-dialog --> </div>
       <!-- /.modal -->
+      <div class="form-group form-group-sm ">
+        <label for="nickName" class="col-xs-3 control-label cr666 f14">行驶证照：</label>
+        <div class="col-xs-5">
+          <input type="file" id="identity_vl_image" name="identity_vl_image ">
+          <img id="insurance-image" src="" style="display:none;" />
+        </div>
+        <span id="mobile-verify" class="col-xs-4 f12 crred control-label tl">
+          
+        </span>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-offset-3">
+          <div class="col-xs-4">
+            <a class="com-rposition"  data-toggle="modal" data-target=".bs-example-modal-sm1" >
+              <i  class="fa fa-search module-identif-i"></i>
+            </a>
+            <img class="module-identif-driversimg" src="images/driver1.jpg"></div>
 
+        </div>
+      </div>
+      <div class="modal fade bs-example-modal-sm1 " id="mymodal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+              </button>
+              <h4 class="modal-title">驾驶证样本</h4>
+            </div>
+            <div class="modal-body text-center">
+              <img class="module-identif-driverimg" src="images/driver2.jpg"></div>
+          </div>
+          <!-- /.modal-content --> </div>
+        <!-- /.modal-dialog --> </div>
+      <!-- /.modal -->
       <div class="form-group form-group-sm ">
         <label for="nickName" class="col-xs-3 control-label cr666 f14">车辆照片：</label>
-        <div class="col-xs-3">
-          <input type="file" id="exampleInputFile"></div>
+        <div class="col-xs-5">
+          <input type="file" id="car_image" name="car_image" />
+        </div>
+        <span id="mobile-verify" class="col-xs-4 f12 crred control-label tl">
+          <i class="fa fa-times-circle crred fa-lg mr5"></i>
+          输入车辆照片
+        </span>
       </div>
       <div class="form-group">
         <div class="col-xs-offset-3">
@@ -141,7 +187,8 @@
             <a class="com-rposition"  data-toggle="modal" data-target=".bs-example-modal-sm-car" >
               <i  class="fa fa-search module-identif-i"></i>
             </a>
-            <img class="module-identif-driversimg" src="images/driver1.jpg"></div>
+            <img class="module-identif-driversimg" src="images/driver1.jpg" />
+          </div>
 
         </div>
       </div>
@@ -153,20 +200,39 @@
                 <span aria-hidden="true">&times;</span>
                 <span class="sr-only">Close</span>
               </button>
-              <h4 class="modal-title">车辆照片</h4>
+              <h4 class="modal-title">驾驶证样本</h4>
             </div>
             <div class="modal-body text-center">
-              <img class="module-identif-driverimg" src="images/driver1.jpg"></div>
+              <img class="module-identif-driverimg" src="images/driver2.jpg"></div>
           </div>
           <!-- /.modal-content --> </div>
         <!-- /.modal-dialog --> </div>
       <!-- /.modal -->
       <div class="form-group mt20">
         <div class="col-xs-offset-3 col-xs-9">
-          <button type="button" class="btn btn-primary p10 frame-nradius btn-sm">确认</button>
+          <button type="button" id='identity-car-btn' class="btn btn-primary p10 frame-nradius btn-sm">确认</button>
           <button type="reset" class="btn btn-sm btn-default p10 frame-nradius ">重置</button>
         </div>
       </div>
     </form>
   </div>
 </div>
+
+<script src='js/rome.js'></script>
+<script>
+  var moment = rome.moment;
+  rome(insurance_expired, { time: false });
+
+  function loadCardImage(sourceId){
+    if (typeof FileReader === 'undefined') {  
+      alert('Your browser does not support FileReader...');  
+      return;  
+    }  
+    var reader = new FileReader();  
+    reader.onload = function(e) {   
+      $("#driver-image").attr("src", this.result);
+    }  
+    reader.readAsDataURL(document.getElementById(sourceId).files[0]); 
+  }
+
+</script>

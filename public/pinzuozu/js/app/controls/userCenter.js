@@ -343,11 +343,45 @@
 			});
 		},
 		'#certificate-driver click':function(el){//驾驶认证
+			var userid = this.options.secret.attr("userid");
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
+			userid = parseInt(userid);
+
 			$("#accordion li").removeClass('menu-current');
 			el.parent().addClass('menu-current');
-			$("#user-content").html(can.view(
-				"js/app/views/userCenter/certificate/driver.ejs"
-			));
+
+			Identity.find_identity_driver({
+				auth_token:token,
+				login:login,
+				pzz_user_id:userid
+			},function(identity){
+				console.log(identity);
+				if(identity != null){
+					if(identity.identity_status == "pending"){//审核中
+						$("#user-content").html(can.view(
+							"js/app/views/userCenter/certificate/driver_wait.ejs",{identity:identity}
+						));
+					}else if(identity.identity_status == "failed"){
+						$("#user-content").html(can.view(
+							"js/app/views/userCenter/certificate/driver_fail.ejs",{identity:identity}
+						));
+					}else{
+						$("#user-content").html(can.view(
+							"js/app/views/userCenter/certificate/driver_success.ejs",{identity:identity}
+						));
+					}
+				}else{
+					
+				}
+			},function(error){
+				//console.log(status);
+				console.log(error.status);
+				$("#user-content").html(can.view(
+					"js/app/views/userCenter/certificate/driver.ejs"
+				));
+			});
+			
 		},
 		'#identity-driver-btn click':function(el,event){//驾驶认证提交
 			var userid = this.options.secret.attr("userid");
@@ -355,21 +389,125 @@
 			var login = this.options.secret.attr("login");
 			userid = parseInt(userid);
 
+			if($("#user_realname").val() == null || $("#user_realname").val() == ""){
+				$("#identity-driver-realname-msg").addClass('crred fa fa-times-circle');
+				$("#identity-driver-realname-msg").text("请填写真实姓名");
+				return;	
+			}
+			
+			if($("#identity_dl_no").val() == null || $("#identity_dl_no").val() == ""){
+				$("#identity_dl_no-msg").addClass('crred fa fa-times-circle');
+				$("#identity_dl_no-msg").text("请填写驾证号码");
+				return;	
+			}
+			
+			if($("#identity_dl_issued").val() == null || $("#identity_dl_issued").val() == ""){
+				$("#identity_dl_issued-msg").addClass('crred fa fa-times-circle');
+				$("#identity_dl_issued-msg").text("请填写驾证颁发时间");
+				return;	
+			}
+
+			if($("#identity_dl_image").val() == null || $("#identity_dl_image").val() == ""){
+				$("#identity_dl_image-msg").addClass('crred fa fa-times-circle');
+				$("#identity_dl_image-msg").text("请上传驾证扫描件");
+				return;	
+			}
+
 			var identity = new Identity();
 			var form = this.element.find("form");
 			values = can.deparam(form.serialize());
 			identity.attr(values);
 
+			var identity_dl_image = $("#driver-image").attr("src");
+
 			Identity.identity_driver({
 				auth_token:token,
 				login:login,
 				pzz_user_id:userid,
-				identity_realname:identity.identity_realname,
-				identity_gender:identity.identity_gender,
-				identity_card_no:identity.identity_card_no,
-				identity_card_image:identity_card_image
+				identity_realname:identity.user_realname,
+				identity_dl_no:identity.identity_dl_no,
+				identity_dl_image:identity_dl_image,
+				identity_dl_type:identity.identity_dl_type,
+				identity_dl_issued:identity.identity_dl_issued
 			},function(identity){
 				console.log(identity);
+				$("#user-content").html(can.view(
+					"js/app/views/userCenter/certificate/driver_wait.ejs",{identity:identity}
+				));
+			},function(error){
+				console.log(error);
+			});
+		},
+		'#identity-driver-again click':function(el,event){//重新认证
+			var userid = this.options.secret.attr("userid");
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
+			userid = parseInt(userid);
+
+			Identity.find_identity_driver({
+				auth_token:token,
+				login:login,
+				pzz_user_id:userid
+			},function(identity){
+				$("#user-content").html(can.view(
+					"js/app/views/userCenter/certificate/driver_again.ejs",{identity:identity}
+				));
+			},function(error){
+
+			});
+		},
+		'#identity-driver-again-btn click':function(el,event){//重新提交驾驶认证
+			var userid = this.options.secret.attr("userid");
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
+			userid = parseInt(userid);
+
+			if($("#user_realname").val() == null || $("#user_realname").val() == ""){
+				$("#identity-driver-realname-msg").addClass('crred fa fa-times-circle');
+				$("#identity-driver-realname-msg").text("请填写真实姓名");
+				return;	
+			}
+			
+			if($("#identity_dl_no").val() == null || $("#identity_dl_no").val() == ""){
+				$("#identity_dl_no-msg").addClass('crred fa fa-times-circle');
+				$("#identity_dl_no-msg").text("请填写驾证号码");
+				return;	
+			}
+			
+			if($("#identity_dl_issued").val() == null || $("#identity_dl_issued").val() == ""){
+				$("#identity_dl_issued-msg").addClass('crred fa fa-times-circle');
+				$("#identity_dl_issued-msg").text("请填写驾证颁发时间");
+				return;	
+			}
+
+			if($("#identity_dl_image").val() == null || $("#identity_dl_image").val() == ""){
+				$("#identity_dl_image-msg").addClass('crred fa fa-times-circle');
+				$("#identity_dl_image-msg").text("请上传驾证扫描件");
+				return;	
+			}
+
+			var identity = new Identity();
+			var form = this.element.find("form");
+			values = can.deparam(form.serialize());
+			identity.attr(values);
+
+			var identity_dl_image = $("#driver-image").attr("src");
+
+			Identity.update_identity_driver({
+				auth_token:token,
+				login:login,
+				pzz_user_id:userid,
+				id:identity.id,
+				identity_realname:identity.user_realname,
+				identity_dl_no:identity.identity_dl_no,
+				identity_dl_image:identity_dl_image,
+				identity_dl_type:identity.identity_dl_type,
+				identity_dl_issued:identity.identity_dl_issued
+			},function(identity){
+				console.log(identity);
+				$("#user-content").html(can.view(
+					"js/app/views/userCenter/certificate/driver_wait.ejs",{identity:identity}
+				));
 			},function(error){
 				console.log(error);
 			});
@@ -380,6 +518,61 @@
 			$("#user-content").html(can.view(
 				"js/app/views/userCenter/certificate/car.ejs"
 			));
+		},
+		'#identity-car-btn click':function(el,event){//车辆认证提交
+			var userid = this.options.secret.attr("userid");
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
+			userid = parseInt(userid);
+
+			if($("#car_plate_no").val() == null || $("#car_plate_no").val() == ""){
+				$("#car_plate_no-msg").addClass('crred fa fa-times-circle');
+				$("#car_plate_no-msg").text("请填写车牌号");
+				return;	
+			}
+			
+			if($("#car_engine_no").val() == null || $("#car_engine_no").val() == ""){
+				$("#car_engine_no-msg").addClass('crred fa fa-times-circle');
+				$("#car_engine_no-msg").text("请填写发动机编号");
+				return;	
+			}
+			
+			if($("#identity_dl_issued").val() == null || $("#identity_dl_issued").val() == ""){
+				$("#identity_dl_issued-msg").addClass('crred fa fa-times-circle');
+				$("#identity_dl_issued-msg").text("请填写驾证颁发时间");
+				return;	
+			}
+
+			if($("#identity_dl_image").val() == null || $("#identity_dl_image").val() == ""){
+				$("#identity_dl_image-msg").addClass('crred fa fa-times-circle');
+				$("#identity_dl_image-msg").text("请上传驾证扫描件");
+				return;	
+			}
+
+			var identity = new Identity();
+			var form = this.element.find("form");
+			values = can.deparam(form.serialize());
+			identity.attr(values);
+
+			var identity_dl_image = $("#driver-image").attr("src");
+
+			Identity.identity_driver({
+				auth_token:token,
+				login:login,
+				pzz_user_id:userid,
+				identity_realname:identity.user_realname,
+				identity_dl_no:identity.identity_dl_no,
+				identity_dl_image:identity_dl_image,
+				identity_dl_type:identity.identity_dl_type,
+				identity_dl_issued:identity.identity_dl_issued
+			},function(identity){
+				console.log(identity);
+				$("#user-content").html(can.view(
+					"js/app/views/userCenter/certificate/driver_wait.ejs",{identity:identity}
+				));
+			},function(error){
+				console.log(error);
+			});
 		},
 		//我的拼座
 		'#myroute-driver click':function(el){//我是司机

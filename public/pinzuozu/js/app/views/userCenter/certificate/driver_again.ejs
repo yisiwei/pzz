@@ -5,11 +5,11 @@
   </div>
   <div class="user-cr">
     <form class="form-horizontal mt50 " role="form">
-
+      <input type="hidden" name="id" value="<%=identity.id%>" />
       <div class="form-group m30">
         <label for="inputMobile" class="col-xs-3 control-label cr666 f14">真实姓名：</label>
         <div class="col-xs-5">
-          <input type="tel" class="form-control frame-nradius" id="user_realname" name="user_realname" placeholder="真实姓名" />
+          <input type="tel" class="form-control frame-nradius" id="user_realname" name="user_realname" placeholder="真实姓名" value="<%=identity.user_realname%>"/>
         </div>
         <span id="identity-driver-realname-msg" class="col-xs-4 f12 crred control-label tl">
         </span>
@@ -17,7 +17,7 @@
       <div class="form-group m30">
         <label for="inputMobile" class="col-xs-3 control-label cr666 f14">驾证号码：</label>
         <div class="col-xs-5">
-          <input type="tel" class="form-control frame-nradius" id="identity_dl_no" name="identity_dl_no" placeholder="驾证号码" />
+          <input type="tel" class="form-control frame-nradius" id="identity_dl_no" name="identity_dl_no" placeholder="驾证号码" value="<%=identity.identity_dl_no%>" />
         </div>
         <span id="identity_dl_no-msg" class="col-xs-4 f12 crred control-label tl">
         </span>
@@ -26,9 +26,9 @@
         <label for="inputMobile" class="col-xs-3 control-label cr666 f14">驾照类型：</label>
         <div class="col-xs-5">
           <select class="form-control frame-nradius" name="identity_dl_type">
-            <option value="0" checked>A本</option>
-            <option value="1">B本</option>
-            <option value="2">C本</option>
+            <option value="0" <%=identity.identity_dl_type=='A'?'selected=selected':'' %>>A本</option>
+            <option value="1" <%=identity.identity_dl_type=='B'?'selected=selected':'' %>>B本</option>
+            <option value="2" <%=identity.identity_dl_type=='C'?'selected=selected':'' %>>C本</option>
           </select>
         </div>
       </div>
@@ -39,7 +39,7 @@
             <div class="input-prepend input-group col-xs-10">
               <span class="add-on input-group-addon border-radius-style"> <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
               </span>
-              <input type="text" id='identity_dl_issued' name='identity_dl_issued' class="form-control border-radius-style offer-date-input" placeholder="领驾照时间"/>
+              <input type="text" id='identity_dl_issued' name='identity_dl_issued' class="form-control border-radius-style offer-date-input" placeholder="领驾照时间" value="<%=identity.identity_dl_issued.substr(0,10) %>"/>
             </div>
           </div>
         </div>
@@ -86,7 +86,7 @@
 
       <div class="form-group mt20">
         <div class="col-xs-offset-3 col-xs-9">
-          <button type="button" id='identity-driver-btn' class="btn btn-primary p10 frame-nradius btn-sm">确认</button>
+          <button type="button" id='identity-driver-again-btn' class="btn btn-primary p10 frame-nradius btn-sm">确认</button>
           <button type="reset" class="btn btn-sm btn-default p10 frame-nradius ">重置</button>
         </div>
       </div>

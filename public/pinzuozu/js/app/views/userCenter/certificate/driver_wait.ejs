@@ -1,0 +1,26 @@
+<div class="page-list-bg p10 mt20 frame-border">
+
+  <div class="mt20 ml20">
+    <h4>公安部实名认证</h4>
+  </div>
+  <div class="user-cr module-success">
+    <div class="">
+      <div class="text-center f26 cr5c">
+        <span> 
+          正在审核中...
+        </span>
+      </div>
+
+      <p>姓名：<%= identity.user_realname %></p>
+      <p><%= identity.identity_dl_no %></p>
+      <p>驾驶类型：<%= identity.identity_dl_type %>本
+      </p>
+      <p>初领驾照时间：<%= identity.identity_dl_issued %> </p>
+      <p>
+        <img src="http://192.168.1.115:3000/<%=identity.identity_dl_image %>">
+      </p>
+      <p>提交申请时间：<%=identity.created_at %></p>
+      
+    </div>
+  </div>
+</div>

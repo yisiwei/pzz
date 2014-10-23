@@ -14,10 +14,10 @@
     <p>姓名：<%=identity.user_realname %></p>
     <p>性别：<%= identity.user_gender=='0'?'男':'女' %></p>
     <p>身份证号：<%=identity.identity_card_no %></p>
-    <p>提交申请时间：<%=identity.created_at %></p>
     <p>
       <img src="http://192.168.1.115:3000/<%=identity.identity_image %>">
     </p>
+    <p>提交申请时间：<%=identity.created_at %></p>
     <!--
     <div class="text-center mt10">
       <button type="button" class="btn btn-success frame-nradius">重新认证</button>
