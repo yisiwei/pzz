@@ -15,6 +15,29 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/style.js"></script>
+    <script type="text/javascript">
+           
+            $(document).ready(function() {
+                $("#route-detail").css('display','none');
+                $("#route-more").click(function() {
+                    $("#route-detail").slideToggle('slow',function(){
+                        if ($("#route-more").html()=="收起更多&nbsp;▲"){
+                            $("#route-more").html("展开更多&nbsp;▼")
+                        }else{
+                             $("#route-more").html("收起更多&nbsp;▲")
+                        }
+
+                       
+                    });
+
+                    
+                    
+                });
+               
+                        });
+          
+ 
+    </script>
 </head>
 <body>
     <div class="wrapper">
@@ -67,6 +90,8 @@
     </div>
 </div>
 <!-- top end -->
+
+
 <div class="container header_top">
     <div class="logo">
         <a href="index.html">
@@ -107,8 +132,9 @@
             <div id="banner" class="banner-bg wmw home-other-banner home-search-banner ">
                 <!-- 发布线路 -->
                 <div class="container ">
-                    <div id="search" class="home-search-bg">
-                        <form class="form-horizontal home-search-local"  role="form">
+                    <div id="search" class="home-search-bg ">
+                        <form class="form-horizontal home-search-local com-rposition"  role="form">
+                             <a id="route-more" style="bottom: 0px;position: absolute;right: 320px;" class="crfff" href="javascript:void(0)">展开更多<i class="fa fa-caret-down"></i></a>
                             <div class="p10 form-group ml20">
                             
                             </div>
@@ -138,14 +164,14 @@
                                 <div class="col-xs-6">
                                     <input class="form-control border-radius-style" id="dDestinationCityD"
                                     placeholder="详细地址">
-                                    <a class="crfff" href="">更多>></a>
+                                   
                                     <span onclick="mark('end')" class="cr3b r10 offer-position-icon fa fa-map-marker fa-lg form-control-feedback">
                                     </span>
                                     <div id="searchdDestinationCityD" class="offer-map-detail">
                                     </div>
                                 </div>
                             </div>
-                            <div style="display:none;">
+                            <div id="route-detail" >
                                <div class="form-group ">
                                 <label for="destinationCar" class="col-xs-2 control-label crfff">
                                     出发时间
@@ -163,6 +189,7 @@
                                 </div>
                             </div> 
                             </div>
+                          
                              
                             <div class="form-group">
                                 <div class="col-xs-offset-2 col-xs-10">
