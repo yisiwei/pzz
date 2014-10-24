@@ -1,0 +1,241 @@
+<div class="page-list-bg p10 mt20 frame-border">
+
+  <div class="mt20 ml20">
+    <h4>我的车辆</h4>
+  </div>
+  <div class="user-cr">
+    <form class="form-horizontal mt50 " role="form">
+      <input type="hidden" name="id" value="<%= car.id %>" />
+      <div class="form-group m30">
+        <label for="inputMobile" class="col-xs-3 control-label cr666 f14">车牌号码：</label>
+        <!--<div class="col-xs-2">
+          <select class="form-control frame-nradius">
+            <option value='京'>京</option>
+            <option value='冀'>冀</option>
+            <option value='苏'>苏</option>
+          </select>
+        </div>-->
+        <div class="col-xs-4">
+          <input type="tel" class="form-control frame-nradius" id="car_plate_no" name="car_plate_no" placeholder="车牌号" value="<%= car.car_plate_no %>"></div>
+        <span id="car_plate_no-msg" class="col-xs-3 f12 crred control-label tl"> 
+          
+        </span>
+      </div>
+      <div class="form-group form-group-sm ">
+        <label for="nickName" class="col-xs-3 cr666 f14 control-label">座位数：</label>
+        <div class="col-xs-2">
+          <select class="form-control" name="car_seats">
+            <option value='1' <%= car.car_seats=='1'?'selected':'' %> >1</option>
+            <option value='2' <%= car.car_seats=='2'?'selected':'' %> >2</option>
+            <option value='3' <%= car.car_seats=='3'?'selected':'' %> >3</option>
+            <option value='4' <%= car.car_seats=='4'?'selected':'' %> >4</option>
+          </select>
+        </div>
+        <div class="col-xs-2">
+          <span class="cr14">(含驾驶员)</span>
+        </div>
+      </div>
+      <div class="form-group m30">
+        <label for="inputMobile" class="col-xs-3 control-label cr666 f14">发动机编号：</label>
+        <div class="col-xs-6">
+          <input type="tel" class="form-control frame-nradius" id="car_engine_no" name="car_engine_no " placeholder="发动机编号" value="<%= car.car_engine_no %>"></div>
+        <span id="car_engine_no" class="col-xs-3 f12 crred control-label tl">
+          
+        </span>
+      </div>
+      <div class="form-group form-group-sm ">
+        <label for="nickName" class="col-xs-3 control-label cr666 f14">车种：</label>
+        <div class="col-xs-3">
+          <select class="form-control" name="car_type" id="car_type">
+            <option value="SUV" <%= car.car_type=='SUV'?'selected':'' %>>城市越野车</option>
+            <option value="SPORTS" <%= car.car_type=='SPORTS'?'selected':'' %>>跑车</option>
+            <option value="MPV" <%= car.car_type=='MPV'?'selected':'' %>>多功能用途车</option>
+            <option value="MINI" <%= car.car_type=='MINI'?'selected':'' %>>迷你轿车</option>
+            <option value="COMPACT" <%= car.car_type=='COMPACT'?'selected':'' %>>小型轿车</option>
+            <option value="FAMILY" <%= car.car_type=='FAMILY'?'selected':'' %>>中级轿车</option>
+            <option value="LUXURY" <%= car.car_type=='LUXURY'?'selected':'' %>>小型客车</option>
+            <option value="BUS" <%= car.car_type=='BUS'?'selected':'' %>>豪华轿车</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group form-group-sm ">
+        <label for="nickName" class="col-xs-3 control-label cr666 f14">车型：</label>
+        <div class="col-xs-3">
+          <select class="form-control" name="car_brand_name">
+            <option value="宝马">宝马</option>
+            <option value="奔驰">奔驰</option>
+            <option value="奥迪">奥迪</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group m30">
+        <label for="inputMobile" class="col-xs-3 control-label cr666 f14">保险公司名称：</label>
+        <div class="col-xs-6">
+          <input type="tel" class="form-control frame-nradius" id="insurance_corporate" name="insurance_corporate" placeholder="保险公司名称" value="<%= car.insurance_corporate %>"></div>
+        <span id="insurance_corporate-msg" class="col-xs-3 f12 crred control-label tl">
+          
+        </span>
+      </div>
+      <div class="form-group form-group-xs ">
+        <label for="nickName" class="col-xs-3 control-label f14 cr666">保险到期时间：</label>
+        <div class="control-group col-xs-3">
+          <div class="controls">
+            <div class="input-prepend input-group ">
+              <span class="add-on input-group-addon border-radius-style">
+                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+              </span>
+              <input type="text" id='insurance_expired' class="form-control border-radius-style offer-date-input" name="insurance_expired" value="<%= car.insurance_expired %>"/>
+            </div>
+          </div>
+        </div>
+        <span id="mobile-verify" class="col-xs-3 f12 crred control-label tl">
+          
+        </span>
+      </div>
+      <div class="form-group m30">
+        <label for="inputMobile" class="col-xs-3 control-label cr666 f14">保险单号：</label>
+        <div class="col-xs-6">
+          <input type="tel" class="form-control frame-nradius" id="insurance_no" name="insurance_no" placeholder="保险单号" value="<%= car.insurance_no %>"></div>
+        <span id="insurance_no-msg" class="col-xs-3 f12 crred control-label tl">
+        </span>
+      </div>
+
+      <div class="form-group form-group-sm ">
+        <label for="nickName" class="col-xs-3 control-label cr666 f14">保险单扫描件：</label>
+        <div class="col-xs-3">
+          <input type="file" id="insurance_image" name="insurance_image" onchange="loadCardImage(this.id,'insurance-image')" />
+          <img id="insurance-image" src="" style="display:none;" />
+        </div>
+        <span id="insurance_image-msg" class="col-xs-3 f12 crred control-label tl">
+        </span>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-offset-3">
+          <div class="col-xs-4">
+            <a class="com-rposition"  data-toggle="modal" data-target=".bs-example-modal-sm" >
+              <i  class="fa fa-search module-identif-i"></i>
+            </a>
+            <img class="module-identif-driversimg" src="images/driver1.jpg" />
+          </div>
+        </div>
+      </div>
+      <div class="modal fade bs-example-modal-sm " id="mymodal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+              </button>
+              <h4 class="modal-title">保险单样本</h4>
+            </div>
+            <div class="modal-body text-center">
+              <img class="module-identif-driverimg" src="images/driver1.jpg"></div>
+          </div>
+          <!-- /.modal-content --> </div>
+        <!-- /.modal-dialog --> </div>
+      <!-- /.modal -->
+      <div class="form-group form-group-sm ">
+        <label for="nickName" class="col-xs-3 control-label cr666 f14">行驶证照：</label>
+        <div class="col-xs-5">
+          <input type="file" id="identity_vl_image" name="identity_vl_image" onchange="loadCardImage(this.id,'vl_image')">
+          <img id="vl_image" src="" style="display:none;" />
+        </div>
+        <span id="identity_vl_image-msg" class="col-xs-4 f12 crred control-label tl">
+          
+        </span>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-offset-3">
+          <div class="col-xs-4">
+            <a class="com-rposition"  data-toggle="modal" data-target=".bs-example-modal-sm1" >
+              <i  class="fa fa-search module-identif-i"></i>
+            </a>
+            <img class="module-identif-driversimg" src="images/driver1.jpg" />
+          </div>
+        </div>
+      </div>
+      <div class="modal fade bs-example-modal-sm1 " id="mymodal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+              </button>
+              <h4 class="modal-title">行驶证样本</h4>
+            </div>
+            <div class="modal-body text-center">
+              <img class="module-identif-driverimg" src="images/driver2.jpg"></div>
+          </div>
+          <!-- /.modal-content --> </div>
+        <!-- /.modal-dialog --> </div>
+      <!-- /.modal -->
+      <div class="form-group form-group-sm ">
+        <label for="nickName" class="col-xs-3 control-label cr666 f14">车辆照片：</label>
+        <div class="col-xs-5">
+          <input type="file" id="car_image" name="car_image" onchange="loadCardImage(this.id,'car_img')"/>
+          <img id="car_img" src="" style="display:none;" />
+        </div>
+        <span id="car_image-msg" class="col-xs-4 f12 crred control-label tl">
+
+        </span>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-offset-3">
+          <div class="col-xs-4">
+            <a class="com-rposition"  data-toggle="modal" data-target=".bs-example-modal-sm-car" >
+              <i  class="fa fa-search module-identif-i"></i>
+            </a>
+            <img class="module-identif-driversimg" src="images/driver1.jpg" />
+          </div>
+
+        </div>
+      </div>
+      <div class="modal fade bs-example-modal-sm-car " id="mymodal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+              </button>
+              <h4 class="modal-title">车辆样本</h4>
+            </div>
+            <div class="modal-body text-center">
+              <img class="module-identif-driverimg" src="images/car.jpg"></div>
+          </div>
+          <!-- /.modal-content --> </div>
+        <!-- /.modal-dialog --> </div>
+      <!-- /.modal -->
+      <div class="form-group mt20">
+        <div class="col-xs-offset-3 col-xs-9">
+          <button type="button" id='identity-car-again-btn' class="btn btn-primary p10 frame-nradius btn-sm">确认</button>
+          <button type="reset" class="btn btn-sm btn-default p10 frame-nradius ">重置</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src='js/rome.js'></script>
+<script>
+  var moment = rome.moment;
+  rome(insurance_expired, { time: false });
+
+  function loadCardImage(sourceId,imgId){
+    if (typeof FileReader === 'undefined') {  
+      alert('Your browser does not support FileReader...');  
+      return;  
+    }  
+    var reader = new FileReader();  
+    reader.onload = function(e) {   
+      $("#"+imgId).attr("src", this.result);
+    }  
+    reader.readAsDataURL(document.getElementById(sourceId).files[0]); 
+  }
+
+  //$("#car_type").val("<%= car.car_type %>"); 
+  $("#car_brand_name").val("<%= car.car_brand_name %>");
+  //alert(<%= car.car_type %>);
+</script>

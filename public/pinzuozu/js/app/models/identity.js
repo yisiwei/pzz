@@ -108,12 +108,13 @@
 		},
 		//车辆认证
 		identity_car:function(params,success,error){
-			console.log("userid:"+params.userid);
+			console.log("userid:"+params.pzz_user_id);
 			return $.ajax({
-				url: 'http://192.168.1.115:3000/pzz_users/'+params.userid
+				url: 'http://192.168.1.115:3000/pzz_users/'+params.pzz_user_id
 					+'/pzz_cars.json',
 				type: 'POST',
 				dataType: 'json',
+				contentType:'application/x-www-form-urlencoded',
 				data:{
 					auth_token:params.auth_token,
 					login:params.login,
@@ -136,14 +137,44 @@
 				error:error
 			});
 		},
-		//查询
-		find_identity_driver2:function(params,success,error){
+		//查询车辆认证信息
+		find_identity_car:function(params,success,error){
 			console.log("userid:"+params.pzz_user_id);
 			return $.ajax({
 				url: 'http://192.168.1.115:3000/pzz_users/'+params.pzz_user_id
-					+'/pzz_driver_identities.json?auth_token='+params.auth_token+'&login='+params.login,
+					+'/pzz_cars.json?auth_token='+params.auth_token+'&login='+params.login,
 				type: 'GET',
 				dataType: 'json',
+				success:success,
+				error:error
+			});
+		},
+		//重新提交车辆认证
+		update_identity_car:function(params,success,error){
+			console.log("identity_id:"+params.id);
+			return $.ajax({
+				url: 'http://192.168.1.115:3000/pzz_users/'+params.pzz_user_id
+					+'/pzz_cars/'+params.id+'.json',
+				type: 'PUT',
+				dataType: 'json',
+				data:{
+					auth_token:params.auth_token,
+					login:params.login,
+					car_type:params.car_type,
+					car_brand_name:params.car_brand_name,
+					car_seats:params.car_seats,
+					car_plate_no:params.car_plate_no,
+					car_vin:params.car_vin,
+					car_engine_no:params.car_engine_no,
+					identity_vl_no:params.identity_vl_no,
+					identity_vl_image:params.identity_vl_image,
+					identity_vl_issued:params.identity_vl_issued,
+					insurance_corporate:params.insurance_corporate,
+					insurance_no:params.insurance_no,
+					insurance_expired:params.insurance_expired,
+					insurance_image:params.insurance_image,
+					car_image:params.car_image
+				},
 				success:success,
 				error:error
 			});

@@ -11,20 +11,21 @@
                 </span>
             </div>
 
-            <p>车牌号码：<%= identity.car_plate_no %></p>
-            <p>座位数：<%= identity.car_seats %></p>
-            <p>发动机编号：<%= identity.car_engine_no %></p>
-            <p>车种：<%= identity.car_type %> </p>
-            <p>保险公司名称：<%= identity.insurance_corporate %>  </p>
-            <p>保险到期时间：<%= identity.insurance_expired %> </p>
-            <p>保险单号：<%= identity.insurance_no %> </p>
+            <p>车牌号码：<%= car.car_plate_no %></p>
+            <p>座位数：<%= car.car_seats %></p>
+            <p>发动机编号：<%= car.car_engine_no %></p>
+            <p>车种：<%= car.car_type_CN %> </p>
+            <p>车型：<%= car.car_brand_name %> </p>
+            <p>保险公司名称：<%= car.insurance_corporate %>  </p>
+            <p>保险到期时间：<%= car.insurance_expired %> </p>
+            <p>保险单号：<%= car.insurance_no %> </p>
             <p>保险单扫描件：</p> 
-            <p><img src="http://192.168.1.115:3000/<%= identity.insurance_image %>"></p>
-            <p>行驶证照：</p> 
-            <p><img src="http://192.168.1.115:3000/<%= identity.identity_vl_image %>"></p>
+            <p><img src="http://192.168.1.115:3000/<%= car.insurance_image %>"></p>
+            <!--<p>行驶证照：</p> 
+            <p><img src="http://192.168.1.115:3000/<%= car.identity_vl_image %>"></p>-->
             <p>车辆照片：</p> 
-            <p><img src="http://192.168.1.115:3000/<%= identity.car_image %>"></p>
-            <p>提交时间：<%= identity.updated_at %></p>
+            <p><img src="http://192.168.1.115:3000/<%= car.car_image %>"></p>
+            <p>提交时间：<%= car.updated_at %></p>
         </div>
     </div>
 </div>

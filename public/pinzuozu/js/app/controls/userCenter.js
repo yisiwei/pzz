@@ -357,22 +357,18 @@
 				pzz_user_id:userid
 			},function(identity){
 				console.log(identity);
-				if(identity != null){
-					if(identity.identity_status == "pending"){//审核中
-						$("#user-content").html(can.view(
-							"js/app/views/userCenter/certificate/driver_wait.ejs",{identity:identity}
-						));
-					}else if(identity.identity_status == "failed"){
-						$("#user-content").html(can.view(
-							"js/app/views/userCenter/certificate/driver_fail.ejs",{identity:identity}
-						));
-					}else{
-						$("#user-content").html(can.view(
-							"js/app/views/userCenter/certificate/driver_success.ejs",{identity:identity}
-						));
-					}
+				if(identity.identity_status == "pending"){//审核中
+					$("#user-content").html(can.view(
+						"js/app/views/userCenter/certificate/driver_wait.ejs",{identity:identity}
+					));
+				}else if(identity.identity_status == "failed"){
+					$("#user-content").html(can.view(
+						"js/app/views/userCenter/certificate/driver_fail.ejs",{identity:identity}
+					));
 				}else{
-					
+					$("#user-content").html(can.view(
+						"js/app/views/userCenter/certificate/driver_success.ejs",{identity:identity}
+					));
 				}
 			},function(error){
 				//console.log(status);
@@ -513,11 +509,41 @@
 			});
 		},
 		'#certificate-car click':function(el){//车辆认证
+			var userid = this.options.secret.attr("userid");
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
+			userid = parseInt(userid);
+
 			$("#accordion li").removeClass('menu-current');
 			el.parent().addClass('menu-current');
-			$("#user-content").html(can.view(
-				"js/app/views/userCenter/certificate/car.ejs"
-			));
+
+			Identity.find_identity_car({
+				auth_token:token,
+				login:login,
+				pzz_user_id:userid
+			},function(car){
+				console.log(car);
+				if(car.identity_status == "pending"){//审核中
+					$("#user-content").html(can.view(
+						"js/app/views/userCenter/certificate/car_wait.ejs",{car:car}
+					));
+				}else if(car.identity_status == "failed"){
+					$("#user-content").html(can.view(
+						"js/app/views/userCenter/certificate/car_fail.ejs",{car:car}
+					));
+				}else{
+					$("#user-content").html(can.view(
+						"js/app/views/userCenter/certificate/car_success.ejs",{car:car}
+					));
+				}
+			},function(error){
+				//console.log(status);
+				console.log(error.status);
+				$("#user-content").html(can.view(
+					"js/app/views/userCenter/certificate/car.ejs"
+				));
+			});
+			
 		},
 		'#identity-car-btn click':function(el,event){//车辆认证提交
 			var userid = this.options.secret.attr("userid");
@@ -537,15 +563,33 @@
 				return;	
 			}
 			
-			if($("#identity_dl_issued").val() == null || $("#identity_dl_issued").val() == ""){
-				$("#identity_dl_issued-msg").addClass('crred fa fa-times-circle');
-				$("#identity_dl_issued-msg").text("请填写驾证颁发时间");
+			if($("#insurance_corporate").val() == null || $("#insurance_corporate").val() == ""){
+				$("#insurance_corporate-msg").addClass('crred fa fa-times-circle');
+				$("#insurance_corporate-msg").text("请填写保险公司名称");
 				return;	
 			}
 
-			if($("#identity_dl_image").val() == null || $("#identity_dl_image").val() == ""){
-				$("#identity_dl_image-msg").addClass('crred fa fa-times-circle');
-				$("#identity_dl_image-msg").text("请上传驾证扫描件");
+			if($("#insurance_no").val() == null || $("#insurance_no").val() == ""){
+				$("#insurance_no-msg").addClass('crred fa fa-times-circle');
+				$("#insurance_no-msg").text("请填写保险单号");
+				return;	
+			}
+
+			if($("#insurance_image").val() == null || $("#insurance_image").val() == ""){
+				$("#insurance_image-msg").addClass('crred fa fa-times-circle');
+				$("#insurance_image-msg").text("请填上传保险单扫描件");
+				return;	
+			}
+
+			if($("#identity_vl_image").val() == null || $("#identity_vl_image").val() == ""){
+				$("#identity_vl_image-msg").addClass('crred fa fa-times-circle');
+				$("#identity_vl_image-msg").text("请上传行驶证扫描件");
+				return;	
+			}
+			
+			if($("#car_image").val() == null || $("#car_image").val() == ""){
+				$("#car_image-msg").addClass('crred fa fa-times-circle');
+				$("#car_image-msg").text("请上传车辆照片");
 				return;	
 			}
 
@@ -554,25 +598,174 @@
 			values = can.deparam(form.serialize());
 			identity.attr(values);
 
-			var identity_dl_image = $("#driver-image").attr("src");
+			var insurance_image = $("#insurance-image").attr("src");
+			var identity_vl_image = $("#vl_image").attr("src");
+			var car_image = $("#car-image").attr("src");
+			//console.log("-----------"+car_image);
+			console.log("-----------"+identity.id);
+			if(identity.id != "" && identity.id != null){//重新（修改）申请
+				Identity.update_identity_car({
+					auth_token:token,
+					login:login,
+					pzz_user_id:userid,
+					id:identity.id,
+					car_type:identity.car_type,
+					car_brand_name:identity.car_brand_name,
+					car_seats:identity.car_seats,
+					car_plate_no:identity.car_plate_no,
+					car_vin:identity.car_vin,
+					car_engine_no:identity.car_engine_no,
+					identity_vl_no:identity.identity_vl_no,
+					identity_vl_image:identity_vl_image,
+					identity_vl_issued:identity.identity_vl_issued,
+					insurance_corporate:identity.insurance_corporate,
+					insurance_no:identity.insurance_no,
+					insurance_expired:identity.insurance_expired,
+					insurance_image:insurance_image,
+					car_image:car_image
+				},function(car){
+					console.log(car);
+					$("#user-content").html(can.view(
+						"js/app/views/userCenter/certificate/car_wait.ejs",{car:car}
+					));
+				},function(error){
+					console.log(error);
+				});
+			}else{//提交申请
+				Identity.identity_car({
+					auth_token:token,
+					login:login,
+					pzz_user_id:userid,
+					car_type:identity.car_type,
+					car_brand_name:identity.car_brand_name,
+					car_seats:identity.car_seats,
+					car_plate_no:identity.car_plate_no,
+					car_vin:identity.car_vin,
+					car_engine_no:identity.car_engine_no,
+					identity_vl_no:identity.identity_vl_no,
+					identity_vl_image:identity_vl_image,
+					identity_vl_issued:identity.identity_vl_issued,
+					insurance_corporate:identity.insurance_corporate,
+					insurance_no:identity.insurance_no,
+					insurance_expired:identity.insurance_expired,
+					insurance_image:insurance_image,
+					car_image:car_image
+				},function(car){
+					console.log(car);
+					$("#user-content").html(can.view(
+						"js/app/views/userCenter/certificate/car_wait.ejs",{car:car}
+					));
+				},function(error){
+					console.log(error);
+				});
+			}
+			
+		},
+		'#identity-car-again click':function(el,event){
+			var userid = this.options.secret.attr("userid");
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
+			userid = parseInt(userid);
 
-			Identity.identity_driver({
+			Identity.find_identity_car({
+				auth_token:token,
+				login:login,
+				pzz_user_id:userid
+			},function(car){
+				$("#user-content").html(can.view(
+					"js/app/views/userCenter/certificate/car_again.ejs",{car:car}
+				));
+			},function(error){
+
+			});
+		},
+		'#identity-car-again-btn click':function(el,event){//车辆认证提交
+			var userid = this.options.secret.attr("userid");
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
+			userid = parseInt(userid);
+
+			if($("#car_plate_no").val() == null || $("#car_plate_no").val() == ""){
+				$("#car_plate_no-msg").addClass('crred fa fa-times-circle');
+				$("#car_plate_no-msg").text("请填写车牌号");
+				return;	
+			}
+			
+			if($("#car_engine_no").val() == null || $("#car_engine_no").val() == ""){
+				$("#car_engine_no-msg").addClass('crred fa fa-times-circle');
+				$("#car_engine_no-msg").text("请填写发动机编号");
+				return;	
+			}
+			
+			if($("#insurance_corporate").val() == null || $("#insurance_corporate").val() == ""){
+				$("#insurance_corporate-msg").addClass('crred fa fa-times-circle');
+				$("#insurance_corporate-msg").text("请填写保险公司名称");
+				return;	
+			}
+
+			if($("#insurance_no").val() == null || $("#insurance_no").val() == ""){
+				$("#insurance_no-msg").addClass('crred fa fa-times-circle');
+				$("#insurance_no-msg").text("请填写保险单号");
+				return;	
+			}
+
+			if($("#insurance_image").val() == null || $("#insurance_image").val() == ""){
+				$("#insurance_image-msg").addClass('crred fa fa-times-circle');
+				$("#insurance_image-msg").text("请填上传保险单扫描件");
+				return;	
+			}
+
+			if($("#identity_vl_image").val() == null || $("#identity_vl_image").val() == ""){
+				$("#identity_vl_image-msg").addClass('crred fa fa-times-circle');
+				$("#identity_vl_image-msg").text("请上传行驶证扫描件");
+				return;	
+			}
+			
+			if($("#car_image").val() == null || $("#car_image").val() == ""){
+				$("#car_image-msg").addClass('crred fa fa-times-circle');
+				$("#car_image-msg").text("请上传车辆照片");
+				return;	
+			}
+
+			var identity = new Identity();
+			var form = this.element.find("form");
+			values = can.deparam(form.serialize());
+			identity.attr(values);
+
+			var insurance_image = $("#insurance-image").attr("src");
+			var identity_vl_image = $("#vl_image").attr("src");
+			var car_image = $("#car-image").attr("src");
+			//console.log("-----------"+car_image);
+			console.log("-----------"+identity.id);
+			Identity.update_identity_car({
 				auth_token:token,
 				login:login,
 				pzz_user_id:userid,
-				identity_realname:identity.user_realname,
-				identity_dl_no:identity.identity_dl_no,
-				identity_dl_image:identity_dl_image,
-				identity_dl_type:identity.identity_dl_type,
-				identity_dl_issued:identity.identity_dl_issued
-			},function(identity){
-				console.log(identity);
+				id:identity.id,
+				car_type:identity.car_type,
+				car_brand_name:identity.car_brand_name,
+				car_seats:identity.car_seats,
+				car_plate_no:identity.car_plate_no,
+				car_vin:identity.car_vin,
+				car_engine_no:identity.car_engine_no,
+				identity_vl_no:identity.identity_vl_no,
+				identity_vl_image:identity_vl_image,
+				identity_vl_issued:identity.identity_vl_issued,
+				insurance_corporate:identity.insurance_corporate,
+				insurance_no:identity.insurance_no,
+				insurance_expired:identity.insurance_expired,
+				insurance_image:insurance_image,
+				car_image:car_image
+			},function(car){
+				console.log(car);
 				$("#user-content").html(can.view(
-					"js/app/views/userCenter/certificate/driver_wait.ejs",{identity:identity}
+					"js/app/views/userCenter/certificate/car_wait.ejs",{car:car}
 				));
 			},function(error){
 				console.log(error);
 			});
+			
+			
 		},
 		//我的拼座
 		'#myroute-driver click':function(el){//我是司机
