@@ -30,16 +30,33 @@
         <!-- date end -->
          <script>
             var numplace=1;
+            var numplaceid=1;
             $(document).ready(function(){
                  $('#addplace').click(function(){
-                    if(numplace++ <= 4){
-                          $('#addsite').append(" <div class='form-group'><div class='col-xs-6 col-xs-offset-2'><input class='form-control  border-radius-style' id='destinationCar' placeholder='城市/小区/写字楼/地标建筑/道路'/></div></div>");
+                    if(numplace <= 4){
+                        var strDestinationCar = "destinationCar"+numplaceid;
+                        var strDeleteplace = "deleteplace"+numplaceid;
+                          $('#addsite').append(" <div id='"+strDestinationCar+"' class='form-group  has-feedback addplace-span'><div class='col-xs-6 col-xs-offset-2'><input value='11'  class='form-control  border-radius-style' id='destinationCar"+numplaceid+"' placeholder='城市/小区/写字楼/地标建筑/道路'/><span class='glyphicon glyphicon-remove form-control-feedback cr999 spancolor ' id='"+strDeleteplace+"' ></span></div></div>");
+                                numplace++;numplaceid++;
+                               $("#"+strDeleteplace).click(function(){
+                                numplace--;
+                                $("#"+strDestinationCar).remove();
+                                alert(numplace);
+                            });
                         }
                     else{
                         alert("最多添加5个地点");
                     }
                   
-});
+                });
+                $('#getvalue').click(function(){
+                   var str=""
+                    $("#addsite input").each(function(index, element) {
+                        str += $(this).val()+","
+                    });
+                    str = str.substr(0,str.length-1);//除去最后一个“，”
+                    alert(str);
+                });
             });
         </script>
         <script>
@@ -285,7 +302,7 @@
                                     途径哪里：
                                 </label>
                                 <div class="col-xs-6">
-                                    <input class="form-control border-radius-style" id="destinationCar" placeholder="城市/小区/写字楼/地标建筑/道路">
+                                    <input class="form-control border-radius-style" id="destinationCar12" placeholder="城市/小区/写字楼/地标建筑/道路">
                                 </div>
                                 <button type="button" id="addplace" class="col-xs-2 cr5b module-driver-route-btn control-label tl"><i class="fa pr5 fa-lg fa-plus"></i>添加途径地点</button>
                                 <span id="dpassplace" class="col-xs-4 f12 crred control-label ">
@@ -480,7 +497,7 @@
                             </div>
                             <!-- descrip end -->
                             <div class="text-center m30">
-                                <button type="button" class="btn btn-primary border-radius-style">
+                                <button type="button" id="getvalue" class="btn btn-primary border-radius-style">
                                     立即发布
                                 </button>
                                 <button type="button" class="btn border-radius-style offer-back-btn">
