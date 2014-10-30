@@ -23,7 +23,7 @@
 			));
 
 			$("#header-top").html(can.view(
-				"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:nickname}
+				"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:nickname,token:token,login:login}
 			));
 			$("#header-bottom").html(can.view(
 				"js/app/views/head/headBottom.ejs"
@@ -48,11 +48,13 @@
             });
             $("#select-passenger b").css("color","#fff");
 
-            if(login == "" || login == null){
-            	can.route.attr("route","login");
-            }else{
-            	can.route.attr('route','route_passenger');	
-            }
+            // if(login == "" || login == null){
+            // 	can.route.attr("route","login");
+            // }else{
+            // 	can.route.attr('route','route_passenger');	
+            // }
+
+            can.route.attr('route','route_passenger');
         },
         '#select-driver click':function(el,event) {//我是司机
         	var login = this.options.secret.attr("login");
@@ -60,12 +62,15 @@
                 backgroundColor: '#6DC5DD',
                 color: '#fff'
             });
-            $("#select-driver b").css("color","#fff");
-            if(login == "" || login == null){
-            	can.route.attr("route","login");
-            }else{
-            	can.route.attr('route','route_driver');
-            }
+            
+            // $("#select-driver b").css("color","#fff");
+            // if(login == "" || login == null){
+            // 	can.route.attr("route","login");
+            // }else{
+            // 	can.route.attr('route','route_driver');
+            // }
+
+            can.route.attr('route','route_driver');
         }
 	});
 

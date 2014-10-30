@@ -1,31 +1,157 @@
 <div class="page-list-bg p10 mt20 frame-border">
 
-    <div class="mt20 ml20">
-        <h4>公安部实名认证</h4>
-    </div>
-    <div class="user-cr module-success">
-        <div class="">
-            <div class="text-center f26 cr5c">
-                <span>
-                    正在审核中
-                </span>
-            </div>
+  <div class="mt20 ml20 cr5b">
+    <h3><i class="fa fa fa-exclamation-circle"></i>正在审核中...</h3>
+  </div>
 
-            <p>车牌号码：<%= car.car_plate_no %></p>
-            <p>座位数：<%= car.car_seats %></p>
-            <p>发动机编号：<%= car.car_engine_no %></p>
-            <p>车种：<%= car.car_type_CN %> </p>
-            <p>车型：<%= car.car_brand_name %> </p>
-            <p>保险公司名称：<%= car.insurance_corporate %>  </p>
-            <p>保险到期时间：<%= car.insurance_expired %> </p>
-            <p>保险单号：<%= car.insurance_no %> </p>
-            <p>保险单扫描件：</p> 
-            <p><img src="http://192.168.1.115:3000/<%= car.insurance_image %>"></p>
-            <!--<p>行驶证照：</p> 
-            <p><img src="http://192.168.1.115:3000/<%= car.identity_vl_image %>"></p>-->
-            <p>车辆照片：</p> 
-            <p><img src="http://192.168.1.115:3000/<%= car.car_image %>"></p>
-            <p>提交时间：<%= car.updated_at %></p>
+  <div class="user-cr mt10">
+    <form class="form-horizontal  mt30" role="form">
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          车牌号码：
+        </label>
+        <div class="col-xs-3">
+          <p class="form-control-static">
+            <%= car.car_plate_no %>
+          </p>
         </div>
-    </div>
+      </div>
+
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          座位数：
+        </label>
+        <div class="col-xs-3">
+          <p class="form-control-static">
+            <%= car.car_seats %>
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          发动机编号：
+        </label>
+        <div class="col-xs-3">
+          <p class="form-control-static">
+            <%= car.car_engine_no %>
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          车种：
+        </label>
+        <div class="col-xs-3">
+          <p class="form-control-static">
+            <%= car.car_type_CN %>
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          车型：
+        </label>
+        <div class="col-xs-3">
+          <p class="form-control-static">
+            <%= car.car_brand_name %> 
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          保险公司名称：
+        </label>
+        <div class="col-xs-3">
+          <p class="form-control-static">
+            <%= car.insurance_corporate %>
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          保险到期时间：
+        </label>
+        <div class="col-xs-3">
+          <p class="form-control-static">
+            <%= car.insurance_expired %>
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          保险单号：
+        </label>
+        <div class="col-xs-3">
+          <p class="form-control-static">
+            <%= car.insurance_no %>
+          </p>
+        </div>
+      </div>
+      
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          保险单扫描件：
+        </label>
+        <div class="col-xs-3 module-success-cardimg">
+          <img src="http://192.168.1.115:3000/<%= car.insurance_image %>" />
+        </div> 
+      </div>
+      <!--
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          行驶证照：
+        </label>
+        <div class="col-xs-3 module-success-cardimg">
+          <img src="http://192.168.1.115:3000/<%= car.identity_vl_image %>" />
+        </div> 
+      </div>
+      -->
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          车辆照片：
+        </label>
+        <div class="col-xs-3 module-success-cardimg">
+          <img src="http://192.168.1.115:3000/<%= car.car_image %>" />
+        </div> 
+      </div>
+      
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          提交申请时间：
+        </label>
+        <div class="col-xs-3 ">
+          <p class="form-control-static">
+            <%=identity.created_at %>
+          </p>
+        </div>
+        
+      </div>
+
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          未通过原因：
+        </label>
+        <div class="col-xs-3 ">
+          <p class="form-control-static">
+            <%=identity.identity_remark==null?"无":identity.identity_remark %>
+          </p>
+        </div>
+      </div>
+      
+      <div class="form-group module-success-form">
+        <div class="col-xs-offset-3 col-xs-6">
+          <button type="button" id="identity-car-again" class="btn btn-primary frame-nradius">
+            重新认证
+          </button>
+        </div>
+      </div>
+      
+    </form>
+  </div>
 </div>

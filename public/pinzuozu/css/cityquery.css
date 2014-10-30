@@ -144,7 +144,8 @@ body{
 .pop_city{
 	position: absolute;
 	z-index: 9;
-	width: 360px;	
+	width: 360px;
+	padding-bottom: 10px;	
 	font-size: 12px;
 	border: 1px solid #B2DFFF;
 	background-color: #FFFFFF;	
@@ -195,7 +196,7 @@ body{
 	font-weight:bold;
 }
 .pop_city .pop_city_container{
-	padding:4px;margin-bottom:20px;	
+	padding: 0px 20px;margin-bottom:20px;	
 }
 .pop_city .pop_city_container ul{
 	

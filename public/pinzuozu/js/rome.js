@@ -1213,7 +1213,7 @@ module.exports = objectTypes;
             }
         },
 
-        _months : "January_February_March_April_May_June_July_August_September_October_November_December".split("_"),
+        _months : "1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月".split("_"),
         months : function (m) {
             return this._months[m.month()];
         },
@@ -1254,7 +1254,7 @@ module.exports = objectTypes;
             return this._weekdaysShort[m.day()];
         },
 
-        _weekdaysMin : "Su_Mo_Tu_We_Th_Fr_Sa".split("_"),
+        _weekdaysMin : "日_一_二_三_四_五_六".split("_"),
         weekdaysMin : function (m) {
             return this._weekdaysMin[m.day()];
         },

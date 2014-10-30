@@ -23,7 +23,7 @@
 			));
 
 			$("#header-top").html(can.view(
-				"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:nickname}
+				"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:nickname,token:token,login:login}
 			));
 			$("#header-bottom").html(can.view(
 				"js/app/views/head/headBottom.ejs"
@@ -42,6 +42,12 @@
 			var login = this.options.secret.attr("login");
 
         	$("input[name='line_depart_datetime']").val($("#d").val()+" "+$("#t").val()+":00");
+			
+        	if($("#isBack").prop("checked")==true){
+				$("input[name='line_return_datetime']").val($("#db").val()+" "+$("#tb").val()+":00");
+			}else{
+				$("input[name='line_return_datetime']").val("0000-01-01 00:00:00");
+			}
 			
 			var form = this.element.find("form");
 			var values = can.deparam(form.serialize());
@@ -64,17 +70,22 @@
 				return;
 			}
 			if($("#isBack").prop("checked")==true){//返程
-				//$("input[name='line_return_datetime']").val($("#db").val()+" "+$("#tb").val()+":00");
 				if($.trim($("#db").val()).length<=0 || $.trim($("#tb").val()).length<=0){
 					$("#backtime-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
 					$("#backtime-msg").text("请输入返程时间");		
 					return;
 				}
-			}else{
-				//$("input[name='line_return_datetime']").val("0000-01-01 00:00:00");
 			}
+
+			var linePlace="";
+			$("input[name='placeValue']").each(function(){
+				linePlace = linePlace + $(this).val()+",";
+			});
+
 			var line = new Line();
 			line.attr(values);
+
+			line.attr("line_price",linePlace);
 			line.attr("pzz_user_id",userid);
 			line.attr("auth_token",token);
 			line.attr("login",login);
@@ -189,6 +200,14 @@
 		"#btn-back click":function(){//返回
 			window.location.href="#!route";
 		}
+		// '#getValue click':function(el,event){
+		// 	var linePlace="";
+		// 	$("input[name='placeValue']").each(function(){
+		// 		linePlace = linePlace + $(this).val()+",";
+
+		// 	});
+		// 	//alert(linePlace.substr(0,linePlace.length-1));
+		// }
 	});
 
 	can.extend(namespace,{

@@ -34,7 +34,7 @@
 			$("#menu-home").parent().addClass('current');
 
 			$('.carousel').carousel({
-            	interval: 2000
+            	interval: 3000
             });
 
 			Line.findAll({user_type:1,line_type:0,page:'1',per_page:'5'},function(results){
@@ -115,6 +115,9 @@
 			));
 		},
 		"#search-btn click":function(){
+			can.route.attr("route","search");
+		},
+		"#detail-search-btn click":function(){
 			can.route.attr("route","search");
 		}
 	});

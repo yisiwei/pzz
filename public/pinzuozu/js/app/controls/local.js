@@ -7,7 +7,7 @@
 				this.showLocal();
 			}
 		},
-		showLocal:function(){
+		showLocal:function(opt){
 			var isLogin = false;
 
 			var userid = this.options.secret.attr("userid");
@@ -23,20 +23,37 @@
 				"js/app/views/local/local.ejs"
 			));
 			$("#header-top").html(can.view(
-				"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:nickname}
+				"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:nickname,token:token,login:login}
 			));
 			$("#header-bottom").html(can.view(
 				"js/app/views/head/headBottom.ejs"
 			));
+
 			$("#banner").html(can.view(
-				"js/app/views/head/banner.ejs"
+				"js/app/views/head/banner_local.ejs"
 			));
+
+			var currentCity;
+			if(opt != "" && opt != null){
+				//alert(opt);
+				currentCity = opt;
+				$("#currentCity").text(currentCity);
+			}else{
+				
+				function myFun(result){
+				  currentCity = result.name;
+				  $("#currentCity").text(currentCity);
+				}
+				var myCity = new BMap.LocalCity();
+				myCity.get(myFun);
+			}
+			
 			$("#footer").html(can.view(
 				"js/app/views/footer/footer.ejs"
 			));
 			$("#menu-local").parent().addClass('current');
 
-			//var el = this;
+			//TODO 添加城市条件
 			Line.findAll({user_type:1,line_type:0},function(lines){
 				//var lines = results.filter("上下班拼车");
 				console.log(lines);
@@ -65,22 +82,38 @@
 		},
 		'local route':function(){
 			this.showLocal();
+		},
+		'#slectcity click':function(el,event){//切换城市
+			$("#main").html(can.view(
+				"js/app/views/head/city.ejs"
+			));
+		},
+		'.city click':function(el,event){//选择城市后跳回来
+			console.log("选择城市："+el.attr("title"));
+			//can.route.attr({"route":"local","city":el.attr("title")});
+			this.showLocal(el.attr("title"));
+		},
+		"#search-btn click":function(){//搜索
+			can.route.attr("route","search");
+		},
+		"#detail-search-btn click":function(){//去搜索
+			can.route.attr("route","search");
 		}
 	});
 
-	NextPrev = can.Control({
-		init:function(){
-			this.element.html(can.view('nextPrevStache',this.options));
-		},
-		".next click" : function(){
-	    	var paginate = this.options.paginate;
-	    	paginate.next();
-	  	},
-	  	".prev click" : function(){
-	    	var paginate = this.options.paginate;
-	    	paginate.prev();
-	  	}
-	});
+	// NextPrev = can.Control({
+	// 	init:function(){
+	// 		this.element.html(can.view('nextPrevStache',this.options));
+	// 	},
+	// 	".next click" : function(){
+	//     	var paginate = this.options.paginate;
+	//     	paginate.next();
+	//   	},
+	//   	".prev click" : function(){
+	//     	var paginate = this.options.paginate;
+	//     	paginate.prev();
+	//   	}
+	// });
 
 	can.extend(namespace,{
 		Local:Local

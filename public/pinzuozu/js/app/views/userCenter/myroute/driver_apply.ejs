@@ -1,4 +1,4 @@
-<table class="table table-striped">
+<table class="table module-user-myroute-table">
   <thead>
     <tr>
       <th>出发日期</th>
@@ -13,9 +13,10 @@
     <tr>
       <td><%= orders[i].line_depart_datetime.substr(0,10) %></td>
       <td>
-        <a href="#!driver_detail&id=<%=orders[i].pzz_line_id%>" onFocus="this.blur()">
-        <%= orders[i].line_depart_city %>：<%= orders[i].line_depart_address %>
-          -><%= orders[i].line_dest_city %>：<%= orders[i].line_dest_address %>
+        <a href="#!driver_detail&id=<%=orders[i].pzz_line_id%>" onFocus="this.blur()" title="<%= orders[i].line_depart_city %>：<%= orders[i].line_depart_address %>
+          -><%= orders[i].line_dest_city %>：<%= orders[i].line_dest_address %>">
+
+        <%= orders[i].line_depart_address %>-><%= orders[i].line_dest_address %>
         </a>
       </td>
       <td><%= orders[i].passenger_nickname %></td>

@@ -1,0 +1,155 @@
+<div class="container ">
+  <div id="search" class="home-search-bg ">
+    <form class="form-horizontal home-search-local com-rposition"  role="form">
+      <a id="route-more" style="bottom: 0px;position: absolute;right: 320px;" class="crfff" href="javascript:void(0)">
+        展开更多 <i class="fa fa-caret-down"></i>
+      </a>
+      <div class="p10 form-group ml20"></div>
+      <div class="form-group ">
+        <label for="originCar" class="col-xs-2 control-label crfff">上车地点</label>
+        <div class="col-xs-4 startcity">
+          <input class="form-control border-radius-style" id="startcity" />
+        </div>
+        <div class="col-xs-6">
+          <input class="form-control border-radius-style" id="startPlace" placeholder="详细地址" />
+          <span class="r10 cr3b offer-position-icon fa fa-map-marker fa-lg form-control-feedback"></span>
+          <div id="searchStartPlace" class="offer-map-detail"></div>
+        </div>
+      </div>
+      <div class="form-group ">
+        <label for="destinationCar" class="col-xs-2 control-label crfff">下车地点</label>
+        <div class="col-xs-4 endcity">
+          <input class="form-control border-radius-style" id="endcity"></div>
+        <div class="col-xs-6">
+          <input class="form-control border-radius-style" id="endPlace" placeholder="详细地址" />
+
+          <span class="cr3b r10 offer-position-icon fa fa-map-marker fa-lg form-control-feedback"></span>
+          <div id="searchEndPlace" class="offer-map-detail"></div>
+        </div>
+      </div>
+      <div id="route-detail" style="display:none;">
+        <div class="form-group ">
+          <label for="destinationCar" class="col-xs-2 control-label crfff">出发时间</label>
+          <div class="col-xs-3">
+            <input class="form-control border-radius-style" id="starttime" placeholder="出发时间">
+          </div>
+        </div>
+        <div class="form-group ">
+          <label for="destinationCar" class="col-xs-2 control-label crfff">座位数</label>
+          <div class="col-xs-3">
+            <input class="form-control border-radius-style" id="seats" placeholder="座位数">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-10">
+          <button type="search" class="btn btn-info text-btn border-radius-style">立即搜索</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  $(function(){
+    $("#route-more").click(function() {
+      $("#route-detail").slideToggle('slow',function(){
+        if ($("#route-more").html()=="收起更多&nbsp;▲"){
+          $("#route-more").html("展开更多&nbsp;▼")
+        }else{
+          $("#route-more").html("收起更多&nbsp;▲")
+        }  
+      });   
+    });
+
+  });
+</script>
+
+<script type="text/javascript">
+  var labelFromcity = new Array();
+  labelFromcity ['热门城市'] = new Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40);
+  labelFromcity ['A-F'] = new Array(0,3,4,5,6,28,29);
+  labelFromcity ['G-J'] = new Array(1,7,8,9,30,31,32,33,37,40);
+  labelFromcity ['K-N'] = new Array(10,11,12,34,35,38);
+  labelFromcity ['P-W'] = new Array(13,14,15,16,17,18,22,24,25,36);
+  labelFromcity ['X-Z'] = new Array(2,19,20,21,26,27,39);
+  var hotList = new Array(14,15,16,17,18,19);
+
+  $(document).ready(function(){
+    $('#startcity').querycity({'data':citysFlight,'tabs':labelFromcity,'hotList':hotList},"startcity");
+    $('#endcity').querycity({'data':citysFlight,'tabs':labelFromcity,'hotList':hotList},"endcity");
+  });
+
+  $(function(){
+    var hasS = 0;
+    var currentCity;
+    function myFun(result){
+      currentCity = result.name;
+      //console.log("当前定位城市:"+currentCity);
+      $("#startcity").val(currentCity.substr(0,2));
+      $("#endcity").val(currentCity.substr(0,2));
+
+      loadStartPlace();
+      loadEndPlace();
+    }
+    var myCity = new BMap.LocalCity();
+    myCity.get(myFun);
+
+    function loadStartPlace(){//初始化起点地址
+      var startPlace = new BMap.Autocomplete({
+        "input":"startPlace",
+        "location":currentCity,
+        onSearchComplete:function(r){
+          var ps = [];
+          for(var i = r.getNumPois()-1;i>-1;i--){
+            var p = r.getPoi(i);
+            //console.log("选择的城市："+$("#startcity").val()+"市");
+            if(p.city == $("#startcity").val()+"市"){
+              ps.push(p);
+              $('.tangram-suggestion-main:eq(0) tr').eq(i).addClass('index' + i).find('td').attr('city', p.city).attr('district', p.district).attr('address', p.business);
+            }else{
+              $('.tangram-suggestion-main:eq(0) tr').eq(i).remove();
+            }
+          }
+          if (!$('#startPlace').is(":focus")) {
+              startPlace.hide();
+          }
+        }
+      });
+    }
+
+    function loadEndPlace(){//初始化终点地址
+      var endPlace = new BMap.Autocomplete({
+        "input":"endPlace",
+        "location":currentCity,
+        onSearchComplete:function(r){
+          var ps = [];
+          for(var i = r.getNumPois()-1;i>-1;i--){
+            var p = r.getPoi(i);
+            //console.log("选择的城市："+$("#endcity").val()+"市");
+            if(p.city == $("#endcity").val()+"市"){
+              ps.push(p);
+              $('.tangram-suggestion-main:eq(1) tr').eq(i).addClass('index' + i).find('td').attr('city', p.city).attr('district', p.district).attr('address', p.business);
+            }else{
+              $('.tangram-suggestion-main:eq(1) tr').eq(i).remove();
+            }
+          }
+          if (!$('#endPlace').is(":focus")) {
+              startPlace.hide();
+          }
+        }
+      });
+    }
+
+    function startAutoCallback(r, i) {
+      $('.tangram-suggestion-main:eq(0) tr td').removeClass('tangram-suggestion-current');
+      if (i)
+        $('.tangram-suggestion-main:eq(0) tr.index' + i + ' td').addClass('tangram-suggestion-current')
+      else
+        $('.tangram-suggestion-main:eq(0) tr:eq(0) td').addClass('tangram-suggestion-current')
+    }
+    
+
+  });
+</script>

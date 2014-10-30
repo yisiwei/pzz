@@ -56,19 +56,18 @@
   	      <span id="dest-msg" class="f12 crred control-label tl"></span>
         </div>
   	  </div>
-  	  <div class="form-group">
+  	  <!--<div class="form-group">
   	    <label for="destinationCar" class="col-xs-2 control-label">途径：</label>
   	    <div class="col-xs-6">
   	      <input name="line_midway" class="form-control border-radius-style" id="line_midway" placeholder="途径地"></div>
-  	  </div>
+  	  </div>-->
   	  <div class="form-group">
-  	    <label for="destinationCar" class="col-xs-2 control-label">里程：</label>
-  	    <div class="col-xs-10">
-  	      <input name="line_milleage" id="line_milleage" type="text" value="0" 
+        <label for="destinationCar" class="col-xs-2 control-label">里程：</label>
+        <div class="col-xs-10">
+          <input name="line_milleage" id="line_milleage" type="text" value="0" 
           class="form-control-static offer-kilometre-span offer-kilometre-span-font" style="background-color:transparent;border:none;" size='5' onfocus=this.blur()>
-  	      <!--<span class="form-control-static offer-kilometre-span">km</span>-->
-  	    </div>
-  	  </div>
+        </div>
+      </div>
   	  <!--start time -->
   	  <div class="form-group">
   	    <label for="destinationCar" class="col-xs-2 control-label">
@@ -158,11 +157,10 @@
   	  <!-- price -->
   	  <div class="form-group">
   	    <label class="col-xs-2 control-label">
-          <b class="crred f12 p2">*</b>
           期望价格：
         </label>
   	    <div class="col-xs-2">
-  	      <input type="number" id="line_price" class="form-control border-radius-style offer-date-input" name="line_price" />
+  	      <input type="text" id="line_price" class="form-control border-radius-style offer-date-input" name="line_price" value='0'/>
   	    </div>
   	    <span class="col-xs-4 control-label tl">元/人</span>
 
@@ -196,6 +194,13 @@
     map.centerAndZoom(new BMap.Point(116.404, 39.915), 12);
     map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
     map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+    //var transit = new BMap.DrivingRoute(map, {
+    //    renderOptions: {
+    //        map: map,
+            //panel: "r-result",
+            //enableDragging : true //起终点可进行拖拽
+    //    },  
+    //});
     var myCity = new BMap.LocalCity();
     myCity.get(myFun);
 
@@ -206,7 +211,8 @@
         $("#line_depart_city").val(cityName);
         $("#line_dest_city").val(cityName);
     }
-
+    //transit.search("固安","廊坊市");
+    
     var sIcon=new BMap.Icon("http://api0.map.bdimg.com/images/dest_markers.png",new BMap.Size(42,34),{anchor:new BMap.Size(15,32),imageOffset:new BMap.Size(0,0)});
     var eIcon=new BMap.Icon("http://api0.map.bdimg.com/images/dest_markers.png",new BMap.Size(42,34),{anchor:new BMap.Size(15,32),imageOffset:new BMap.Size(0,-34)});
     var s_marker;//起点标记
@@ -217,13 +223,45 @@
     var startPlace = new BMap.Autocomplete(
       {
         "input":"line_depart_address",
-        "location":map
+        "location":cityName,
+        onSearchComplete:function(r){
+          var ps = [];
+          for(var i = r.getNumPois()-1;i>-1;i--){
+            var p = r.getPoi(i);
+            //console.log("城市："+$("#line_depart_city").val());
+            if(p.city == $("#line_depart_city").val()){
+              ps.push(p);
+              $('.tangram-suggestion-main:eq(0) tr').eq(i).addClass('index' + i).find('td').attr('city', p.city).attr('district', p.district).attr('address', p.business);
+            }else{
+              $('.tangram-suggestion-main:eq(0) tr').eq(i).remove();
+            }
+          }
+          //if (!$('#startPlace').is(":focus")) {
+          //    startPlace.hide();
+          //}
+        }
       }
     );
     var endPlace = new BMap.Autocomplete(
       {
         "input":"line_dest_address",
-        "location":map
+        "location":map,
+        onSearchComplete:function(r){
+          var ps = [];
+          for(var i = r.getNumPois()-1;i>-1;i--){
+            var p = r.getPoi(i);
+            //console.log("城市："+$("#line_dest_city").val());
+            if(p.city == $("#line_dest_city").val()){
+              ps.push(p);
+              $('.tangram-suggestion-main:eq(1) tr').eq(i).addClass('index' + i).find('td').attr('city', p.city).attr('district', p.district).attr('address', p.business);
+            }else{
+              $('.tangram-suggestion-main:eq(1) tr').eq(i).remove();
+            }
+          }
+          //if (!$('#startPlace').is(":focus")) {
+          //    startPlace.hide();
+          //}
+        }
       }
     );
     //鼠标放在下拉列表上的事件
@@ -232,15 +270,13 @@
       var _value = e.fromitem.value;
       var value = "";
       if(e.fromitem.index > -1){
-        value = _value.province + _value.city + _value.district + 
-        _value.street + _value.business;
+        value = _value.district + _value.street + _value.business;
       }
       str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
       value = "";
       if(e.toitem.index > -1){
         _value = e.toitem.value;
-        value = _value.province + _value.city + _value.district +
-        _value.street + _value.business;
+        value = _value.district + _value.street + _value.business;
       }
       str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
       $("#searchDepartCity").innerHTML = str;
@@ -251,14 +287,13 @@
       var _value = e.fromitem.value;
       var value = "";
       if(e.fromitem.index > -1){
-        value = _value.province + _value.city + _value.district + 
-        _value.street + _value.business;
+        value = _value.district + _value.street + _value.business;
       }
       str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
       value = "";
       if(e.toitem.index > -1){
         _value = e.toitem.value;
-        value = _value.province + _value.city + _value.district +
+        value =  _value.district +
         _value.street + _value.business;
       }
       str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
@@ -271,7 +306,7 @@
     //鼠标点击下拉列表后的事件
     startPlace.addEventListener("onconfirm",function(e){
       var _value = e.item.value;
-      myStartValue = _value.province + _value.city + _value.district +
+      myStartValue =  _value.district +
       _value.street + _value.business;
       $("#searchDepartCity").innerHTML = "onconfirm<br />index="+e.item.index+"<br />myStartValue= " + myStartValue;
       setStartPlace();
@@ -279,7 +314,7 @@
     endPlace.addEventListener("onconfirm",function(e){
       var _value = e.item.value;
 
-      myEndValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+      myEndValue = _value.district + _value.street + _value.business;
       $("#searchDestCity").innerHTML = "onconfirm<br />index="+e.item.index+"<br />myEndValue= " + myEndValue;
       setEndPlace();
     });
@@ -291,7 +326,6 @@
       var sLocal = new BMap.LocalSearch(map,{
         onSearchComplete:myStartFun
       });
-      
       sLocal.search(myStartValue);
       function myStartFun(){
         //获取第一个智能搜索的结果
@@ -300,12 +334,16 @@
         //alert("line_depart_gps:"+line_depart_gps);
         $("#line_depart_gps").val(line_depart_gps);//起点GPS
         map.centerAndZoom(sPoint,12);
+
+        map.centerAndZoom(sPoint,12);
         s_marker = new BMap.Marker(sPoint,{icon:sIcon});
         map.addOverlay(s_marker);//将标记添加到地图中
         s_marker.enableDragging();//设置可拖动标记
         s_marker.addEventListener('dragend', function(e){
           myGeo.getLocation(e.point,function(rs){
             var addComp = rs.addressComponents;
+            line_depart_gps = e.point.lng + "," + e.point.lat;
+            $("#line_depart_gps").val(line_depart_gps);//起点GPS
             $("#line_depart_address").val(addComp.district + addComp.street+addComp.streetNumber);
           });
         });
@@ -318,7 +356,6 @@
       var eLocal = new BMap.LocalSearch(map,{
         onSearchComplete:myEndFun
       });
-      
       eLocal.search(myEndValue);
       function myEndFun(){
         //获取第一个智能搜索的结果
@@ -334,13 +371,16 @@
         e_marker.addEventListener('dragend', function(e){
           myGeo.getLocation(e.point,function(rs){
             var addComp = rs.addressComponents;
+            line_dest_gps = ePoint.lng + "," + ePoint.lat;
+            $("#line_dest_gps").val(line_dest_gps);//终点GPS
             $("#line_dest_address").val(addComp.district + addComp.street+addComp.streetNumber);
           });
         });
       }
     }
     
-    $("#startAddress").click(function(){
+
+     $("#startAddress").click(function(){
       myGeo.getPoint(cityName,function(point){
         if(point){
           
@@ -356,6 +396,8 @@
             myGeo.getLocation(e.point,function(rs){
               var addComp = rs.addressComponents;
               //alert(addComp.street+addComp.streetNumber);
+              var line_depart_gps = e.point.lng + "," + e.point.lat;
+              $("#line_depart_gps").val();//起点GPS
               $("#line_depart_address").val(addComp.district +addComp.street+addComp.streetNumber);
             });
           });
@@ -376,6 +418,8 @@
             // $("#detail-e-place").val(e.point.lng + ", " + e.point.lat);
             myGeo.getLocation(e.point,function(rs){
               var addComp = rs.addressComponents;
+              var line_dest_gps = e.point.lng + "," + e.point.lat;
+              $("#line_dest_gps").val();//终点GPS
               $("#line_dest_address").val(addComp.district +addComp.street+addComp.streetNumber);
             });
           });
@@ -404,22 +448,58 @@
       }
     });
     $("#lookLineBtn").click(function(){
-      
-      map.clearOverlays();
-      var s_address = $("#line_depart_city").val() + $("#line_depart_address").val();
-      var e_address = $("#line_dest_city").val() + $("#line_dest_address").val();
-      if($("#line_depart_address").val()==null || $("#line_depart_address").val()==""
-         || $("#line_dest_address").val()==null || $("#line_dest_address")==""){
-         $("#depart-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
-         $("#depart-msg").text("请输入起始地点");
-      }else{
-        transit.search(s_address, e_address);
-      }
+      searchLine();
     });
     
     $("#clearLineBtn").click(function(){
       transit.clearResults();//清除
     });
+
+    function searchLine(){
+      map.clearOverlays();
+      var s_address = $("#line_depart_city").val() + $("#line_depart_address").val();
+      var e_address = $("#line_dest_city").val() + $("#line_dest_address").val();
+      if($("#line_depart_address").val()==null || $("#line_depart_address").val()==""
+          || $("#line_dest_address").val()==null || $("#line_dest_address").val()==""){
+          
+          //$("#depart-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-//circle');
+          //$("#depart-msg").text("请输入起始地点");
+      }else{
+        transit.search(s_address, e_address);
+      }
+    }
+
+    $("#line_depart_address").blur(function(event) {
+        var sLocal = new BMap.LocalSearch(map,{
+            onSearchComplete:myStartFun
+        });
+        function myStartFun(){
+            //获取第一个智能搜索的结果
+            var sPoint = sLocal.getResults().getPoi(0).point;
+            //获取经度和纬度
+      　　　var line_depart_gps = sPoint.lng + "," + sPoint.lat;
+            $("#line_depart_gps").val(line_depart_gps);//起点GPS
+        }    
+        sLocal.search($("#line_depart_address").val());
+        searchLine();
+
+    });
+
+    $("#line_dest_address").blur(function(event) {
+        var eLocal = new BMap.LocalSearch(map,{
+            onSearchComplete:myEndFun
+        });
+        function myEndFun(){
+            //获取第一个智能搜索的结果
+            var ePoint = eLocal.getResults().getPoi(0).point;
+            //获取经度和纬度
+      　　　var line_dest_gps = ePoint.lng + "," + ePoint.lat;
+            $("#line_dest_gps").val(line_dest_gps);//终点GPS
+        }    
+        eLocal.search($("#line_dest_address").val());
+        searchLine();
+    });
+
 
   });
 </script>

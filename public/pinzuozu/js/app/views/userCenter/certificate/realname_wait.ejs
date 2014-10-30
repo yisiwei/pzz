@@ -1,28 +1,73 @@
 <div class="page-list-bg p10 mt20 frame-border">
 
-  <div class="mt20 ml20">
-    <h4>公安部实名认证</h4>
+  <div class="mt20 ml20 cr5b">
+    <h3><i class="fa fa fa-exclamation-circle"></i>正在审核中...</h3>
   </div>
-  <div class="user-cr module-success">
-    <div class="">
-      <div class="text-center f26 cr5c">
-        <span>
-          正在审核中...
-      </span>
-    </div>
 
-    <p>姓名：<%=identity.user_realname %></p>
-    <p>性别：<%= identity.user_gender=='0'?'男':'女' %></p>
-    <p>身份证号：<%=identity.identity_card_no %></p>
-    <p>
-      <img src="http://192.168.1.115:3000/<%=identity.identity_image %>">
-    </p>
-    <p>提交申请时间：<%=identity.created_at %></p>
-    <!--
-    <div class="text-center mt10">
-      <button type="button" class="btn btn-success frame-nradius">重新认证</button>
-    </div>
-    -->
+  <div class="user-cr mt10">
+    <form class="form-horizontal  mt30" role="form">
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          姓名：
+        </label>
+        <div class="col-xs-3">
+          <p class="form-control-static">
+            <%=identity.user_realname %>
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          性别：
+        </label>
+        <div class="col-xs-3">
+          <p class="form-control-static">
+            <%= identity.user_gender=='0'?'男':'女' %>
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          身份证：
+        </label>
+        <div class="col-xs-3">
+          <p class="form-control-static">
+            <%=identity.identity_card_no %>
+          </p>
+        </div>
+      </div>
+      
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          身份证照：
+        </label>
+        <div class="col-xs-3 module-success-cardimg">
+          <img src="http://192.168.1.115:3000/<%=identity.identity_image %>" />
+        </div> 
+      </div>
+      
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          提交申请时间：
+        </label>
+        <div class="col-xs-3 ">
+          <p class="form-control-static">
+            <%=identity.created_at %>
+          </p>
+        </div>
+        
+      </div>
+      <!--
+      <div class="form-group module-success-form">
+        <div class="col-xs-offset-3 col-xs-6">
+          <button type="button" class="btn btn-primary frame-nradius">
+            重新提交
+          </button>
+        </div>
+      </div>
+      -->
+    </form>
   </div>
-</div>
 </div>

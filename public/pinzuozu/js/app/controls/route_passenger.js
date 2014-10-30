@@ -24,7 +24,7 @@
 			));
 
 			$("#header-top").html(can.view(
-				"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:nickname}
+				"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:nickname,token:token,login:login}
 			));
 			$("#header-bottom").html(can.view(
 				"js/app/views/head/headBottom.ejs"
@@ -45,10 +45,10 @@
 			var login = this.options.secret.attr("login");
 
 			//未登录跳转到登录界面
-        	if(nickname == null || $.trim(nickname).length<=0){
-        		can.route.attr("route","login");
-        		return;
-        	}
+        	// if(nickname == null || $.trim(nickname).length<=0){
+        	// 	can.route.attr("route","login");
+        	// 	return;
+        	// }
 
         	$("input[name='line_depart_datetime']").val($("#d").val()+" "+$("#t").val()+":00");
 			
@@ -91,12 +91,17 @@
 			line.attr("pzz_user_id",userid);
 			line.attr("auth_token",token);
 			line.attr("login",login);
-			Line.create(line,function(line){
-				alert("发布成功");
-				console.log(line);
-			},function(error){
-				console.log(error);
-			});
+			// Line.create(line,function(line){
+			// 	alert("发布成功");
+			// 	console.log(line);
+			// },function(error){
+			// 	console.log(error);
+			// });
+			
+			//can.route.attr("route","route_success");
+			$("#main").html(can.view(
+				"js/app/views/route/route_success.ejs"
+			));
 			
         },
         '#isBack click':function(){ //是否返程

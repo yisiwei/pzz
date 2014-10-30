@@ -22,13 +22,13 @@
 				"js/app/views/long/long.ejs"
 			));
 			$("#header-top").html(can.view(
-				"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:nickname}
+				"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:nickname,token:token,login:login}
 			));
 			$("#header-bottom").html(can.view(
 				"js/app/views/head/headBottom.ejs"
 			));
 			$("#banner").html(can.view(
-				"js/app/views/head/banner.ejs"
+				"js/app/views/head/banner_local.ejs"
 			));
 			$("#footer").html(can.view(
 				"js/app/views/footer/footer.ejs"

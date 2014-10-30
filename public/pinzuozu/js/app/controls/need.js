@@ -6,7 +6,7 @@
 				this.showNeed();
 			}
 		},
-		showNeed:function(){
+		showNeed:function(opt){
 			var isLogin = false;
 
 			var userid = this.options.secret.attr("userid");
@@ -22,14 +22,31 @@
 				"js/app/views/need/need.ejs"
 			));
 			$("#header-top").html(can.view(
-				"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:nickname}
+				"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:nickname,token:token,login:login}
 			));
 			$("#header-bottom").html(can.view(
 				"js/app/views/head/headBottom.ejs"
 			));
+			
 			$("#banner").html(can.view(
-				"js/app/views/head/banner.ejs"
+				"js/app/views/head/banner_local.ejs"
 			));
+
+			var currentCity;
+			if(opt != "" && opt != null){
+				//alert(opt);
+				currentCity = opt;
+				$("#currentCity").text(currentCity);
+			}else{
+				
+				function myFun(result){
+				  currentCity = result.name;
+				  $("#currentCity").text(currentCity);
+				}
+				var myCity = new BMap.LocalCity();
+				myCity.get(myFun);
+			}
+
 			$("#footer").html(can.view(
 				"js/app/views/footer/footer.ejs"
 			));

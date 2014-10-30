@@ -1,5 +1,5 @@
 (function($){
-    $.querycity = function(input,options){
+    $.querycity = function(input,options,id){
         var input = $(input);
         input.attr('autocomplete','off');
         if($.trim(input.val())=='' || $.trim(input.val())==options.defaultText){ 
@@ -8,8 +8,8 @@
         var t_pop_focus = false;
         var t_suggest_focus = false;
         var t_suggest_page_click = false;
-        $('body').append("<div id='pop_city_"+input.attr('id')+"' class='pop_city' style='display:none'><p class='pop_head'></p><ul class='list_label'></ul><div class='pop_city_container'></div></div>");
-        $('body').append("<div id='suggest_city_"+input.attr('id')+"' class='list_city' style='display:none'><div class='list_city_head'></div><div class='list_city_container'></div><div class='page_break'></div></div>");
+        $('.'+id).append("<div id='pop_city_"+input.attr('id')+"' class='pop_city' style='display:none'><p class='pop_head'></p><ul class='list_label'></ul><div class='pop_city_container'></div></div>");
+        $('.'+id).append("<div id='suggest_city_"+input.attr('id')+"' class='list_city' style='display:none'><div class='list_city_head'></div><div class='list_city_container'></div><div class='page_break'></div></div>");
         var popMain = $("#pop_city_"+input.attr('id'))
         var popContainer = popMain.find('.pop_city_container');
         var labelMain = popMain.find('.list_label');
@@ -310,12 +310,12 @@
             suggestMain.css({'top':input.position().top+input.outerHeight(),'left':input.position().left});
         }
     }
-    $.fn.querycity = function(options){
+    $.fn.querycity = function(options,id){
         var defaults = {
             'data'          : {},
             'tabs'          : '',
             'hotList'       : '',            
-            'defaultText'   : '中文/拼音',
+            //'defaultText'   : '选择城市',
             'popTitleText'  : '请选择城市或输入城市名称的拼音或英文',
             'suggestTitleText' : '输入中文/拼音或↑↓选择',
             'suggestLength' : 10,
@@ -324,7 +324,7 @@
         };
         var options = $.extend(defaults,options);
         this.each(function(){
-            new $.querycity(this,options);            
+            new $.querycity(this,options,id);            
         });
         return this;
     };
@@ -333,8 +333,9 @@
 
 (function($){
 $.fn.bgIframe = $.fn.bgiframe = function(s) {
+	//$.browser.msie && /6.0/.test(navigator.userAgent)
 	if ( (navigator.userAgent.toLowerCase().indexOf('msie 6') != -1) && 
-         (navigator.userAgent.toLowerCase().indexOf('msie 7') == -1) ) {
+		 (navigator.userAgent.toLowerCase().indexOf('msie 7') == -1) ) {
 		s = $.extend({
 			top     : 'auto', // auto == .currentStyle.borderTopWidth
 			left    : 'auto', // auto == .currentStyle.borderLeftWidth

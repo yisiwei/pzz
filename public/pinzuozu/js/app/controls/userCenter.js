@@ -1038,16 +1038,17 @@
 				alert(message_id);
 
 				//删除消息
-				Message.findMessageById({
+				Message.deleteMessageById({
 					userid:userid,
 					token:token,
 					login:login,
 					messageId:messageId
 				},function(message){
-					$("#message-detail-model").html(can.view(
-						"js/app/views/userCenter/message/messageDetail.ejs",{message:message}
-					));
-					$("#message-detail-model").modal('show');
+					// $("#message-detail-model").html(can.view(
+					// 	"js/app/views/userCenter/message/messageDetail.ejs",{message:message}
+					// ));
+					// $("#message-detail-model").modal('show');
+					alert("删除成功");
 				},function(error){
 					console.log(error);
 				});

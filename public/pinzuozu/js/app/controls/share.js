@@ -9,6 +9,8 @@
 		},
 		showShare:function(){
 
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
 			var nickname = this.options.secret.attr("nickname");
 			var isLogin = false;
 			if(nickname != null && nickname != ""){
@@ -19,7 +21,7 @@
 				"js/app/views/share/share.ejs"
 			));
 			$("#header-top").html(can.view(
-				"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:nickname}
+				"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:nickname,token:token,login:login}
 			));
 			$("#header-bottom").html(can.view(
 				"js/app/views/head/headBottom.ejs"
@@ -45,6 +47,8 @@
 		},
 		showShareDetail:function(){
 
+			var token = this.options.secret.attr("token");
+			var login = this.options.secret.attr("login");
 			var nickname = this.options.secret.attr("nickname");
 			var isLogin = false;
 			if(nickname != null && nickname != ""){
@@ -58,7 +62,7 @@
 				"js/app/views/share/share_detail.ejs"
 			));
 			$("#header-top").html(can.view(
-				"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:nickname}
+				"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:nickname,token:token,login:login}
 			));
 			$("#header-bottom").html(can.view(
 				"js/app/views/head/headBottom.ejs"

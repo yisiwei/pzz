@@ -1,30 +1,94 @@
 <div class="page-list-bg p10 mt20 frame-border">
 
-  <div class="mt20 ml20">
-    <h4>公安部实名认证</h4>
+  <div class="mt20 ml20 crred">
+    <h3><i class="fa  fa-times-circle"></i>审核未通过</h3>
   </div>
-  <div class="user-cr module-success">
-    <div class="">
-      <div class="text-center f26 cr5c">
-        <span> 
-          <i class="fa crred fa-times-circle"></i> 审核未通过
-        </span>
+
+  <div class="user-cr mt10">
+    <form class="form-horizontal  mt30" role="form">
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          姓名：
+        </label>
+        <div class="col-xs-3">
+          <p class="form-control-static">
+            <%= identity.user_realname %>
+          </p>
+        </div>
       </div>
 
-      <p>姓名：<%= identity.user_realname %></p>
-      <p><%= identity.identity_dl_no %></p>
-      <p>驾驶类型：<%= identity.identity_dl_type %>本
-      </p>
-      
-      <p>初领驾照时间：<%= identity.identity_dl_issued %> </p>
-      <p>
-        <img src="http://192.168.1.115:3000/<%=identity.identity_dl_image %>">
-      </p>
-      <p>未通过原因：<%= identity.identity_remark %></p>
-      <div class="text-center mt10">
-        <button type="button" id="identity-driver-again" class="btn btn-success frame-nradius">重新认证</button>
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          驾驶证号：
+        </label>
+        <div class="col-xs-3">
+          <p class="form-control-static">
+            <%= identity.identity_dl_no %>
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          驾照类型：
+        </label>
+        <div class="col-xs-3">
+          <p class="form-control-static">
+            <%= identity.identity_dl_type %>本
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          初领驾照时间：
+        </label>
+        <div class="col-xs-3">
+          <p class="form-control-static">
+            <%= identity.identity_dl_issued %>
+          </p>
+        </div>
       </div>
       
-    </div>
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          驾驶者照：
+        </label>
+        <div class="col-xs-3 module-success-cardimg">
+          <img src="http://192.168.1.115:3000/<%=identity.identity_dl_image %>">
+        </div> 
+      </div>
+      
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          审核时间：
+        </label>
+        <div class="col-xs-3 ">
+          <p class="form-control-static">
+            <%=identity.updated_at %>
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group module-success-form">
+        <label class="col-xs-3 control-label f14 cr666">
+          未通过原因：
+        </label>
+        <div class="col-xs-3 ">
+          <p class="form-control-static">
+            <%=identity.identity_remark==null?"无":identity.identity_remark %>
+          </p>
+        </div>
+      </div>
+      
+      <div class="form-group module-success-form">
+        <div class="col-xs-offset-3 col-xs-6">
+          <button type="button" id="identity-driver-again" class="btn btn-primary frame-nradius">
+            重新认证
+          </button>
+        </div>
+      </div>
+      
+    </form>
   </div>
 </div>
