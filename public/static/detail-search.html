@@ -134,7 +134,8 @@
                                     上车地点
                                 </label>
                                 <div class="col-xs-4">
-                                    <input class="form-control border-radius-style" id="originCar" placeholder="城市">
+                                    <input type="text" class="form-control border-radius-style" value="" size="15" id="homecity_name" name="homecity_name" mod="address|notice" mod_address_source="hotel" mod_address_suggest="@Beijing|北京|53@Shanghai|上海|321@Shenzhen|深圳|91@Guangzhou|广州|80@Qingdao|青岛|292@Chengdu|成都|324@Hangzhou|杭州|383@Wuhan|武汉|192@Tianjin|天津|343@Dalian|大连|248@Xiamen|厦门|61@Chongqing|重庆|394@" mod_address_reference="cityid" mod_notice_tip="中文/拼音" />
+                                   <input id="cityid" name="cityid" type="hidden" value="{$cityid}" />
                                 </div>
                                 <div class="col-xs-6">
                                     <input class="form-control border-radius-style" id="dDestinationCityD"
@@ -150,7 +151,8 @@
                                     下车地点
                                 </label>
                                <div class="col-xs-4">
-                                    <input class="form-control border-radius-style" id="originCar" placeholder="城市">
+                                    <input type="text" class="form-control border-radius-style" value="" size="15" id="getcity_name" name="getcity_name" mod="address|notice" mod_address_source="hotel" mod_address_suggest="@Beijing|北京|53@Shanghai|上海|321@Shenzhen|深圳|91@Guangzhou|广州|80@Qingdao|青岛|292@Chengdu|成都|324@Hangzhou|杭州|383@Wuhan|武汉|192@Tianjin|天津|343@Dalian|大连|248@Xiamen|厦门|61@Chongqing|重庆|394@" mod_address_reference="getcityid" mod_notice_tip="中文/拼音" />
+                                    <input id="getcityid" name="getcityid" type="hidden" value="{$getcityid}" />
                                 </div>
                                 <div class="col-xs-6">
                                     <input class="form-control border-radius-style" id="dDestinationCityD"
@@ -666,6 +668,11 @@
 </div>
 
 <!-- main  end -->
+ <!-- 城市选择 -->
+             <div id="jsContainer" class="jsContainer" >
+                  <div id="tuna_alert" class="select-city-alert"></div>
+                  <div id="tuna_jmpinfo" class="select-city-info"></div>
+            </div>
 <!-- footer start -->
 <div id="footer" class="text-center  wmw p30 footer-bg" >
 <p>
@@ -686,6 +693,9 @@
 <!-- footer end -->
 </div>
 <!-- wrapper -->
+<!-- city -->
+<script type="text/javascript" src="js/fixdiv.js"></script>
+<script type="text/javascript" src="js/address.js"></script>
  <script src='js/rome.js'>
         </script>
         <script src='js/example.js'>
