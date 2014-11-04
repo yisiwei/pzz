@@ -2,9 +2,9 @@
 	
 	RouteDriverDetail = can.Control({
 		init:function(element,options){
-			if(this.options.route === 'driver_detail'){
+			//if(this.options.route === 'driver_detail'){
 				this.showRouteDriverDetail();
-			}
+			//}
 		},
 		showRouteDriverDetail:function(){
 			var isLogin = false;
@@ -17,8 +17,11 @@
 			if(nickname != null && nickname != ""){
 				isLogin = true;
 			}
-			var id = can.route.attr("id");
-			console.log("id=="+can.route.attr("id"));
+			//var id = can.route.attr("id");
+			var hash = window.location.hash;
+			var id = hash.substr(1,hash.length);
+			console.log("route_id="+id);
+
 			var self = this;
 			Line.findOne({id:id},function(line){
 				console.log(line.extras.user_avatar_url);
@@ -27,7 +30,7 @@
 				));
 
 				$("#header-top").html(can.view(
-					"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:nickname}
+					"js/app/views/head/headTop.ejs",{isLogin:isLogin,username:nickname,token:token,login:login}
 				));
 				$("#header-bottom").html(can.view(
 					"js/app/views/head/headBottom.ejs"
@@ -38,13 +41,11 @@
 			},function(error){
 				console.log(error);
 			});
-
-			
 			//$("#menu-route").parent().addClass('current');
 		},
-		'driver_detail route':function(){
-			this.showRouteDriverDetail();
-		},
+		// 'driver_detail route':function(){
+		// 	this.showRouteDriverDetail();
+		// },
 		'#driver-lookContact click':function(el,event){//查看联系方式
 			var userid = this.options.secret.attr("userid");
 			var token = this.options.secret.attr("token");
@@ -78,20 +79,23 @@
 				console.log("-----"+Object.prototype.toString.apply(line_participants));
 
 				
-				Order.joinLine({
-					auth_token:token,
-					login:login,
-					pzz_user_id:userid,
-					pzz_line_id:pzz_line_id,
-					line_participants:line_participants
-				},function(order){
-					console.log(order);
-				},function(error){
-					console.log(error);
-				});
+				// Order.joinLine({
+				// 	auth_token:token,
+				// 	login:login,
+				// 	pzz_user_id:userid,
+				// 	pzz_line_id:pzz_line_id,
+				// 	line_participants:line_participants
+				// },function(order){
+				// 	console.log(order);
+				// },function(error){
+				// 	console.log(error);
+				// });
+				$("#main").html(can.view(
+					"js/app/views/detail/success.ejs"
+				));
 			}
 		},
-		'#addseat click':function(el,event){
+		'#addseat click':function(el,event){//增加座位数
 			var joinCount = $("#seatCount");
         	joinCount.val(parseInt(joinCount.val()) + 1);
         	var count = $("#line_participants").text();
@@ -101,7 +105,7 @@
         	var priceCoute = (joinCount.val()*$("#single-price").text()).toFixed(1);
 			$("#priceCount").val(priceCoute);
 		},
-		'#minseat click':function(el,event){
+		'#minseat click':function(el,event){//减少座位数
 			var joinCount = $("#seatCount"); 
 	        joinCount.val(parseInt(joinCount.val()) - 1);
 	        if(parseInt(joinCount.val()) < 1){ 

@@ -2,10 +2,9 @@
 
 	Home = can.Control({
 		init:function(element,options){
-			//this.showHome();
-			if(this.options.route === 'home' || this.options.route==""){
+			//if(this.options.route === 'home' || this.options.route==""){
 				this.showHome();
-			}
+			//}
 		},
 		showHome:function(){
 			var token = this.options.secret.attr("token");
@@ -96,9 +95,9 @@
 			});
 			
 		},
-		'home route':function(){
-			this.showHome();			
-		},
+		// 'home route':function(){
+		// 	this.showHome();			
+		// },
 		'#logout click':function(){
 			$.removeCookie("userid");
 			$.removeCookie("nickname");
@@ -114,11 +113,12 @@
 				"js/app/views/head/headTop.ejs",{isLogin:false}
 			));
 		},
-		"#search-btn click":function(){
-			can.route.attr("route","search");
+		"#search-btn click":function(){//搜索
+			window.location.href="search.html";
 		},
 		"#detail-search-btn click":function(){
-			can.route.attr("route","search");
+			//can.route.attr("route","search");
+			window.location.href="search.html";
 		}
 	});
 

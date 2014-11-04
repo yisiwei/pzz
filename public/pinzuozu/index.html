@@ -23,59 +23,6 @@
 
 <body>
     <div id="wrapper" class="wrapper"></div>
-    <!-- kefu -->
-    <div id="floatTools" class="floatservice">
-        <div class="floatL">
-            <a style="display: block" id="aFloatTools_Show" class="btnOpen" 
-            title="查看在线客服" 
-            onclick="javascript:$('#divFloatToolsView').animate({width: 'show', opacity: 'show'}, 'normal',function(){ $('#divFloatToolsView').show();kf_setCookie('RightFloatShown', 0, '', '/', 'www.istudy.com.cn'); });$('#aFloatTools_Show').attr('style','display:none');$('#aFloatTools_Hide').attr('style','display:block');" 
-            href="javascript:void(0);">展开</a>
-            <a style="display:none;" id="aFloatTools_Hide" class="btnCtn" 
-            title= "关闭在线客服"
-            onclick="javascript:$('#divFloatToolsView').animate({width: 'hide', opacity: 'hide'}, 'normal',function(){ $('#divFloatToolsView').hide();kf_setCookie('RightFloatShown', 1, '', '/', 'www.istudy.com.cn'); });$('#aFloatTools_Show').attr('style','display:block');$('#aFloatTools_Hide').attr('style','display:none');" 
-            href="javascript:void(0);">收缩</a>
-        </div>
-        <div id="divFloatToolsView" style="display:none;" class="floatR">
-            <div class="tp"></div>
-            <div class="cn">
-                <ul>
-                    <li class="top">
-                        <h3 class="titZx">QQ咨询</h3>
-                    </li>
-                    <li>
-                        <span class="icoZx f14">在线咨询</span>
-                    </li>
-                    <li>
-                        <a class="icoTc f12" href="#">QQ群一</a>
-                    </li>
-                    <li>
-                        <a class="icoTc f12" href="javascript:void(0);">QQ群二</a>
-                    </li>
-                    <li>
-                        <a class="icoTc f12" href="#">QQ群三</a>
-                    </li>
-                    <li class="bot f12">
-                        <a class="icoTc" href="javascript:void(0);">QQ群四</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li>
-                        <h3 class="titDh f14">电话咨询</h3>
-                    </li>
-                    <li>
-                        <span class="icoTl f12">400-000-0000</span>
-                    </li>
-                    <li class="bot">
-                        <h3 class="titDc">
-                            <a href="#" target="_blank">微信号</a>
-                        </h3>
-                    </li>
-                    <li class="floatservice-code">
-                        <img class="friends-links-code-img ml10" src="images/code.png"></li>
-                </ul>
-            </div>
-        </div>
-    </div>
 </body>
 
 </html>
@@ -94,15 +41,14 @@
 <script src="js/can.ejs.js"></script>
 <script src="js/can.fixture.js"></script>
 
-<script src="js/app/fixtures/line.js"></script>
-
 <script src="js/app/models/line.js"></script>
 <script src="js/app/models/user.js"></script>
 <script src="js/app/models/order.js"></script>
 <script src="js/app/models/message.js"></script>
 <script src="js/app/models/identity.js"></script>
 
-<script src="js/app/controls/common.js"></script>
+<script src="js/app/controls/home.js"></script>
+<!-- <script src="js/app/controls/common.js"></script>
 <script src="js/app/controls/home.js"></script>
 <script src="js/app/controls/search.js"></script>
 <script src="js/app/controls/local.js"></script>
@@ -119,6 +65,7 @@
 <script src="js/app/controls/userCenter.js"></script>
 <script src="js/app/controls/email_active.js"></script>
 <script src="js/app/controls/findPwd.js"></script>
+<script src="js/app/controls/userHome.js"></script> -->
 
 <script src="js/app/app.js"></script>
 

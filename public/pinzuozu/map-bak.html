@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>
+           拼座族
+        </title>
+        <!-- Bootstrap -->
+        <link href="css/comm.css" rel='stylesheet' type='text/css' />
+        <link href="css/cssreset.css" rel='stylesheet' type='text/css' />
+        <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+        <link href="css/module.css" rel='stylesheet' type='text/css' />
+        <!-- Custom Theme files -->
+        <link href="css/style.css" rel='stylesheet' type='text/css' />
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href='css/rome.css' rel='stylesheet' type='text/css' />
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media
+        queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file://
+        -->
+        <!--[if lt IE 9]>
+            <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js">
+            </script>
+            <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js">
+            </script>
+        <![endif]-->
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <!-- Include all compiled plugins (below), or include individual files
+        as needed -->
+        <script src="js/jquery.min.js">
+        </script>
+        <script src="js/bootstrap.min.js">
+        </script>
+
+    <script type="text/javascript" 
+    src="http://api.map.baidu.com/api?v=2.0&ak=xmyNRRC4grtX6rp4hv0rp7q8"></script>
+    </head>
+    
+    <body>
+        <div id="test-map" style="height:400px;width:600px;float:left;"></div>
+        <div style="float:left;width:300px;">
+              <input class="form-control border-radius-style" id="line_depart_city" name="line_depart_city" placeholder="出发城市" />
+              <input class="form-control border-radius-style" id="line_depart_address" name="line_depart_address" placeholder="详细地址" />
+              <input type="button" id="startAddress" value="标记起点" />
+              <div id="searchDepartCity" class="offer-map-detail"></div>
+              <input type="button" id="lookLineBtn" value="查看路线" />&nbsp;&nbsp;
+        </div>
+        <div style="float:left;width:300px;">
+              <input class="form-control border-radius-style" id="line_dest_city" name="line_dest_city" placeholder="目的城市" />
+              <input class="form-control border-radius-style" id="line_dest_address" name="line_dest_address" placeholder="详细地址" />
+              <input type="button" id="endAddress" value="标记终点" />
+              <div id="searchDestCity" class="offer-map-detail"></div>
+              <input type="button" id="clearLineBtn" value="重新标记" />&nbsp;&nbsp;
+        </div>
+        <div style="float:left;width:300px;">
+            GPS1<input type="text" id="line_depart_gps" /><br />
+            GPS2<input type="text" id="line_dest_gps" /><br />
+            里程<input type="text" id="line_milleage" /><br />
+            时间<input type="text" id="line_elapse" />
+        </div>
+    </body>
+
+</html>
+<script type="text/javascript">
+  $(function(){
+    var map = new BMap.Map("test-map");
+    map.centerAndZoom(new BMap.Point(116.404, 39.915), 12);
+    map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+    map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+    //var transit = new BMap.DrivingRoute(map, {
+    //    renderOptions: {
+    //        map: map,
+            //panel: "r-result",
+            //enableDragging : true //起终点可进行拖拽
+    //    },  
+    //});
+    var myCity = new BMap.LocalCity();
+    myCity.get(myFun);
+
+    var cityName;
+    function myFun(result){
+        cityName = result.name;
+        map.setCenter(cityName);
+        $("#line_depart_city").val(cityName);
+        $("#line_dest_city").val(cityName);
+    }
+    //transit.search("固安","廊坊市");
+    
+    var sIcon=new BMap.Icon("http://api0.map.bdimg.com/images/dest_markers.png",new BMap.Size(42,34),{anchor:new BMap.Size(15,32),imageOffset:new BMap.Size(0,0)});
+    var eIcon=new BMap.Icon("http://api0.map.bdimg.com/images/dest_markers.png",new BMap.Size(42,34),{anchor:new BMap.Size(15,32),imageOffset:new BMap.Size(0,-34)});
+    var s_marker;//起点标记
+    var e_marker;//终点标记
+    var myGeo = new BMap.Geocoder();
+
+    //建立一个自动完成的对象
+    var startPlace = new BMap.Autocomplete(
+      {
+        "input":"line_depart_address",
+        "location":map
+      }
+    );
+    startPlace.setLocation("廊坊市");
+    var endPlace = new BMap.Autocomplete(
+      {
+        "input":"line_dest_address",
+        "location":map
+      }
+    );
+    //鼠标放在下拉列表上的事件
+    startPlace.addEventListener("onhighlight", function(e){
+      var str = "";
+      var _value = e.fromitem.value;
+      var value = "";
+      if(e.fromitem.index > -1){
+        value = _value.district + 
+        _value.street + _value.business;
+      }
+      str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+      value = "";
+      if(e.toitem.index > -1){
+        _value = e.toitem.value;
+        value = _value.district +
+        _value.street + _value.business;
+      }
+      str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+      $("#searchDepartCity").innerHTML = str;
+    });
+
+    endPlace.addEventListener("onhighlight", function(e){
+      var str = "";
+      var _value = e.fromitem.value;
+      var value = "";
+      if(e.fromitem.index > -1){
+        value = _value.district + _value.street + _value.business;
+      }
+      str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+      value = "";
+      if(e.toitem.index > -1){
+        _value = e.toitem.value;
+        value =  _value.district +
+        _value.street + _value.business;
+      }
+      str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+      $("#searchDestCity").innerHTML = str;
+    });
+
+
+    var myStartValue;
+    var myEndValue;
+    //鼠标点击下拉列表后的事件
+    startPlace.addEventListener("onconfirm",function(e){
+      var _value = e.item.value;
+      myStartValue =  _value.district +
+      _value.street + _value.business;
+      $("#searchDepartCity").innerHTML = "onconfirm<br />index="+e.item.index+"<br />myStartValue= " + myStartValue;
+      setStartPlace();
+    });
+    endPlace.addEventListener("onconfirm",function(e){
+      var _value = e.item.value;
+
+      myEndValue = _value.district + _value.street + _value.business;
+      $("#searchDestCity").innerHTML = "onconfirm<br />index="+e.item.index+"<br />myEndValue= " + myEndValue;
+      setEndPlace();
+    });
+
+    function setStartPlace(){
+        transit.clearResults();//清除
+      if(s_marker!=null && s_marker!=""){
+        map.removeOverlay(s_marker);//清除单个标记
+      }
+      var sLocal = new BMap.LocalSearch(map,{
+        onSearchComplete:myStartFun
+      });
+      sLocal.search(myStartValue);
+      function myStartFun(){
+        //获取第一个智能搜索的结果
+        var sPoint = sLocal.getResults().getPoi(0).point;
+        var line_depart_gps = sPoint.lng + "," + sPoint.lat;
+        //alert("line_depart_gps:"+line_depart_gps);
+        $("#line_depart_gps").val(line_depart_gps);//起点GPS
+        map.centerAndZoom(sPoint,12);
+
+        map.centerAndZoom(sPoint,12);
+        s_marker = new BMap.Marker(sPoint,{icon:sIcon});
+        map.addOverlay(s_marker);//将标记添加到地图中
+        s_marker.enableDragging();//设置可拖动标记
+        s_marker.addEventListener('dragend', function(e){
+          myGeo.getLocation(e.point,function(rs){
+            var addComp = rs.addressComponents;
+            $("#line_depart_address").val(addComp.district + addComp.street+addComp.streetNumber);
+          });
+        });
+      }
+    }
+    function setEndPlace(){
+        transit.clearResults();//清除
+      if(e_marker!=null && e_marker!=""){
+        map.removeOverlay(e_marker);//清除单个标记
+      }
+      var eLocal = new BMap.LocalSearch(map,{
+        onSearchComplete:myEndFun
+      });
+      eLocal.search(myEndValue);
+      function myEndFun(){
+        //获取第一个智能搜索的结果
+        var ePoint = eLocal.getResults().getPoi(0).point;
+        //获取经度和纬度
+  　　　var line_dest_gps = ePoint.lng + "," + ePoint.lat;
+        //alert("line_dest_gps:"+line_dest_gps);
+        $("#line_dest_gps").val(line_dest_gps);//终点GPS
+        map.centerAndZoom(ePoint,12);
+        e_marker = new BMap.Marker(ePoint,{icon:eIcon});
+        map.addOverlay(e_marker);//将标记添加到地图中
+        e_marker.enableDragging();//设置可拖动标记
+        e_marker.addEventListener('dragend', function(e){
+          myGeo.getLocation(e.point,function(rs){
+            var addComp = rs.addressComponents;
+            $("#line_dest_address").val(addComp.district + addComp.street+addComp.streetNumber);
+          });
+        });
+      }
+    }
+    
+
+     $("#startAddress").click(function(){
+      myGeo.getPoint(cityName,function(point){
+        if(point){
+          
+          map.centerAndZoom(point,12);
+          //map.clearOverlays();//清除所有标记
+          map.removeOverlay(s_marker);//清除单个标记
+          s_marker = new BMap.Marker(point,{icon:sIcon});//创建标记，icon为标记图标
+          map.addOverlay(s_marker);//将标记添加到地图中
+          s_marker.enableDragging();//设置可拖动标记
+         
+          s_marker.addEventListener('dragend', function(e){
+            // $("#detail-s-place").val(e.point.lng + ", " + e.point.lat);
+            myGeo.getLocation(e.point,function(rs){
+              var addComp = rs.addressComponents;
+              var line_depart_gps = e.point.lng + "," + e.point.lat;
+              $("#line_depart_gps").val(line_depart_gps);//起点GPS
+              $("#line_depart_address").val(addComp.district +addComp.street+addComp.streetNumber);
+            });
+          });
+        }
+      });
+    });
+
+    $("#endAddress").click(function(){
+      myGeo.getPoint(cityName,function(point){
+        if(point){
+          map.centerAndZoom(point,12);
+          map.removeOverlay(e_marker);//清除单个标记
+          e_marker = new BMap.Marker(point,{icon:eIcon});//创建标记，icon为标记图标
+          map.addOverlay(e_marker);//将标记添加到地图中
+          e_marker.enableDragging();//设置可拖动标记
+         
+          e_marker.addEventListener('dragend', function(e){
+            // $("#detail-e-place").val(e.point.lng + ", " + e.point.lat);
+            myGeo.getLocation(e.point,function(rs){
+              var addComp = rs.addressComponents;
+              var line_dest_gps = e.point.lng + "," + e.point.lat;
+              $("#line_dest_gps").val(line_dest_gps);//终点GPS
+              $("#line_dest_address").val(addComp.district +addComp.street+addComp.streetNumber);
+            });
+          });
+        }
+      });
+    });
+
+    var searchComplete = function (results){
+      if (transit.getStatus() != BMAP_STATUS_SUCCESS){
+        return ;
+      }
+      var plan = results.getPlan(0);
+      var duration = plan.getDuration(true); //获取时间
+      var distance = plan.getDistance(true); //获取距离
+      $("#line_milleage").val(distance);//里程
+      $("#line_elapse").val(duration);//时间
+    }
+
+    var transit = new BMap.DrivingRoute(map, {
+      renderOptions: {map: map},
+        onSearchComplete: searchComplete,
+        onPolylinesSet: function(){        
+          setTimeout(function(){
+            //alert($("#line_milleage").val()+"--"+$("#line_elapse").val());
+          },"1000");
+      }
+    });
+    $("#lookLineBtn").click(function(){
+      
+      searchLine();
+    });
+    
+    $("#clearLineBtn").click(function(){
+      transit.clearResults();//清除
+    });
+
+    function searchLine(){
+        map.clearOverlays();
+        var s_address = $("#line_depart_city").val() + $("#line_depart_address").val();
+          var e_address = $("#line_dest_city").val() + $("#line_dest_address").val();
+          if($("#line_depart_address").val()==null || $("#line_depart_address").val()==""
+             || $("#line_dest_address").val()==null || $("#line_dest_address").val()==""){
+            alert("请输入起始地点");
+             $("#depart-msg").removeClass('cr5a fa fa-check-circle').addClass('crred fa fa-times-circle');
+             $("#depart-msg").text("请输入起始地点");
+          }else{
+            transit.search(s_address, e_address);
+          }
+    }
+
+    $("#line_depart_address").blur(function(event) {
+        var sLocal = new BMap.LocalSearch(map,{
+            onSearchComplete:myStartFun
+        });
+        function myStartFun(){
+            //获取第一个智能搜索的结果
+            var sPoint = sLocal.getResults().getPoi(0).point;
+            //获取经度和纬度
+      　　　var line_depart_gps = sPoint.lng + "," + sPoint.lat;
+            $("#line_depart_gps").val(line_depart_gps);//终点GPS
+        }    
+        sLocal.search($("#line_depart_address").val());
+        searchLine();
+
+    });
+
+    $("#line_dest_address").blur(function(event) {
+        var eLocal = new BMap.LocalSearch(map,{
+            onSearchComplete:myEndFun
+        });
+        function myEndFun(){
+            //获取第一个智能搜索的结果
+            var ePoint = eLocal.getResults().getPoi(0).point;
+            //获取经度和纬度
+      　　　var line_dest_gps = ePoint.lng + "," + ePoint.lat;
+            $("#line_dest_gps").val(line_dest_gps);//终点GPS
+        }    
+        eLocal.search($("#line_dest_address").val());
+        searchLine();
+    });
+
+
+  });
+</script>

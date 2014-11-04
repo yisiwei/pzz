@@ -2,9 +2,9 @@
 
 	Search = can.Control({
 		init:function(element,options){
-			if(this.options.route === 'search'){
+			//if(this.options.route === 'search'){
 				this.showSearch();
-			}
+			//}
 		},
 		showSearch:function(){
 
@@ -33,7 +33,7 @@
 			));
 			//$("#menu-home").parent().addClass('current');
 
-      $("#search-driver").html(can.view(
+      		$("#search-driver").html(can.view(
 				"js/app/views/search/search_driver.ejs"
 			));
 
@@ -42,9 +42,9 @@
 			));
 			
 		},
-		'search route':function(){
-			this.showSearch();			
-		},
+		// 'search route':function(){
+		// 	this.showSearch();			
+		// },
 		'#logout click':function(){
 			$.removeCookie("userid");
 			$.removeCookie("nickname");
@@ -62,5 +62,5 @@
 		}
 	});
 
-	namespace.Home = Home;
+	namespace.Search = Search;
 })(window);

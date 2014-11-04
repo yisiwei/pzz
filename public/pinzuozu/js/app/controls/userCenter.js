@@ -2,9 +2,9 @@
 
 	UserCenter = can.Control({
 		init:function(element,options){
-			if(this.options.route === 'userCenter'){
+			//if(this.options.route === 'userCenter'){
 				this.showUserCenter();
-			}
+			//}
 		},
 		showUserCenter:function(){
 			var userid = this.options.secret.attr("userid");
@@ -39,13 +39,14 @@
 					//can.route.attr("route","login");
 				});
 			}else{
-				can.route.attr("route","login");
+				//can.route.attr("route","login");
+				window.location.href="login.html";
 			}
 			
 		},
-		'userCenter route':function(){
-			this.showUserCenter();
-		},
+		// 'userCenter route':function(){
+		// 	this.showUserCenter();
+		// },
 		'#basic-btn click':function(el,event){//修改基本信息
 			var user = new User();
 			var form = this.element.find("form");

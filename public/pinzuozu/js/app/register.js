@@ -1,6 +1,22 @@
-$(function() {
-	//alert("注册");
-	new RegisterView("#register");
+(function() {
+	$(function() {
 
-	new Footer("#footer");
-});
+		can.route.ready(false);
+
+		can.route( ':route/:id' );
+
+		var userid = $.cookie("userid");
+		var nickname = $.cookie("nickname");
+		var token = $.cookie("token");
+		var login = $.cookie("login");
+
+		console.log("cookie:"+userid+"-"+login+"-"+token+"-"+nickname);
+
+		var secret = new can.Observe({userid:userid,nickname:nickname,token:token,login:login,code:""});
+
+		new Register("#wrapper",{'secret':secret});		
+
+		can.route.ready(true);
+	
+	});
+})();

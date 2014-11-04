@@ -2,9 +2,9 @@
 	
 	RoutePassengerDetail = can.Control({
 		init:function(element,options){
-			if(this.options.route === 'passenger_detail'){
+			//if(this.options.route === 'passenger_detail'){
 				this.showRoutePassengerDetail();
-			}
+			//}
 		},
 		showRoutePassengerDetail:function(){
 			var isLogin = false;
@@ -17,8 +17,11 @@
 			if(nickname != null && nickname != ""){
 				isLogin = true;
 			}
-			var id = can.route.attr("id");
-			console.log("id=="+can.route.attr("id"));
+			//var id = can.route.attr("id");
+			var hash = window.location.hash;
+			var id = hash.substr(1,hash.length);
+			console.log("route_id="+id);
+			
 			var self = this;
 			Line.findOne({id:id},function(line){
 				console.log(line.extras.user_avatar_url);
@@ -42,15 +45,19 @@
 			
 			//$("#menu-route").parent().addClass('current');
 		},
-		'passenger_detail route':function(){
-			this.showRoutePassengerDetail();
-		},
-		'#lookContact click':function(el,event){
+		// 'passenger_detail route':function(){
+		// 	this.showRoutePassengerDetail();
+		// },
+		'#lookContact click':function(el,event){//查看联系方式
 			var userid = this.options.secret.attr("userid");
 			var token = this.options.secret.attr("token");
 			var login = this.options.secret.attr("login");
 			if(token == null || token == ""){
-				can.route.attr("route","login");
+				//can.route.attr("route","login");
+				$("#mymodal").html(can.view(
+					"js/app/views/detail/message.ejs"
+				));
+				$("#mymodal").modal('show');
 			}else{
 				$("#mymodal").modal('show');
 			}

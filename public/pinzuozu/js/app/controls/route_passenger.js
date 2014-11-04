@@ -3,9 +3,9 @@
 	//发布线路
 	RoutePassenger = can.Control({
 		init:function(element,options){
-			if(this.options.route === 'route_passenger'){
+			//if(this.options.route === 'route_passenger'){
 				this.showRoutePassenger();
-			}
+			//}
 		},
 		showRoutePassenger:function(){
 			var isLogin = false;
@@ -34,9 +34,9 @@
 			));
 			$("#menu-route").parent().addClass('current');
 		},
-		'route_passenger route':function(){
-			this.showRoutePassenger();
-		},
+		// 'route_passenger route':function(){
+		// 	this.showRoutePassenger();
+		// },
         '#passenger-submit click':function(){//乘客发布路线
 
         	var userid = this.options.secret.attr("userid");
@@ -203,7 +203,7 @@
 			seatCount.val(parseInt(seatCount.val()) + 1);
 		},
 		"#btn-back click":function(){//返回
-			window.location.href="#!route";
+			window.location.href="route.html";
 		}
 	});
 

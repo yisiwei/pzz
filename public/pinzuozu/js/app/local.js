@@ -1,18 +1,33 @@
-$(function() {
-	//alert("上下班拼车");
-	new LocalList("#work-local");
+(function() {
+	$(function() {
 
-	//head
-	new HeadTop("#head-top");
-	new HeadBottom("#head-bottom");
+		//can.route('',{line_type:''});
+		can.route.ready(false);
 
-	new Banner("#banner");
+		can.route( ':route/:id' );
 
-	new DiaryList("#diary-share");
-	new RoadList("#road-share");
+		// can.route.bind('change', function(ev, attr, how, newVal, oldVal) {
+		// 	//if (how === 'set') Pages.initMenu();
+		// });
 
-	//footer
-	new Footer("#footer");
+		var userid = $.cookie("userid");
+		var nickname = $.cookie("nickname");
+		var token = $.cookie("token");
+		var login = $.cookie("login");
 
-	$("#menu-local").parent().addClass('current');
-});
+		console.log("cookie:"+userid+"-"+login+"-"+token+"-"+nickname);
+		//$.removeCookie("nickname");
+
+		var hash = window.location.hash;
+		var route = hash.substr(2, hash.length);
+		route = route.split("&")[0];
+		console.log(route);
+
+		var secret = new can.Observe({userid:userid,nickname:nickname,token:token,login:login});
+
+		new Local("#wrapper",{'secret':secret});		
+
+		can.route.ready(true);
+	
+	});
+})();

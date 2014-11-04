@@ -2,9 +2,9 @@
 	//发布线路
 	RouteDriver = can.Control({
 		init:function(element,options){
-			if(this.options.route === 'route_driver'){
+			//if(this.options.route === 'route_driver'){
 				this.showRouteDriver();
-			}
+			//}
 		},
 		showRouteDriver:function(){
 			var isLogin = false;
@@ -33,9 +33,9 @@
 			));
 			$("#menu-route").parent().addClass('current');
 		},
-		'route_driver route':function(){
-			this.showRouteDriver();
-		},
+		// 'route_driver route':function(){
+		// 	this.showRouteDriver();
+		// },
         '#driver-submit click':function(){//司机发布路线
         	var userid = this.options.secret.attr("userid");
         	var token = this.options.secret.attr("token");
@@ -198,7 +198,7 @@
 			seatCount.val(parseInt(seatCount.val()) + 1);
 		},
 		"#btn-back click":function(){//返回
-			window.location.href="#!route";
+			window.location.href="route.html";
 		}
 		// '#getValue click':function(el,event){
 		// 	var linePlace="";

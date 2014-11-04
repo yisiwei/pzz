@@ -15,8 +15,7 @@
 				error:error
 			});
 		},
-		findOne:'GET /pzz_users/{id}.json',
-		findById:function(params,success,error){
+		findById:function(params,success,error){//根据ID获取指定的用户
 			console.log("token:"+params.token+"-login:"+params.login);
 			return $.ajax({
 				url: 'http://192.168.1.115:3000/pzz_users/'+params.id+".json?auth_token="+ params.token + "&login=" + params.login,
@@ -28,14 +27,13 @@
 			});
 			
 		},
-		//findByPhone: 'GET /pzz_users/phone_registered',
-		findByPhone: function(params,success,error){
+		findByPhone: function(params,success,error){//判断指定手机号是否已经注册
 			console.log("phone:"+params)
 			return $.ajax({
-				url: 'http://192.168.1.115:3000/pzz_users/phone_registered.json',
+				url: 'http://192.168.1.115:3000/pzz_users/phone_registered.json?user_phone='+params,
 				type: 'GET',
 				dataType: 'json',
-				data: {user_phone: params},
+				//data: {user_phone: params},
 				success:success,
 				error:error
 			});
@@ -65,7 +63,7 @@
 				error:error
 			});
 		},
-		register:function(params,success,error){
+		register:function(params,success,error){//注册新用户
 			console.log("password:"+params.password);
 			return $.ajax({
 				url: 'http://192.168.1.115:3000/pzz_users.json',
@@ -77,14 +75,15 @@
 					email:params.email,
 					password:params.password,
 					password_confirmation:params.password_confirmation,
-					user_nickname:params.user_nickname
+					user_nickname:params.user_nickname,
+					verfication_code:params.verfication_code
 				},
 				success:success,
 				error:error
 			});
 			
 		},
-		updateAvatar:function(params,success,error){
+		updateAvatar:function(params,success,error){//设定用户头像
 			console.log("auth_token:"+params.auth_token);
 			return $.ajax({
 				url: 'http://192.168.1.115:3000/pzz_users/avatar.json',
@@ -106,10 +105,10 @@
 				error:error
 			});
 		},
-		create: 'POST http://192.168.1.115:3000/pzz_users.json',
+		//create: 'POST http://192.168.1.115:3000/pzz_users.json',
 		//update: 'PUT /pzz_users/{id}',
-		destroy: 'DELETE /pzz_users/{id}',
-		update: function(params,success,error){
+		//destroy: 'DELETE /pzz_users/{id}',
+		update: function(params,success,error){//更新指定用户的信息
 			console.log("id:"+params.id+"-token:"+params.auth_token);
 			return $.ajax({
 				url: 'http://192.168.1.115:3000/pzz_users/'+params.id+'.json',
@@ -126,7 +125,19 @@
 				success:success,
 				error:error
 			});
+		},
+		getCode:function(params,success,error){//获取验证码
+			console.log("user_phone:"+params);
+			return $.ajax({
+				url: 'http://192.168.1.115:3000/pzz_users/get_verification_code.json?user_phone='+params,
+				type: 'GET',
+				dataType: 'json',
+				success:success,
+				error:error
+			});
 		}
+
+
 	},{});
 
 	// Export our model to the namespace

@@ -39,6 +39,13 @@
 		
 	},{});
 
+	// Message.bind('updated', function(event,updatedTask) {
+	// 	/* Act on the event */
+	// 	console.log("updated", updatedTask);
+	// }).bind("destroyed", function(ev, destroyedTask){ 
+	// 	console.log("destroyed", destroyedTask);
+	// });
+
 	// Export our model to the namespace
 	namespace.Message = Message;
 })(window);

@@ -2,9 +2,9 @@
 	//长途拼车
 	Long = can.Control({
 		init:function(element,options){
-			if(this.options.route === 'long'){
+			//if(this.options.route === 'long'){
 				this.showLong();
-			}
+			//}
 		},
 		showLong:function(){
 			var isLogin = false;
@@ -28,7 +28,7 @@
 				"js/app/views/head/headBottom.ejs"
 			));
 			$("#banner").html(can.view(
-				"js/app/views/head/banner_local.ejs"
+				"js/app/views/head/banner_long.ejs"
 			));
 			$("#footer").html(can.view(
 				"js/app/views/footer/footer.ejs"
@@ -61,8 +61,14 @@
 				console.log(error);
 			});
 		},
-		'long route':function(){
-			this.showLong();
+		// 'long route':function(){
+		// 	this.showLong();
+		// },
+		"#search-btn click":function(){//搜索
+			window.location.href="search.html";
+		},
+		"#detail-search-btn click":function(){//去搜索
+			window.location.href="search.html";
 		}
 	});
 

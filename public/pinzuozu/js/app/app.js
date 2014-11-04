@@ -26,30 +26,32 @@
 		var secret = new can.Observe({userid:userid,nickname:nickname,token:token,login:login});
 
 		new Home("#wrapper",{'secret':secret,'route':route});
-		new Search("#wrapper",{'secret':secret,'route':route});
-		new Local("#wrapper",{'secret':secret,'route':route});
-		new Long("#wrapper",{'secret':secret,'route':route});
-		new Need("#wrapper",{'secret':secret,'route':route});
+		//new Search("#wrapper",{'secret':secret,'route':route});
+		//new Local("#wrapper",{'secret':secret,'route':route});
+		//new Long("#wrapper",{'secret':secret,'route':route});
+		//new Need("#wrapper",{'secret':secret,'route':route});
+
+		//new UserHome("#wrapper",{'secret':secret,'route':route});
 		
-		new Share("#wrapper",{'secret':secret,'route':route});
-		new ShareDetail("#wrapper",{'secret':secret,'route':route});
+		//new Share("#wrapper",{'secret':secret,'route':route});
+		//new ShareDetail("#wrapper",{'secret':secret,'route':route});
 
-		new Route("#wrapper",{'secret':secret,'route':route});
-		new RoutePassenger("#wrapper",{'secret':secret,'route':route});
-		new RouteDriver("#wrapper",{'secret':secret,'route':route});
+		//new Route("#wrapper",{'secret':secret,'route':route});
+		//new RoutePassenger("#wrapper",{'secret':secret,'route':route});
+		//new RouteDriver("#wrapper",{'secret':secret,'route':route});
 		//路线详情
-		new RouteDriverDetail("#wrapper",{'secret':secret,'route':route});
-		new RoutePassengerDetail("#wrapper",{'secret':secret,'route':route});
+		//new RouteDriverDetail("#wrapper",{'secret':secret,'route':route});
+		//new RoutePassengerDetail("#wrapper",{'secret':secret,'route':route});
 
-		new UserCenter("#wrapper",{'secret':secret,'route':route});
+		//new UserCenter("#wrapper",{'secret':secret,'route':route});
 
-		new Register("#wrapper",{'secret':secret,'route':route});
-		new EmailActive("#wrapper",{'route':route});
+		//new Register("#wrapper",{'secret':secret,'route':route});
+		//new EmailActive("#wrapper",{'route':route});
 
-		new Login("#wrapper",{'secret':secret,'route':route});
-		new FindPwdUsername("#wrapper",{'secret':secret,'route':route});
-		new FindPwdVerify("#wrapper",{'secret':secret,'route':route});
-		new FindPwdNewPwd("#wrapper",{'secret':secret,'route':route});
+		//new Login("#wrapper",{'secret':secret,'route':route});
+		//new FindPwdUsername("#wrapper",{'secret':secret,'route':route});
+		//new FindPwdVerify("#wrapper",{'secret':secret,'route':route});
+		//new FindPwdNewPwd("#wrapper",{'secret':secret,'route':route});
 
 		can.route.ready(true);
 	

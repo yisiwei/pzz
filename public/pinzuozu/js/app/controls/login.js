@@ -2,9 +2,9 @@
 
 	Login = can.Control({
 		init:function(element,options){
-			if(this.options.route === 'login'){
-				this.showLogin();
-			}
+			//if(this.options.route === 'login'){
+			this.showLogin();
+			//}
 		},
 		showLogin:function(){
 
@@ -72,7 +72,8 @@
 				//console.log("line_id="+can.route.attr("id"));
 				//var line_id = can.route.attr("id");
 				
-				can.route.attr("route","home");
+				//can.route.attr("route","home");
+				window.location.href = "index.html";
 
 			},function(error){
 				console.log(error);
@@ -82,13 +83,13 @@
 		'#isRememberPwd click':function(el,event){//记住密码
 			//alert($("#isRememberPwd").prop("checked"));
 		},
-		'#username input':function(el,event){ //监听输入框值变化
+		'#username input':function(el,event){ //监听用户名变化
 			var username = el.val();
 			if($.trim(username).length>0){
 				$("#msg").text("");	
 			}
 		},
-		'#password input':function(el,event){
+		'#password input':function(el,event){//监听密码变化
 			var password = el.val();
 			if($.trim(password).length>0){
 				$("#msg").text("");	

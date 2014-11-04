@@ -2,9 +2,9 @@
 	//发布线路
 	Route = can.Control({
 		init:function(element,options){
-			if(this.options.route === 'route'){
+			//if(this.options.route === 'route'){
 				this.showRoute();
-			}
+			//}
 		},
 		showRoute:function(){
 			var isLogin = false;
@@ -34,9 +34,9 @@
 			));
 			$("#menu-route").parent().addClass('current');
 		},
-		'route route':function(){
-			this.showRoute();
-		},
+		// 'route route':function(){
+		// 	this.showRoute();
+		// },
 		'#select-passenger click':function(el,event) {//我是乘客
 			var userid = this.options.secret.attr("userid");
 			var nickname = this.options.secret.attr("nickname");
@@ -53,8 +53,8 @@
             // }else{
             // 	can.route.attr('route','route_passenger');	
             // }
-
-            can.route.attr('route','route_passenger');
+            //can.route.attr('route','route_passenger');
+            window.location.href="route_passenger.html";
         },
         '#select-driver click':function(el,event) {//我是司机
         	var login = this.options.secret.attr("login");
@@ -62,7 +62,6 @@
                 backgroundColor: '#6DC5DD',
                 color: '#fff'
             });
-            
             // $("#select-driver b").css("color","#fff");
             // if(login == "" || login == null){
             // 	can.route.attr("route","login");
@@ -70,7 +69,8 @@
             // 	can.route.attr('route','route_driver');
             // }
 
-            can.route.attr('route','route_driver');
+            //can.route.attr('route','route_driver');
+            window.location.href="route_driver.html";
         }
 	});
 

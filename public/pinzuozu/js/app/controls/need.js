@@ -2,11 +2,11 @@
 	//乘客需求
 	Need = can.Control({
 		init:function(element,options){
-			if(this.options.route === 'need'){
+			//if(this.options.route === 'need'){
 				this.showNeed();
-			}
+			//}
 		},
-		showNeed:function(opt){
+		showNeed:function(){
 			var isLogin = false;
 
 			var userid = this.options.secret.attr("userid");
@@ -32,13 +32,12 @@
 				"js/app/views/head/banner_local.ejs"
 			));
 
-			var currentCity;
-			if(opt != "" && opt != null){
+			var currentCity = $.cookie("currentCity");//从cookie中取当前城市
+			if(currentCity != "" && currentCity != null){
 				//alert(opt);
-				currentCity = opt;
+				//currentCity = opt;
 				$("#currentCity").text(currentCity);
-			}else{
-				
+			}else{//定位当前城市
 				function myFun(result){
 				  currentCity = result.name;
 				  $("#currentCity").text(currentCity);
@@ -76,8 +75,25 @@
 				console.log(error);
 			});
 		},
-		'need route':function(){
+		// 'need route':function(){
+		// 	this.showNeed();
+		// },
+		'#slectcity click':function(el,event){//切换城市
+			$("#main").html(can.view(
+				"js/app/views/head/city.ejs"
+			));
+		},
+		'.city click':function(el,event){//选择城市后跳回来
+			//console.log("选择城市："+el.attr("title"));
+			$.cookie("currentCity",el.attr("title"));//将选择的城市存到cookie
+			//can.route.attr({"route":"local","city":el.attr("title")});
 			this.showNeed();
+		},
+		"#search-btn click":function(){//搜索
+			window.location.href="search.html";
+		},
+		"#detail-search-btn click":function(){//去搜索
+			window.location.href="search.html";
 		}
 	});
 
